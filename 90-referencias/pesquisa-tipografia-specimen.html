@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A&amp;M — Specimen Tipográfico (pesquisa)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Marcellus&family=Marcellus+SC&family=DM+Serif+Display&family=EB+Garamond:ital@0;1&family=Mulish:wght@300;400;600&family=Hanken+Grotesk:wght@300;400;600&family=Karla:wght@300;400&family=Nunito+Sans&family=Sacramento&family=Parisienne&family=Dancing+Script&family=Pinyon+Script&family=Allura&family=Petit+Formal+Script&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#222220;      /* tinta escura — única cor permitida antes do ADR-002 */
+    --ivory:#F7F1EA;    /* marfim neutro */
+    --line:#dcd3c6;
+    --muted:#6f6a61;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--ivory);color:var(--ink);
+       font-family:'Mulish',system-ui,sans-serif;line-height:1.5;
+       -webkit-font-smoothing:antialiased}
+  .wrap{max-width:880px;margin:0 auto;padding:64px 28px 96px}
+  header{border-bottom:1px solid var(--line);padding-bottom:28px;margin-bottom:8px}
+  .eyebrow{font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--muted)}
+  h1{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:46px;margin:.2em 0 .1em}
+  .note{color:var(--muted);font-size:14px;max-width:60ch}
+  section{margin-top:56px}
+  .sec-title{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);
+             border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:26px}
+  .card{padding:22px 0;border-bottom:1px solid var(--line)}
+  .card:last-child{border-bottom:none}
+  .label{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+  .label b{color:var(--ink);letter-spacing:.06em}
+  .tag{display:inline-block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+       border:1px solid var(--line);border-radius:20px;padding:2px 9px;margin-left:8px;color:var(--muted)}
+  .names{font-size:64px;line-height:1.05}
+  .title-spec{font-size:40px;line-height:1.1}
+  .body-spec{font-size:16px;max-width:62ch}
+  .small-spec{font-size:11px;letter-spacing:.02em}
+  .sys{border:1px solid var(--line);border-radius:14px;padding:28px;margin-bottom:22px;background:rgba(255,255,255,.35)}
+  .sys h3{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:26px;margin:0 0 4px}
+  .sys .recipe{font-size:12px;letter-spacing:.04em;color:var(--muted);margin-bottom:20px}
+  .footer{margin-top:64px;font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding-top:20px}
+  /* font helpers */
+  .f-cormorant{font-family:'Cormorant Garamond',serif}
+  .f-fraunces{font-family:'Fraunces',serif}
+  .f-marcellus{font-family:'Marcellus',serif}
+  .f-marcellus-sc{font-family:'Marcellus SC',serif}
+  .f-dmserif{font-family:'DM Serif Display',serif}
+  .f-ebgaramond{font-family:'EB Garamond',serif}
+  .f-mulish{font-family:'Mulish',sans-serif}
+  .f-hanken{font-family:'Hanken Grotesk',sans-serif}
+  .f-karla{font-family:'Karla',sans-serif}
+  .f-nunito{font-family:'Nunito Sans',sans-serif}
+  .f-sacramento{font-family:'Sacramento',cursive}
+  .f-parisienne{font-family:'Parisienne',cursive}
+  .f-dancing{font-family:'Dancing Script',cursive}
+  .f-pinyon{font-family:'Pinyon Script',cursive}
+  .f-allura{font-family:'Allura',cursive}
+  .f-petit{font-family:'Petit Formal Script',cursive}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Identidade A&amp;M · Pesquisa de tipografia</div>
+    <h1>Alexandre &amp; Mayara</h1>
+    <p class="note">Specimen de <b>intenção</b>, não final. Em tinta escura sobre marfim
+    (sem cor definida — paleta ainda em aberto, ADR-002). Fontes reais via Google Fonts.
+    "passo a passo, sempre juntos."</p>
+  </header>
+
+  <!-- NOMES -->
+  <section>
+    <div class="sec-title">1 · Lettering dos nomes — a assinatura (ADR-003)</div>
+
+    <div class="card">
+      <div class="label"><b>Sacramento</b> — monolinha · ecoa o monograma <span class="tag">recomendada</span></div>
+      <div class="names f-sacramento">Alexandre &amp; Mayara</div>
+    </div>
+    <div class="card">
+      <div class="label"><b>Parisienne</b> — monolinha delicada (mood sereno)</div>
+      <div class="names f-parisienne">Alexandre &amp; Mayara</div>
+    </div>
+    <div class="card">
+      <div class="label"><b>Dancing Script</b> — monolinha popular (fallback)</div>
+      <div class="names f-dancing">Alexandre &amp; Mayara</div>
+    </div>
+    <div class="card">
+      <div class="label"><b>Pinyon Script</b> — caligráfica de contraste (clássica / Paleta C)</div>
+      <div class="names f-pinyon">Alexandre &amp; Mayara</div>
+    </div>
+    <div class="card">
+      <div class="label"><b>Allura</b> — copperplate elegante (clássica)</div>
+      <div class="names f-allura">Alexandre &amp; Mayara</div>
+    </div>
+    <div class="card">
+      <div class="label"><b>Petit Formal Script</b> — formal encorpada</div>
+      <div class="names f-petit">Alexandre &amp; Mayara</div>
+    </div>
+  </section>
+
+  <!-- TITULOS -->
+  <section>
+    <div class="sec-title">2 · Títulos — serifa elegante de contraste</div>
+
+    <div class="card">
+      <div class="label"><b>Cormorant Garamond</b> — delicada, alto contraste <span class="tag">1ª escolha</span></div>
+      <div class="title-spec f-cormorant">Tarde Italiana · Falta 1 ano</div>
+    </div>
+    <div class="card">
+      <div class="label"><b>Fraunces</b> — orgânica, contemporânea (Paleta B)</div>
+      <div class="title-spec f-fraunces">Tarde Italiana · Falta 1 ano</div>
+    </div>
+    <div class="card">
+      <div class="label"><b>Marcellus</b> — romana humanista, quente (alternativa ao Cinzel)</div>
+      <div class="title-spec f-marcellus">TARDE ITALIANA · FALTA 1 ANO</div>
+    </div>
+    <div class="card">
+      <div class="label"><b>DM Serif Display</b> — alto contraste, segura</div>
+      <div class="title-spec f-dmserif">Tarde Italiana · Falta 1 ano</div>
+    </div>
+  </section>
+
+  <!-- CORPO -->
+  <section>
+    <div class="sec-title">3 · Corpo — texto, menu, regras e datas</div>
+
+    <div class="card">
+      <div class="label"><b>Mulish</b> — sans humanista, quente <span class="tag">recomendada</span></div>
+      <div class="body-spec f-mulish">Antipasto da casa, ravióli de abóbora com sálvia, tiramisù.
+      Celebração em 01/08/2026, às 14h — Rua Curuá, 142, terraço dos fundos.</div>
+      <div class="small-spec f-mulish" style="margin-top:8px">8 pt: confirme sua presença até 20/07 · traje esporte fino · estacionamento na rua</div>
+    </div>
+    <div class="card">
+      <div class="label"><b>Hanken Grotesk</b> — humanista com personalidade (com Fraunces)</div>
+      <div class="body-spec f-hanken">Antipasto da casa, ravióli de abóbora com sálvia, tiramisù.
+      Celebração em 01/08/2026, às 14h — Rua Curuá, 142, terraço dos fundos.</div>
+    </div>
+    <div class="card">
+      <div class="label"><b>EB Garamond</b> — serifa de texto, clássica (com Marcellus)</div>
+      <div class="body-spec f-ebgaramond">Antipasto da casa, ravióli de abóbora com sálvia, tiramisù.
+      Celebração em 01/08/2026, às 14h — Rua Curuá, 142, terraço dos fundos.</div>
+    </div>
+  </section>
+
+  <!-- SISTEMAS -->
+  <section>
+    <div class="sec-title">4 · Três sistemas (atados às paletas em teste)</div>
+
+    <div class="sys">
+      <h3 class="f-cormorant">Sistema A — Romântico Sereno</h3>
+      <div class="recipe">Nomes: Parisienne · Títulos: Cormorant Garamond · Corpo: Mulish</div>
+      <div class="names f-parisienne" style="font-size:48px">Alexandre &amp; Mayara</div>
+      <div class="title-spec f-cormorant" style="font-size:30px;margin-top:6px">Falta 1 ano para o nosso sim</div>
+      <div class="body-spec f-mulish" style="margin-top:6px">Leve, arejado, etéreo — o mais delicado dos três.</div>
+    </div>
+
+    <div class="sys">
+      <h3 class="f-fraunces">Sistema B — Jardim Terroso <span class="tag">mood que a May curtiu</span></h3>
+      <div class="recipe">Nomes: Sacramento · Títulos: Fraunces · Corpo: Hanken Grotesk</div>
+      <div class="names f-sacramento" style="font-size:54px">Alexandre &amp; Mayara</div>
+      <div class="title-spec f-fraunces" style="font-size:30px;margin-top:6px">Falta 1 ano para o nosso sim</div>
+      <div class="body-spec f-hanken" style="margin-top:6px">Natural, orgânico, artesanal e contemporâneo.</div>
+    </div>
+
+    <div class="sys">
+      <h3 class="f-marcellus">Sistema C — Clássico Atemporal</h3>
+      <div class="recipe">Nomes: Pinyon Script · Títulos: Marcellus · Corpo: EB Garamond</div>
+      <div class="names f-pinyon" style="font-size:52px">Alexandre &amp; Mayara</div>
+      <div class="title-spec f-marcellus" style="font-size:28px;margin-top:6px">FALTA 1 ANO PARA O NOSSO SIM</div>
+      <div class="body-spec f-ebgaramond" style="margin-top:6px">Papelaria fina tradicional, formal, atemporal.</div>
+    </div>
+  </section>
+
+  <div class="footer">
+    Regra de governança: o script dos nomes é assinatura (nível-logo). Dentro de cada peça,
+    usar no máximo 2 famílias (título + corpo). Não fechar antes da paleta (ADR-002) e do
+    lettering dos nomes com a cliente (ADR-003). Todas as fontes mostradas são Google Fonts
+    (uso comercial liberado).
+  </div>
+</div>
+</body>
+</html>
