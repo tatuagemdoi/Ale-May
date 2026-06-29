@@ -310,7 +310,7 @@
         <span style="font-family:'Lato',sans-serif; font-weight:300; font-size:12px; color:{{ ink60 }}; margin-left:auto;">padrões SVG gerados dos elementos botânicos</span>
       </div>
       <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:20px;">
-        <sc-for list="{{ patterns }}" as="pt" hint-placeholder-count="3">
+        <sc-for list="{{ patterns }}" as="pt" hint-placeholder-count="6">
           <div style="background:{{ cardBg }}; border:1px solid {{ hairline }}; border-radius:3px; overflow:hidden;">
             <div style="height:200px; overflow:hidden; background:{{ pt.bg }};">{{ pt.preview }}</div>
             <div style="padding:16px 18px; border-top:1px solid {{ hairline }};">
@@ -560,8 +560,122 @@ class Component extends DCLogic {
     };
   }
 
+  patternFloral(c, bg) {
+    const petal = 'M0,-3 C5,-10 5,-20 0,-26 C-5,-20 -5,-10 0,-3';
+    const petals = [0,60,120,180,240,300].map(r =>
+      `<path d="${petal}" transform="rotate(${r})" fill="${c}" opacity="0.7"/>`
+    ).join('');
+    const flower = `<g transform="translate(60,44)">${petals}<circle cx="0" cy="0" r="4" fill="${c}" opacity="0.9"/></g>`;
+    const stem = `<path d="M60,44 Q57,68 60,100" fill="none" stroke="${c}" stroke-width="1.2" stroke-linecap="round" opacity="0.5"/>`;
+    const leafL = `<path d="M0,0 C-10,-4 -14,-12 -8,-18 C-2,-12 0,-4 0,0" transform="translate(58,70) rotate(-20)" fill="${c}" opacity="0.6"/>`;
+    const leafR = `<path d="M0,0 C10,-4 14,-12 8,-18 C2,-12 0,-4 0,0" transform="translate(62,84) rotate(20)" fill="${c}" opacity="0.6"/>`;
+    const bud = `<path d="M60,100 C64,94 64,88 60,84 C56,88 56,94 60,100" fill="${c}" opacity="0.65"/>`;
+    const tile = `${stem}${leafL}${leafR}${bud}${flower}`;
+    const defs = `<defs><pattern id="pfl" x="0" y="0" width="120" height="120" patternUnits="userSpaceOnUse">${tile}</pattern></defs>`;
+    const mk = (w,h) => `${defs}<rect width="${w}" height="${h}" fill="${bg}"/><rect width="${w}" height="${h}" fill="url(#pfl)"/>`;
+    return {
+      preview: React.createElement('svg',{viewBox:'0 0 400 200',width:'100%',height:'200',style:{display:'block'},dangerouslySetInnerHTML:{__html:mk(400,200)}}),
+      onDownload: () => this._downloadSvg('am-pattern-floral', `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900">${mk(1200,900)}</svg>`)
+    };
+  }
+
+  patternGalho(c, bg) {
+    const stem = `<path d="M50,0 Q47,80 50,160" fill="none" stroke="${c}" stroke-width="1.5" stroke-linecap="round" opacity="0.65"/>`;
+    const br = (x1,y1,x2,y2,bx,by) => {
+      const bud = `<path d="M0,0 C3,-6 3,-13 0,-17 C-3,-13 -3,-6 0,0" transform="translate(${bx},${by})" fill="${c}" opacity="0.7"/>`;
+      return `<path d="M${x1},${y1} Q${(x1+x2)/2},${(y1+y2)/2-5} ${x2},${y2}" fill="none" stroke="${c}" stroke-width="1" stroke-linecap="round" opacity="0.55"/>${bud}`;
+    };
+    const tile = `${stem}${br(50,28,22,14,22,14)}${br(50,54,82,40,82,40)}${br(50,88,20,74,20,74)}${br(50,116,82,100,82,100)}${br(50,148,20,132,20,132)}`;
+    const defs = `<defs><pattern id="pga" x="0" y="0" width="110" height="160" patternUnits="userSpaceOnUse">${tile}</pattern></defs>`;
+    const mk = (w,h) => `${defs}<rect width="${w}" height="${h}" fill="${bg}"/><rect width="${w}" height="${h}" fill="url(#pga)"/>`;
+    return {
+      preview: React.createElement('svg',{viewBox:'0 0 400 200',width:'100%',height:'200',style:{display:'block'},dangerouslySetInnerHTML:{__html:mk(400,200)}}),
+      onDownload: () => this._downloadSvg('am-pattern-galho', `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900">${mk(1200,900)}</svg>`)
+    };
+  }
+
+  patternVideira(c, bg) {
+    const vine = `<path d="M0,60 C20,38 40,82 60,60 C80,38 100,82 120,60 C140,38 160,82 180,60 C200,38 220,82 240,60" fill="none" stroke="${c}" stroke-width="1.4" stroke-linecap="round" opacity="0.6"/>`;
+    const lf = (x,y,r) => `<path d="M0,0 C5,-7 6,-16 0,-22 C-6,-16 -5,-7 0,0" transform="translate(${x},${y}) rotate(${r})" fill="${c}" opacity="0.65"/>`;
+    const leaves = [lf(12,54,-28),lf(48,66,152),lf(72,54,-28),lf(108,66,152),lf(132,54,-28),lf(168,66,152),lf(192,54,-28),lf(228,66,152)].join('');
+    const td = (x) => `<path d="M${x},50 Q${x-2},38 ${x+3},30 Q${x+8},22 ${x+2},18" fill="none" stroke="${c}" stroke-width="0.9" stroke-linecap="round" opacity="0.4"/>`;
+    const tendrils = [td(30),td(90),td(150),td(210)].join('');
+    const defs = `<defs><pattern id="pvi" x="0" y="0" width="240" height="120" patternUnits="userSpaceOnUse">${vine}${leaves}${tendrils}</pattern></defs>`;
+    const mk = (w,h) => `${defs}<rect width="${w}" height="${h}" fill="${bg}"/><rect width="${w}" height="${h}" fill="url(#pvi)"/>`;
+    return {
+      preview: React.createElement('svg',{viewBox:'0 0 400 200',width:'100%',height:'200',style:{display:'block'},dangerouslySetInnerHTML:{__html:mk(400,200)}}),
+      onDownload: () => this._downloadSvg('am-pattern-videira', `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900">${mk(1200,900)}</svg>`)
+    };
+  }
+
   saveComments(comments) {
     try { localStorage.setItem('am_ds_comments', JSON.stringify(comments)); } catch(e) {}
+  }
+
+  _svgToJpeg(svgRaw, filename, {bgColor='#F7F1EA', size=1200, pad=100, color='#36302a'} = {}) {
+    let svg = svgRaw
+      .replace('style="width:100%;height:100%;display:block;overflow:visible"',
+               `color="${color}" width="${size}" height="${size}"`)
+      .replace(/class="am-\w+"\s*/g, '');
+    if (!svg.includes('xmlns=')) svg = svg.replace('<svg', '<svg xmlns="http://www.w3.org/2000/svg"');
+    const blob = new Blob([svg], {type:'image/svg+xml;charset=utf-8'});
+    const url = URL.createObjectURL(blob);
+    const img = new Image();
+    img.onload = () => {
+      const c = document.createElement('canvas');
+      c.width = size; c.height = size;
+      const ctx = c.getContext('2d');
+      ctx.fillStyle = bgColor;
+      ctx.fillRect(0, 0, size, size);
+      ctx.drawImage(img, pad, pad, size - pad * 2, size - pad * 2);
+      URL.revokeObjectURL(url);
+      const a = document.createElement('a');
+      a.href = c.toDataURL('image/jpeg', 0.93);
+      a.download = filename;
+      a.click();
+    };
+    img.onerror = () => URL.revokeObjectURL(url);
+    img.src = url;
+  }
+
+  downloadMono() {
+    const raw = this.state.mono || this.state.letras;
+    if (!raw) return;
+    this._svgToJpeg(raw, 'am-monograma.jpg', {bgColor:'#F7F1EA', size:1200, pad:100, color:'#36302a'});
+  }
+
+  downloadPaleta() {
+    const P = PALDATA.B;
+    const W = 1400, H = 860;
+    const tks = P.tokens;
+    const sw = Math.floor((W - 160) / 5);
+    const sy = 170, sh = 260;
+    const swatchRects = tks.slice(0,5).map((tk,i) => {
+      const x = 80 + i * sw;
+      return `<rect x="${x}" y="${sy}" width="${sw-14}" height="${sh}" fill="${tk.hex}" rx="2"/>
+        <text x="${x}" y="${sy+sh+26}" font-family="Georgia,serif" font-size="11" font-weight="bold" fill="${P.cMono}" letter-spacing="1">${tk.role.toUpperCase()}</text>
+        <text x="${x}" y="${sy+sh+44}" font-family="Georgia,serif" font-size="11" fill="${P.cMono}99">${tk.name}</text>
+        <text x="${x}" y="${sy+sh+60}" font-family="monospace" font-size="11" fill="${P.cMono}88">${tk.hex}</text>`;
+    }).join('');
+    const svgStr = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}">
+      <rect width="${W}" height="${H}" fill="${P.fundo}"/>
+      <text x="80" y="82" font-family="Georgia,serif" font-size="13" letter-spacing="7" fill="${P.cAcento}">B · JARDIM TERROSO · ✓ APROVADA</text>
+      <text x="80" y="118" font-family="Georgia,serif" font-size="24" fill="${P.cMono}">Casamento Alexandre &amp; Mayara</text>
+      <line x1="80" y1="140" x2="${W-80}" y2="140" stroke="${P.tokens[5].hex}" stroke-width="1"/>
+      ${swatchRects}
+      <text x="80" y="${H-36}" font-family="Georgia,serif" font-size="11" fill="${P.cMono}55">sistema visual · tatuagemdoi/Ale-May · paleta B</text>
+    </svg>`;
+    const blob = new Blob([svgStr], {type:'image/svg+xml;charset=utf-8'});
+    const url = URL.createObjectURL(blob);
+    const img = new Image();
+    img.onload = () => {
+      const c = document.createElement('canvas'); c.width = W; c.height = H;
+      c.getContext('2d').drawImage(img, 0, 0, W, H);
+      URL.revokeObjectURL(url);
+      const a = document.createElement('a'); a.href = c.toDataURL('image/jpeg',0.93); a.download='am-paleta-b.jpg'; a.click();
+    };
+    img.onerror = () => URL.revokeObjectURL(url);
+    img.src = url;
   }
 
   noteFor(key) {
@@ -717,10 +831,16 @@ class Component extends DCLogic {
     const p1 = this.patternFolha(accent, pageBg);
     const p2 = this.patternRamo(accent, cardBg);
     const p3 = this.patternAM(ink, pageBg);
+    const p4 = this.patternFloral(ink, cardBg);
+    const p5 = this.patternGalho(accent, pageBg);
+    const p6 = this.patternVideira(ink, cardBg);
     const patterns = [
-      { name:'FOLHINHA DISPERSA', use:'forro de envelope · papel de seda · embrulho',       bg:pageBg, preview:p1.preview, onDownload:p1.onDownload, note:this.noteFor('pt_folha') },
-      { name:'RAMO ONDULADO',     use:'faixa decorativa · borda de tag · guardanapo',        bg:cardBg, preview:p2.preview, onDownload:p2.onDownload, note:this.noteFor('pt_ramo') },
-      { name:'AM GRID',           use:'fundo de caixa presente · papel de seda · tecido',    bg:pageBg, preview:p3.preview, onDownload:p3.onDownload, note:this.noteFor('pt_am') }
+      { name:'FOLHINHA DISPERSA', use:'forro de envelope · papel de seda · embrulho',         bg:pageBg, preview:p1.preview, onDownload:p1.onDownload, note:this.noteFor('pt_folha') },
+      { name:'RAMO ONDULADO',     use:'faixa decorativa · borda de tag · guardanapo',          bg:cardBg, preview:p2.preview, onDownload:p2.onDownload, note:this.noteFor('pt_ramo') },
+      { name:'AM GRID',           use:'fundo de caixa presente · papel de seda · tecido',      bg:pageBg, preview:p3.preview, onDownload:p3.onDownload, note:this.noteFor('pt_am') },
+      { name:'FLORAL',            use:'convite · capa de menu · papel de carta',               bg:cardBg, preview:p4.preview, onDownload:p4.onDownload, note:this.noteFor('pt_floral') },
+      { name:'GALHO COM BROTOS',  use:'embrulho de presente · forro de caixa · tag',           bg:pageBg, preview:p5.preview, onDownload:p5.onDownload, note:this.noteFor('pt_galho') },
+      { name:'VIDEIRA',           use:'guardanapo · trilho de mesa · bordado em linho',        bg:cardBg, preview:p6.preview, onDownload:p6.onDownload, note:this.noteFor('pt_videira') }
     ];
 
     return {
