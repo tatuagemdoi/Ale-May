@@ -321,6 +321,32 @@
 
   </div><!-- /max-width -->
 
+  <!-- ── COMENTÁRIOS ─────────────────────────────────────── -->
+  <div style="max-width:1080px; margin:64px auto 0;">
+    <div style="display:flex; align-items:baseline; gap:16px; border-bottom:1px solid {{ hairline }}; padding-bottom:14px; margin-bottom:24px;">
+      <h2 style="font-family:'Playfair Display',serif; font-weight:500; font-size:22px; margin:0; color:{{ ink }};">Comentários</h2>
+      <span style="font-family:'Lato',sans-serif; font-weight:300; font-size:12px; color:{{ ink60 }};">notas de aprovação · feedback · decisões pendentes</span>
+    </div>
+    <textarea
+      value="{{ commentDraft }}"
+      onInput="{{ onCommentInput }}"
+      placeholder="Escreva aqui observações, aprovações ou ajustes pendentes…"
+      rows="5"
+      style="width:100%;font-family:'Lato',sans-serif;font-weight:300;font-size:14px;line-height:1.7;color:{{ ink }};background:{{ cardBg }};border:1px solid {{ hairline }};border-radius:3px;padding:16px 18px;resize:vertical;outline:none;box-sizing:border-box;transition:border-color .15s;"
+    ></textarea>
+    <div style="display:flex; align-items:center; gap:12px; margin-top:12px;">
+      <button onClick="{{ onCommentSave }}" style="{{ saveStyle }}">Salvar</button>
+      <button onClick="{{ onCommentClear }}" style="{{ clearStyle }}">Limpar</button>
+      <span style="font-family:'Lato',sans-serif; font-weight:300; font-size:11px; color:{{ ink60 }};">{{ savedAt }}</span>
+    </div>
+    <sc-for list="{{ commentBlocks }}" as="cb" hint-placeholder-count="0">
+      <div style="margin-top:20px; background:{{ cardBg }}; border:1px solid {{ hairline }}; border-radius:3px; padding:18px 20px;">
+        <div style="font-family:'Lato',sans-serif; font-weight:300; font-size:11px; color:{{ ink60 }}; margin-bottom:10px;">{{ cb.date }}</div>
+        <div style="font-family:'Lato',sans-serif; font-weight:300; font-size:14px; line-height:1.7; color:{{ ink }}; white-space:pre-wrap;">{{ cb.text }}</div>
+      </div>
+    </sc-for>
+  </div>
+
   <footer style="max-width:1080px; margin:64px auto 0; padding-top:20px; border-top:1px solid {{ hairline }}; text-align:center; font-family:'Lato',sans-serif; font-weight:300; font-size:11px; letter-spacing:.06em; color:{{ ink60 }};">
     Casamento Alexandre &amp; Mayara · design system · preview de aprovação — nenhuma escolha foi fixada · fonte de verdade: tatuagemdoi/Ale-May
   </footer>
@@ -394,7 +420,10 @@ class Component extends DCLogic {
     weights:{ 0:500, 1:400, 2:400 },
     cases:{ 0:'none', 1:'none', 2:'none' },
     sizes:{ 0:52, 1:52, 2:52 },
-    palette:'B'
+    palette:'B',
+    commentDraft:'',
+    comments:[],
+    savedAt:''
   };
 
   async componentDidMount() {
@@ -429,6 +458,10 @@ class Component extends DCLogic {
       } catch(e) { molds[k] = ''; }
     }));
     this.setState({ mono, letras, ramos, molduras: molds });
+    try {
+      const saved = JSON.parse(localStorage.getItem('am_ds_comments') || '[]');
+      if (saved.length) this.setState({ comments: saved });
+    } catch(e) {}
     try {
       const cs = localStorage.getItem('am_mono_choice_svg');
       if (cs) this.setState({ choiceSvg: cs });
@@ -526,6 +559,10 @@ class Component extends DCLogic {
       preview: React.createElement('svg',{viewBox:'0 0 400 200',width:'100%',height:'200',style:{display:'block'},dangerouslySetInnerHTML:{__html:mk(400,200)}}),
       onDownload: () => this._downloadSvg('am-pattern-am-grid', `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900">${mk(1200,900)}</svg>`)
     };
+  }
+
+  saveComments(comments) {
+    try { localStorage.setItem('am_ds_comments', JSON.stringify(comments)); } catch(e) {}
   }
 
   stepW(i, dir) {
@@ -649,6 +686,22 @@ class Component extends DCLogic {
       { src:'90-referencias/banco-imagens/02-texturas-fundos/mockup_prato-guardanapo-eucalipto_cartao-dobrado.jpg', alt:'Prato com guardanapo de eucalipto e cartão dobrado', caption:'prato · guardanapo eucalipto · cartão dobrado' }
     ];
 
+    const btnBase = `font-family:'Lato',sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border-radius:100px;padding:8px 18px;cursor:pointer;border:1px solid;transition:all .15s;`;
+    const onCommentSave = () => {
+      const text = (s.commentDraft || '').trim();
+      if (!text) return;
+      const now = new Date();
+      const label = now.toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'}) + ' · ' + now.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
+      const next = [{ text, date: label }, ...s.comments];
+      this.saveComments(next);
+      this.setState({ comments: next, commentDraft: '', savedAt: 'salvo às ' + now.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}) });
+    };
+    const onCommentClear = () => {
+      const next = [];
+      this.saveComments(next);
+      this.setState({ comments: next, commentDraft: '', savedAt: '' });
+    };
+
     const p1 = this.patternFolha(accent, pageBg);
     const p2 = this.patternRamo(accent, cardBg);
     const p3 = this.patternAM(ink, pageBg);
@@ -673,7 +726,15 @@ class Component extends DCLogic {
       invariants,
       moodImages,
       mockupImages,
-      patterns
+      patterns,
+      commentDraft: s.commentDraft,
+      onCommentInput: (e) => this.setState({ commentDraft: e.target.value }),
+      onCommentSave,
+      onCommentClear,
+      savedAt: s.savedAt,
+      saveStyle: btnBase + `color:#fff;background:${ink};border-color:${ink};`,
+      clearStyle: btnBase + `color:${ink};background:transparent;border-color:${hairline};`,
+      commentBlocks: s.comments
     };
   }
 }
