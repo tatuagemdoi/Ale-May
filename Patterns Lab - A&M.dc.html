@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing:border-box; }
+    body { margin:0; background:#e8e2d8; font-family:'Lato',sans-serif; min-height:100vh; display:flex; align-items:flex-start; justify-content:center; padding:32px 16px; }
+    input[type=range] { -webkit-appearance:none; appearance:none; height:4px; border-radius:4px; background:#ecdfd2; outline:none; cursor:pointer; }
+    input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:16px; height:16px; border-radius:50%; background:#36302a; cursor:pointer; }
+  </style>
+</helmet>
+
+<div style="width:100%; max-width:1140px; display:flex; flex-direction:column; gap:0; background:#fff; box-shadow:0 4px 28px rgba(0,0,0,.13); border-radius:4px; overflow:hidden;">
+
+  <!-- TOPBAR -->
+  <div style="padding:18px 30px; border-bottom:1px solid #ecdfd2; display:flex; align-items:center; gap:16px;">
+    <span style="font-family:'Cinzel',serif;font-size:11px;letter-spacing:.18em;color:#CB6A4A;">LAB</span>
+    <span style="font-family:'Playfair Display',serif;font-size:22px;font-weight:500;color:#36302a;">Patterns · A&amp;M</span>
+    <span style="font-family:'Lato',sans-serif;font-size:11px;font-weight:300;color:#36302a88;margin-left:8px;">{{ patName }} · {{ scaleLabel }} · {{ opacityLabel }}</span>
+    <div style="margin-left:auto;display:flex;gap:10px;">
+      <button onClick="{{ onDownloadSvg }}" style="font-family:'Lato',sans-serif;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#36302a;background:transparent;border:1px solid #ecdfd2;border-radius:100px;padding:7px 18px;cursor:pointer;">↓ SVG</button>
+      <button onClick="{{ onDownloadJpeg }}" style="font-family:'Lato',sans-serif;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:#36302a;border:none;border-radius:100px;padding:7px 18px;cursor:pointer;">↓ JPEG</button>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div style="display:flex; min-height:740px;">
+
+    <!-- PREVIEW -->
+    <div style="flex:1; background:{{ previewBg }}; transition:background .3s; display:flex; align-items:stretch; justify-content:center; overflow:hidden;">
+      {{ patPreview }}
+    </div>
+
+    <!-- SIDEBAR -->
+    <div style="width:340px; flex-shrink:0; background:#fff; border-left:1px solid #ecdfd2; padding:24px 22px 30px; overflow-y:auto; max-height:820px; display:flex; flex-direction:column; gap:22px;">
+
+      <!-- Pattern selector -->
+      <div>
+        <div style="font-family:'Cinzel',serif;font-size:10px;letter-spacing:.16em;color:#b3a68d;margin-bottom:10px;">PADRÃO</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:7px;">
+          <sc-for list="{{ patCards }}" as="pc" hint-placeholder-count="6">
+            <div onClick="{{ pc.onClick }}" style="{{ pc.box }}">
+              <div style="height:52px;overflow:hidden;border-radius:2px;margin-bottom:5px;">{{ pc.thumb }}</div>
+              <div style="font-family:'Lato',sans-serif;font-size:8.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#36302a;line-height:1.3;text-align:center;">{{ pc.name }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <!-- Cor do padrão -->
+      <div>
+        <div style="font-family:'Cinzel',serif;font-size:10px;letter-spacing:.16em;color:#b3a68d;margin-bottom:10px;">COR DO PADRÃO</div>
+        <div style="display:flex;gap:7px;flex-wrap:wrap;">
+          <sc-for list="{{ colorSwatches }}" as="sw" hint-placeholder-count="5">
+            <div onClick="{{ sw.onClick }}" title="{{ sw.name }}" style="{{ sw.ring }}">
+              <div style="width:28px;height:28px;border-radius:50%;background:{{ sw.hex }};box-shadow:inset 0 0 0 1px rgba(0,0,0,.1);"></div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <!-- Cor do fundo -->
+      <div>
+        <div style="font-family:'Cinzel',serif;font-size:10px;letter-spacing:.16em;color:#b3a68d;margin-bottom:10px;">COR DO FUNDO</div>
+        <div style="display:flex;gap:7px;flex-wrap:wrap;">
+          <sc-for list="{{ bgSwatches }}" as="bg" hint-placeholder-count="4">
+            <div onClick="{{ bg.onClick }}" title="{{ bg.name }}" style="{{ bg.ring }}">
+              <div style="width:28px;height:28px;border-radius:50%;background:{{ bg.hex }};box-shadow:inset 0 0 0 1px rgba(0,0,0,.12);"></div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <!-- Escala -->
+      <div>
+        <div style="font-family:'Cinzel',serif;font-size:10px;letter-spacing:.16em;color:#b3a68d;margin-bottom:8px;">ESCALA <span style="font-family:'Lato';font-size:11px;font-weight:700;color:#36302a;letter-spacing:0;">{{ scaleLabel }}</span></div>
+        <input type="range" min="0.4" max="3.5" step="0.1" value="{{ scale }}" onChange="{{ onScale }}" style="width:100%;">
+      </div>
+
+      <!-- Opacidade -->
+      <div>
+        <div style="font-family:'Cinzel',serif;font-size:10px;letter-spacing:.16em;color:#b3a68d;margin-bottom:8px;">OPACIDADE <span style="font-family:'Lato';font-size:11px;font-weight:700;color:#36302a;letter-spacing:0;">{{ opacityLabel }}</span></div>
+        <input type="range" min="0.1" max="1" step="0.05" value="{{ opacity }}" onChange="{{ onOpacity }}" style="width:100%;">
+      </div>
+
+      <!-- Nota do pattern -->
+      <div>
+        <div style="font-family:'Cinzel',serif;font-size:10px;letter-spacing:.16em;color:#b3a68d;margin-bottom:8px;">NOTA · {{ patName }}</div>
+        <div style="display:flex;gap:7px;align-items:flex-start;">
+          <textarea value="{{ noteDraft }}" onInput="{{ onNoteInput }}" rows="3" placeholder="observações sobre este pattern…" style="flex:1;font-family:'Lato',sans-serif;font-size:11px;color:#36302a;background:#faf7f3;border:1px solid #ecdfd2;border-radius:2px;padding:7px 9px;resize:none;outline:none;line-height:1.6;"></textarea>
+          <button onClick="{{ onNoteSave }}" style="font-family:'Lato',sans-serif;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#36302a;background:transparent;border:1px solid #ecdfd2;border-radius:100px;padding:6px 12px;cursor:pointer;white-space:nowrap;flex-shrink:0;margin-top:1px;">salvar</button>
+        </div>
+      </div>
+
+      <!-- Comentários gerais -->
+      <div>
+        <div style="font-family:'Cinzel',serif;font-size:10px;letter-spacing:.16em;color:#b3a68d;margin-bottom:8px;">COMENTÁRIOS</div>
+        <div style="display:flex;gap:7px;align-items:flex-start;margin-bottom:8px;">
+          <textarea value="{{ commentDraft }}" onInput="{{ onCommentInput }}" rows="3" placeholder="comentário geral do lab…" style="flex:1;font-family:'Lato',sans-serif;font-size:11px;color:#36302a;background:#faf7f3;border:1px solid #ecdfd2;border-radius:2px;padding:7px 9px;resize:none;outline:none;line-height:1.6;"></textarea>
+          <div style="display:flex;flex-direction:column;gap:5px;flex-shrink:0;">
+            <button onClick="{{ onCommentSave }}" style="font-family:'Lato',sans-serif;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#36302a;background:transparent;border:1px solid #ecdfd2;border-radius:100px;padding:5px 11px;cursor:pointer;white-space:nowrap;">salvar</button>
+            <button onClick="{{ onCommentClear }}" style="font-family:'Lato',sans-serif;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#CB6A4A;background:transparent;border:1px solid #CB6A4A44;border-radius:100px;padding:5px 11px;cursor:pointer;white-space:nowrap;">limpar</button>
+          </div>
+        </div>
+        <div style="max-height:180px;overflow-y:auto;display:flex;flex-direction:column;gap:5px;">
+          <sc-for list="{{ comments }}" as="cm" hint-placeholder-count="0">
+            <div style="font-family:'Lato',sans-serif;font-size:11px;color:#36302a;background:#faf7f3;border-left:2px solid #ecdfd2;padding:6px 9px;line-height:1.6;">
+              {{ cm.text }}
+              <div style="font-size:9px;color:#b3a88d;margin-top:2px;">{{ cm.time }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+    </div><!-- /SIDEBAR -->
+  </div><!-- /BODY -->
+</div>
+
+<script type="text/x-dc">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    const st   = (() => { try { return JSON.parse(localStorage.getItem('am_plab_state')||'{}'); } catch(e){return{};} })();
+    const cmts = (() => { try { return JSON.parse(localStorage.getItem('am_plab_comments')||'[]'); } catch(e){return[];} })();
+    const notes= (() => { try { return JSON.parse(localStorage.getItem('am_plab_notes')||'{}'); } catch(e){return{};} })();
+    this.state = {
+      pat:     st.pat     ?? 0,
+      cIdx:    st.cIdx    ?? 0,
+      bgIdx:   st.bgIdx   ?? 0,
+      scale:   st.scale   ?? 1,
+      opacity: st.opacity ?? 0.85,
+      notes, noteDrafts:{},
+      commentDraft:'', comments: cmts,
+    };
+  }
+
+  _persist(patch) {
+    const n = {...this.state, ...patch};
+    this.setState(patch);
+    try { localStorage.setItem('am_plab_state', JSON.stringify({pat:n.pat,cIdx:n.cIdx,bgIdx:n.bgIdx,scale:n.scale,opacity:n.opacity})); } catch(e){}
+  }
+
+  // ── Paleta B ─────────────────────────────────────────────────────────
+  get COLORS() {
+    return [
+      {name:'Tinta sépia',  hex:'#36302a'},
+      {name:'Acento terra', hex:'#CB6A4A'},
+      {name:'Botânico sage',hex:'#8FA383'},
+      {name:'Suave blush',  hex:'#E9C6C3'},
+      {name:'Hairline',     hex:'#ecdfd2'},
+    ];
+  }
+  get BGS() {
+    return [
+      {name:'Fundo ivory',  hex:'#F7F1EA'},
+      {name:'Areia',        hex:'#ecdfd2'},
+      {name:'Branco',       hex:'#ffffff'},
+      {name:'Tinta escuro', hex:'#2c2620'},
+    ];
+  }
+  get PNAMES() {
+    return ['FOLHINHA','RAMO','AM GRID','FLORAL','GALHO','VIDEIRA'];
+  }
+  get FNAMES() {
+    return ['am-pattern-folhinha','am-pattern-ramo','am-pattern-am-grid','am-pattern-floral','am-pattern-galho','am-pattern-videira'];
+  }
+
+  // ── Pattern builders (pid = unique SVG defs id) ───────────────────────
+  _mkPat(idx, c, bg, s, op, pid) {
+    switch(idx) {
+      case 0: return this._pFolha(c,bg,s,op,pid);
+      case 1: return this._pRamo(c,bg,s,op,pid);
+      case 2: return this._pAM(c,bg,s,op,pid);
+      case 3: return this._pFloral(c,bg,s,op,pid);
+      case 4: return this._pGalho(c,bg,s,op,pid);
+      case 5: return this._pVideira(c,bg,s,op,pid);
+      default: return this._pFolha(c,bg,s,op,pid);
+    }
+  }
+
+  _pFolha(c,bg,s,op,pid) {
+    const W=Math.round(110*s), H=Math.round(110*s);
+    const leaf='M0,0 C6,-5 10,-20 0,-32 C-10,-20 -6,-5 0,0';
+    const pts=[{x:30,y:28,r:15},{x:80,y:12,r:-40},{x:55,y:55,r:200},{x:12,y:72,r:100},{x:90,y:65,r:160},{x:48,y:88,r:-70}];
+    const paths=pts.map(p=>`<path d="${leaf}" transform="translate(${p.x},${p.y}) rotate(${p.r})" fill="${c}" opacity="${(op*0.7).toFixed(2)}"/>`).join('');
+    const defs=`<defs><pattern id="${pid}" x="0" y="0" width="${W}" height="${H}" patternUnits="userSpaceOnUse"><g transform="scale(${s})">${paths}</g></pattern></defs>`;
+    return (w,h)=>`${defs}<rect width="${w}" height="${h}" fill="${bg}"/><rect width="${w}" height="${h}" fill="url(#${pid})"/>`;
+  }
+
+  _pRamo(c,bg,s,op,pid) {
+    const W=Math.round(200*s), H=Math.round(80*s);
+    const stem=`<path d="M0,40 Q50,18 100,40 Q150,62 200,40" fill="none" stroke="${c}" stroke-width="1.5" stroke-linecap="round" opacity="${(op*0.6).toFixed(2)}"/>`;
+    const leaf='M0,0 C5,-8 8,-16 0,-22 C-8,-16 -5,-8 0,0';
+    const lps=[{x:22,y:33,r:-55},{x:45,y:26,r:-30},{x:68,y:30,r:-50},{x:100,y:40,r:50},{x:130,y:51,r:30},{x:158,y:44,r:55},{x:180,y:37,r:-45}];
+    const lpath=lps.map(p=>`<path d="${leaf}" transform="translate(${p.x},${p.y}) rotate(${p.r})" fill="${c}" opacity="${(op*0.8).toFixed(2)}"/>`).join('');
+    const defs=`<defs><pattern id="${pid}" x="0" y="0" width="${W}" height="${H}" patternUnits="userSpaceOnUse"><g transform="scale(${s})">${stem}${lpath}</g></pattern></defs>`;
+    return (w,h)=>`${defs}<rect width="${w}" height="${h}" fill="${bg}"/><rect width="${w}" height="${h}" fill="url(#${pid})"/>`;
+  }
+
+  _pAM(c,bg,s,op,pid) {
+    const P1='M376.5,399.47c14.84,8.62,16.57,23.79,20.86,37.54,1.56,4.05,3.9.23,5.15-1.83,3.17-5.25,8.45-16.06,14.87-21.33,6.27-5.63,14.43-7.34,22.32-8.12';
+    const P2='M831.03,566.99c-28.02-2.89-48.55-29.58-45.86-59.62,3.36-37.55,34.48-65.07,69.51-61.47,43.78,4.51,75.86,46.22,71.65,93.16-5.26,58.68-53.88,101.68-108.6,96.04-68.4-7.05-108.98-72.98-125.42-145.46-16.59-67.61-11.46-178.09-11.46-195.33,0-.91.2-6.83-2.32-8.01-2.26-1.06-5.81,2.05-9.11,5.84-7.68,8.05-21.51,32.55-28.78,51.91-10.85,26.9-20.65,60.82-27.36,86.43-5.11,19.27-8.44,33.82-10.14,38.51-.36.86-.6,1.8-1.29,1.9-1.37-.25-2.61-10.89-6.8-25.72-14.73-49.27-39.4-107.93-75.17-145.51-6.65-6.48-13.88-13.12-19.39-16.57-3.57-2.24-7.74,1.69-6.17,5.79.01.02.02.05.03.07,11.99,25.85,48.35,127.07,32.72,199.68-12.69,72.66-50.36,112.27-119.44,117.74';
+    const P3='M168.97,563.57c28.02-2.89,48.55-29.58,45.86-59.62-3.36-37.55-34.48-65.07-69.51-61.47-43.78,4.51-75.86,46.22-71.65,93.16,5.26,58.68,53.88,101.68,108.6,96.04,67.04-6.9,107.17-73.99,147.22-136.58,1.63-2.55,3.18-5.13,4.62-7.8,22.85-42.39,44.94-98.04,67.38-139.01,15.34-25.65,36.46-52.6,62.52-64.95,11.95-4.28,4.01,7.4-2.54,27.83-26.91,79.41-48.09,226.38,31.35,279.1,17.94,11.12,38.83,14.08,59.23,16.03';
+    const sc=0.22*s; const sz=Math.round(220*s);
+    const g=`<g fill="none" stroke="${c}" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" transform="scale(${sc})" opacity="${(op*0.22).toFixed(2)}"><path d="${P1}"/><path d="${P2}"/><path d="${P3}"/></g>`;
+    const defs=`<defs><pattern id="${pid}" x="0" y="0" width="${sz}" height="${sz}" patternUnits="userSpaceOnUse">${g}</pattern></defs>`;
+    return (w,h)=>`${defs}<rect width="${w}" height="${h}" fill="${bg}"/><rect width="${w}" height="${h}" fill="url(#${pid})"/>`;
+  }
+
+  _pFloral(c,bg,s,op,pid) {
+    const W=Math.round(120*s), H=Math.round(120*s);
+    const petal='M0,-3 C5,-10 5,-20 0,-26 C-5,-20 -5,-10 0,-3';
+    const petals=[0,60,120,180,240,300].map(r=>`<path d="${petal}" transform="translate(60,44) rotate(${r})" fill="${c}" opacity="${(op*0.7).toFixed(2)}"/>`).join('');
+    const dot=`<circle cx="60" cy="44" r="4" fill="${c}" opacity="${(op*0.9).toFixed(2)}"/>`;
+    const stem=`<path d="M60,44 Q57,68 60,100" fill="none" stroke="${c}" stroke-width="1.2" stroke-linecap="round" opacity="${(op*0.5).toFixed(2)}"/>`;
+    const leafL=`<path d="M0,0 C-10,-4 -14,-12 -8,-18 C-2,-12 0,-4 0,0" transform="translate(58,70) rotate(-20)" fill="${c}" opacity="${(op*0.6).toFixed(2)}"/>`;
+    const leafR=`<path d="M0,0 C10,-4 14,-12 8,-18 C2,-12 0,-4 0,0" transform="translate(62,84) rotate(20)" fill="${c}" opacity="${(op*0.6).toFixed(2)}"/>`;
+    const bud=`<path d="M0,0 C4,-6 4,-12 0,-16 C-4,-12 -4,-6 0,0" transform="translate(60,100)" fill="${c}" opacity="${(op*0.65).toFixed(2)}"/>`;
+    const defs=`<defs><pattern id="${pid}" x="0" y="0" width="${W}" height="${H}" patternUnits="userSpaceOnUse"><g transform="scale(${s})">${stem}${leafL}${leafR}${bud}${petals}${dot}</g></pattern></defs>`;
+    return (w,h)=>`${defs}<rect width="${w}" height="${h}" fill="${bg}"/><rect width="${w}" height="${h}" fill="url(#${pid})"/>`;
+  }
+
+  _pGalho(c,bg,s,op,pid) {
+    const W=Math.round(110*s), H=Math.round(160*s);
+    const stem=`<path d="M50,0 Q47,80 50,160" fill="none" stroke="${c}" stroke-width="1.5" stroke-linecap="round" opacity="${(op*0.65).toFixed(2)}"/>`;
+    const br=(x1,y1,x2,y2)=>{
+      const mx=(x1+x2)/2, my=(y1+y2)/2-5;
+      const bud=`<path d="M0,0 C3,-6 3,-13 0,-17 C-3,-13 -3,-6 0,0" transform="translate(${x2},${y2})" fill="${c}" opacity="${(op*0.7).toFixed(2)}"/>`;
+      return `<path d="M${x1},${y1} Q${mx},${my} ${x2},${y2}" fill="none" stroke="${c}" stroke-width="1" stroke-linecap="round" opacity="${(op*0.55).toFixed(2)}"/>${bud}`;
+    };
+    const branches=`${br(50,28,22,14)}${br(50,54,82,40)}${br(50,88,20,74)}${br(50,116,82,100)}${br(50,148,20,132)}`;
+    const defs=`<defs><pattern id="${pid}" x="0" y="0" width="${W}" height="${H}" patternUnits="userSpaceOnUse"><g transform="scale(${s})">${stem}${branches}</g></pattern></defs>`;
+    return (w,h)=>`${defs}<rect width="${w}" height="${h}" fill="${bg}"/><rect width="${w}" height="${h}" fill="url(#${pid})"/>`;
+  }
+
+  _pVideira(c,bg,s,op,pid) {
+    const W=Math.round(240*s), H=Math.round(120*s);
+    const vine=`<path d="M0,60 C20,38 40,82 60,60 C80,38 100,82 120,60 C140,38 160,82 180,60 C200,38 220,82 240,60" fill="none" stroke="${c}" stroke-width="1.4" stroke-linecap="round" opacity="${(op*0.6).toFixed(2)}"/>`;
+    const lf=(x,y,r)=>`<path d="M0,0 C5,-7 6,-16 0,-22 C-6,-16 -5,-7 0,0" transform="translate(${x},${y}) rotate(${r})" fill="${c}" opacity="${(op*0.65).toFixed(2)}"/>`;
+    const leaves=[lf(12,54,-28),lf(48,66,152),lf(72,54,-28),lf(108,66,152),lf(132,54,-28),lf(168,66,152),lf(192,54,-28),lf(228,66,152)].join('');
+    const td=(x)=>`<path d="M${x},50 Q${x-2},38 ${x+3},30 Q${x+8},22 ${x+2},18" fill="none" stroke="${c}" stroke-width="0.9" stroke-linecap="round" opacity="${(op*0.4).toFixed(2)}"/>`;
+    const defs=`<defs><pattern id="${pid}" x="0" y="0" width="${W}" height="${H}" patternUnits="userSpaceOnUse"><g transform="scale(${s})">${vine}${leaves}${[30,90,150,210].map(td).join('')}</g></pattern></defs>`;
+    return (w,h)=>`${defs}<rect width="${w}" height="${h}" fill="${bg}"/><rect width="${w}" height="${h}" fill="url(#${pid})"/>`;
+  }
+
+  // ── Downloads ─────────────────────────────────────────────────────────
+  _dlSvg(fn, svgStr) {
+    const blob=new Blob([svgStr],{type:'image/svg+xml'});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a'); a.href=url; a.download=fn+'.svg'; a.click();
+    URL.revokeObjectURL(url);
+  }
+  _dlJpeg(svgStr, fn) {
+    const blob=new Blob([svgStr],{type:'image/svg+xml;charset=utf-8'});
+    const url=URL.createObjectURL(blob);
+    const img=new Image();
+    img.onload=()=>{
+      const cv=document.createElement('canvas'); cv.width=1200; cv.height=900;
+      cv.getContext('2d').drawImage(img,0,0,1200,900);
+      URL.revokeObjectURL(url);
+      const a=document.createElement('a'); a.href=cv.toDataURL('image/jpeg',0.93); a.download=fn+'.jpg'; a.click();
+    };
+    img.onerror=()=>URL.revokeObjectURL(url);
+    img.src=url;
+  }
+
+  // ── Render ────────────────────────────────────────────────────────────
+  renderVals() {
+    const s  = this.state;
+    const ink='#36302a', accent='#CB6A4A', hairline='#ecdfd2';
+    const c  = this.COLORS[s.cIdx].hex;
+    const bg = this.BGS[s.bgIdx].hex;
+    const sc = s.scale, op = s.opacity;
+
+    // Main preview
+    const mainFn  = this._mkPat(s.pat, c, bg, sc, op, 'main');
+    const patPreview = React.createElement('svg',{
+      viewBox:'0 0 800 740', width:'100%', height:'100%',
+      style:{display:'block'},
+      dangerouslySetInnerHTML:{__html: mainFn(800,740)}
+    });
+
+    // Thumbnails (scale 0.5, unique pid per pattern)
+    const patCards = this.PNAMES.map((name,i) => {
+      const fn = this._mkPat(i, c, bg, 0.5, op, 'th'+i);
+      const thumb = React.createElement('svg',{
+        viewBox:'0 0 100 52', width:'100%', height:'100%',
+        style:{display:'block'},
+        dangerouslySetInnerHTML:{__html: fn(100,52)}
+      });
+      const sel = i===s.pat;
+      return {
+        name, thumb,
+        onClick: ()=>this._persist({pat:i}),
+        box: `cursor:pointer;padding:6px;border-radius:3px;border:${sel?`2px solid ${ink}`:`1px solid ${hairline}`};background:${sel?'#faf7f3':'transparent'};transition:all .18s;`
+      };
+    });
+
+    const colorSwatches = this.COLORS.map((col,i)=>({
+      name:col.name, hex:col.hex,
+      onClick:()=>this._persist({cIdx:i}),
+      ring:`cursor:pointer;padding:3px;border-radius:50%;border:2px solid ${i===s.cIdx?ink:'transparent'};transition:border-color .18s;`
+    }));
+    const bgSwatches = this.BGS.map((b,i)=>({
+      name:b.name, hex:b.hex,
+      onClick:()=>this._persist({bgIdx:i}),
+      ring:`cursor:pointer;padding:3px;border-radius:50%;border:2px solid ${i===s.bgIdx?ink:'transparent'};transition:border-color .18s;`
+    }));
+
+    // Note per pattern
+    const nk = 'p'+s.pat;
+    const noteDraft = s.noteDrafts[nk] ?? s.notes[nk] ?? '';
+    const onNoteInput = (e)=>{
+      this.setState({noteDrafts:{...s.noteDrafts,[nk]:e.target.value}});
+    };
+    const onNoteSave = ()=>{
+      const val = s.noteDrafts[nk] ?? s.notes[nk] ?? '';
+      const notes = {...s.notes,[nk]:val};
+      this.setState({notes});
+      try { localStorage.setItem('am_plab_notes',JSON.stringify(notes)); } catch(e){}
+    };
+
+    // Comments
+    const onCommentInput = (e)=>this.setState({commentDraft:e.target.value});
+    const onCommentSave = ()=>{
+      if (!s.commentDraft.trim()) return;
+      const now=new Date().toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});
+      const next=[...s.comments,{text:s.commentDraft.trim(),time:now}];
+      this.setState({comments:next,commentDraft:''});
+      try { localStorage.setItem('am_plab_comments',JSON.stringify(next)); } catch(e){}
+    };
+    const onCommentClear=()=>{
+      this.setState({comments:[]});
+      try { localStorage.removeItem('am_plab_comments'); } catch(e){}
+    };
+
+    // Downloads
+    const onDownloadSvg=()=>{
+      const fn=this._mkPat(s.pat,c,bg,sc,op,'dl');
+      this._dlSvg(this.FNAMES[s.pat],`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900">${fn(1200,900)}</svg>`);
+    };
+    const onDownloadJpeg=()=>{
+      const fn=this._mkPat(s.pat,c,bg,sc,op,'dl');
+      this._dlJpeg(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900">${fn(1200,900)}</svg>`,this.FNAMES[s.pat]);
+    };
+
+    return {
+      ink, accent, hairline,
+      previewBg: bg,
+      patName: this.PNAMES[s.pat],
+      patPreview, patCards,
+      colorSwatches, bgSwatches,
+      scale:sc, scaleLabel: sc.toFixed(1)+'×',
+      opacity:op, opacityLabel: Math.round(op*100)+'%',
+      onScale: (e)=>this._persist({scale:parseFloat(e.target.value)}),
+      onOpacity: (e)=>this._persist({opacity:parseFloat(e.target.value)}),
+      noteDraft, onNoteInput, onNoteSave,
+      commentDraft:s.commentDraft, onCommentInput, onCommentSave, onCommentClear,
+      comments:s.comments,
+      onDownloadSvg, onDownloadJpeg,
+    };
+  }
+}
+</script>
+
+</x-dc>
+</body>
+</html>
