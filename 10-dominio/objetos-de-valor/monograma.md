@@ -29,5 +29,6 @@ atualizado: 2026-06-28
 - Na versão **vestida**, o ramo de eucalipto da base está **deslocado p/ a direita** (assimétrico) — decidir se centraliza ou se é intencional.
 - Ver também o raminho modular em `elementos-graficos.md`.
 - **Opções novas (a avaliar — P1):** `../ativos/ornamentos-novos/` — monograma **vestido** e
-  **linha de base** (sem o ramo) + **moldura botânica** (`opçao alternativa 1` _1/_2/_3). São
-  candidatos p/ fechar os acabamentos; o canônico segue `monograma.svg` até preview aprovado.
+  **linha de base** (sem o ramo). Canônico segue `monograma.svg` até preview aprovado.
+- **Molduras/coroa (12 opções):** `../ativos/ornamentos-novos/molduras/` — `a1, a2, A3, a4, a5, a6,
+  a8, B1, B2, B3, B4, ramos` (`.ai/.svg/.png`). Anel + raminho em várias posições; escolher no preview (P1).

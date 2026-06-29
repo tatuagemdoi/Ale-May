@@ -6,6 +6,9 @@ atualizado: 2026-06-28
 ---
 
 # Changelog de decisões
+- 2026-06-28 — **Biblioteca de molduras completa** em `10-dominio/ativos/ornamentos-novos/molduras/`
+  (12 opções: `a1, a2, A3, a4, a5, a6, a8, B1, B2, B3, B4, ramos`, em `.ai/.svg/.png`). Limpei
+  duplicatas que o export arrastou (botânicos/florais/monograma). Escolha da moldura no preview (P1).
 - 2026-06-28 — **Bundle do Claude Design atualizado e consolidado** em `bootstrap-claude-design.zip`
   (removido o duplicado `bundle-claude-design-fase1.zip`). Inclui contexto completo + ativos novos
   (ornamentos/botânicos) + **autostart com comando `refresh`** (`prompts/claude-design/autostart-claude-design.md`).
