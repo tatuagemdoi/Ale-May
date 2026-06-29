@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Marcellus&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; }
+</style>
+</helmet>
+<div style="min-height:100vh; background:#F3ECE2; color:#222220; font-family:'Montserrat',sans-serif; padding:60px 6vw 100px;">
+
+  <header style="max-width:1180px; margin:0 auto 70px; text-align:center;">
+    <div style="display:flex; justify-content:center; margin-bottom:18px;">
+      <div style="width:92px; height:92px; color:#222220;">{{ sealInk }}</div>
+    </div>
+    <div style="font-family:'Montserrat',sans-serif; font-weight:500; font-size:12px; letter-spacing:.42em; color:#9a8f80; padding-left:.42em; margin-bottom:18px;">FASE 1 · FECHAR O DESIGN SYSTEM</div>
+    <h1 style="font-family:'Cormorant Garamond',serif; font-weight:500; font-size:48px; line-height:1.05; margin:0 0 16px;">Duas decisões para aprovar</h1>
+    <p style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:21px; color:#6f6557; margin:0 auto; max-width:580px; line-height:1.5;">Tudo aqui é preview — nada foi fixado. Agora vocês podem mexer: trocar a cor de cada elemento e o peso das letras, lado a lado, até decidir. Passo a passo, sempre juntos.</p>
+  </header>
+
+  <!-- BOARD 1 — PALETA -->
+  <section style="max-width:1180px; margin:0 auto;">
+    <div style="display:flex; align-items:baseline; gap:18px; border-bottom:1px solid #ddd2c4; padding-bottom:16px; margin-bottom:40px;">
+      <span style="font-family:'Marcellus',serif; font-size:15px; color:#b07a5e;">01</span>
+      <h2 style="font-family:'Cormorant Garamond',serif; font-weight:500; font-size:30px; margin:0;">Paleta</h2>
+      <span style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:12.5px; color:#8a8073; margin-left:auto; letter-spacing:.02em;">A · B · C no monograma + papelaria — toque nas bolinhas para recolorir cada elemento</span>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:26px;">
+      <sc-for list="{{ palettes }}" as="pal" hint-placeholder-count="3">
+        <div>
+          <!-- mockup de papelaria -->
+          <div style="aspect-ratio:5/7; background:{{ pal.cFundo }}; border:1px solid {{ pal.hairline }}; border-radius:3px; box-shadow:0 14px 34px -22px rgba(60,44,30,.5); padding:30px 26px; display:flex; flex-direction:column; align-items:center; text-align:center;">
+            <div style="width:62px; height:62px; color:{{ pal.cMono }}; margin-bottom:auto;">{{ pal.seal }}</div>
+            <div style="font-family:'Montserrat',sans-serif; font-weight:500; font-size:9.5px; letter-spacing:.34em; color:{{ pal.cAcento }}; padding-left:.34em; margin-bottom:14px;">PARA O NOSSO SIM</div>
+            <div style="font-family:{{ pal.nameCss }}; font-weight:{{ pal.nameWeight }}; font-size:31px; line-height:1.04; color:{{ pal.cNomes }}; text-transform:{{ pal.nameCase }};">Alexandre <span style="font-style:italic; color:{{ pal.cAcento }};">&amp;</span> Mayara</div>
+            <div style="display:flex; align-items:center; gap:12px; margin:18px 0;">
+              <span style="width:34px; height:1px; background:{{ pal.cRamos }}; opacity:.6;"></span>
+              <span style="width:24px; height:24px; color:{{ pal.cRamos }};">{{ pal.ramos }}</span>
+              <span style="width:34px; height:1px; background:{{ pal.cRamos }}; opacity:.6;"></span>
+            </div>
+            <div style="font-family:'Marcellus',serif; font-size:15px; letter-spacing:.26em; color:{{ pal.cData }}; padding-left:.26em;">01 · 08 · 2026</div>
+            <div style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:15px; color:{{ pal.ink60 }}; margin-top:8px; margin-bottom:auto;">falta um ano — vem celebrar</div>
+            <div style="font-family:'Montserrat',sans-serif; font-weight:400; font-size:8.5px; letter-spacing:.22em; color:{{ pal.cAcento }}; padding-left:.22em;">{{ pal.tagUpper }}</div>
+          </div>
+
+          <!-- controles de cor por elemento -->
+          <div style="margin-top:16px; background:#FBF6EE; border:1px solid #ece2d4; border-radius:4px; padding:13px 14px;">
+            <div style="display:flex; align-items:baseline; justify-content:space-between; margin-bottom:11px;">
+              <span style="font-family:'Montserrat',sans-serif; font-weight:500; font-size:8.5px; letter-spacing:.16em; color:#a4998a;">AJUSTE A COR DE CADA ELEMENTO</span>
+              <button onClick="{{ pal.onReset }}" style="font-family:'Montserrat',sans-serif; font-weight:400; font-size:8.5px; letter-spacing:.04em; color:#a4998a; background:none; border:none; cursor:pointer; padding:0; text-decoration:underline;">resetar</button>
+            </div>
+            <sc-for list="{{ pal.controls }}" as="ctl" hint-placeholder-count="5">
+              <div style="display:flex; align-items:center; gap:9px; margin-bottom:8px;">
+                <span style="font-family:'Montserrat',sans-serif; font-weight:400; font-size:9.5px; color:#6f6557; width:78px; flex-shrink:0;">{{ ctl.label }}</span>
+                <div style="display:flex; gap:6px; flex-wrap:wrap;">
+                  <sc-for list="{{ ctl.options }}" as="opt" hint-placeholder-count="6">
+                    <button onClick="{{ opt.onPick }}" title="{{ opt.name }}" style="{{ opt.dotStyle }}"></button>
+                  </sc-for>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+
+          <!-- legenda -->
+          <div style="display:flex; align-items:baseline; gap:9px; margin-top:16px;">
+            <span style="font-family:'Marcellus',serif; font-size:17px; color:{{ pal.accent }};">{{ pal.letter }}</span>
+            <span style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:18px;">{{ pal.title }}</span>
+          </div>
+          <div style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:11px; color:#8a8073; line-height:1.5; margin-top:5px;">{{ pal.note }}</div>
+        </div>
+      </sc-for>
+    </div>
+
+    <!-- estúdio do monograma (embed do Monograma AM - Estudio) -->
+    <div style="margin-top:34px;">
+      <div style="font-family:'Montserrat',sans-serif; font-weight:500; font-size:9px; letter-spacing:.16em; color:#a4998a; margin-bottom:12px;">VARIAÇÃO DO MONOGRAMA · personalize e salve em A · B · C</div>
+      <div style="background:#FBF6EE; border:1px solid #e6dccd; border-radius:3px; padding:14px; overflow:hidden;">
+        <dc-import name="Monograma AM - Estudio" hint-size="100%,800px" style="display:block; width:100%; height:800px;"></dc-import>
+      </div>
+      <p style="font-family:'Cormorant Garamond',serif; font-size:17px; line-height:1.45; color:#4a4236; margin:16px 0 0; max-width:560px;">Brinque com pincel, cor, fundo, tamanho e acabamento. Quando gostar, toque em <span style="font-style:italic; color:#8a8073;">Salvar aqui</span> em A, B ou C — as três versões ficam guardadas para compararmos.</p>
+    </div>
+  </section>
+
+  <!-- BOARD 2 — LETTERING -->
+  <section style="max-width:1180px; margin:78px auto 0;">
+    <div style="display:flex; align-items:baseline; gap:18px; border-bottom:1px solid #ddd2c4; padding-bottom:16px; margin-bottom:14px;">
+      <span style="font-family:'Marcellus',serif; font-size:15px; color:#b07a5e;">02</span>
+      <h2 style="font-family:'Cormorant Garamond',serif; font-weight:500; font-size:30px; margin:0;">Lettering dos nomes</h2>
+      <span style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:12.5px; color:#8a8073; margin-left:auto; letter-spacing:.02em;">romano editorial · sem distorção · sem angulação</span>
+    </div>
+    <p style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:19px; color:#6f6557; margin:0 0 30px; max-width:700px; line-height:1.5;">A caligrafia do projeto vive no monograma — não nos nomes. Aqui, três serifas de contraste. Use <strong style="font-style:normal; font-weight:600; color:#4a4236;">mais fino / mais grosso</strong> para encontrar o corpo certo de cada uma, sem distorcer a fonte.</p>
+
+    <div style="display:flex; flex-direction:column; gap:0;">
+      <sc-for list="{{ letterings }}" as="lt" hint-placeholder-count="3">
+        <div style="display:flex; align-items:center; gap:38px; padding:34px 4px; border-top:1px solid #e2d8c9;">
+          <div style="width:182px; flex-shrink:0;">
+            <div style="font-family:'Marcellus',serif; font-size:13px; letter-spacing:.06em; color:#222220;">{{ lt.fontLabel }}</div>
+            <div style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:11px; color:#8a8073; line-height:1.5; margin-top:7px;">{{ lt.note }}</div>
+            <!-- controle de corpo / peso -->
+            <div style="display:flex; align-items:center; gap:7px; margin-top:16px;">
+              <button onClick="{{ lt.onThinner }}" style="{{ lt.thinStyle }}">‹ mais fino</button>
+              <button onClick="{{ lt.onThicker }}" style="{{ lt.thickStyle }}">mais grosso ›</button>
+            </div>
+            <div style="font-family:'Montserrat',sans-serif; font-weight:400; font-size:9.5px; letter-spacing:.1em; color:#a4998a; margin-top:9px;">{{ lt.weightLabel }}</div>
+            <!-- controle de caixa -->
+            <div style="display:flex; align-items:center; gap:7px; margin-top:14px;">
+              <button onClick="{{ lt.onUpper }}" style="{{ lt.upperStyle }}">MAIÚSCULO</button>
+              <button onClick="{{ lt.onLower }}" style="{{ lt.lowerStyle }}">minúsculo</button>
+            </div>
+            <!-- controle de tamanho -->
+            <div style="display:flex; align-items:center; gap:7px; margin-top:14px;">
+              <button onClick="{{ lt.onSmaller }}" style="{{ lt.smallerStyle }}">– menor</button>
+              <button onClick="{{ lt.onBigger }}" style="{{ lt.biggerStyle }}">maior +</button>
+            </div>
+            <div style="font-family:'Montserrat',sans-serif; font-weight:400; font-size:9.5px; letter-spacing:.1em; color:#a4998a; margin-top:9px;">Corpo {{ lt.size }}px</div>
+            <button onClick="{{ lt.onChoose }}" style="{{ lt.chooseStyle }}">{{ lt.chooseLabel }}</button>
+          </div>
+          <div style="flex:1; display:flex;">
+            <div data-namecol="{{ lt.idx }}" style="display:inline-flex; flex-direction:column; align-items:center;">
+            <div style="font-family:{{ lt.css }}; font-weight:{{ lt.weight }}; font-size:{{ lt.size }}px; line-height:1.02; color:#222220; text-transform:{{ lt.caseT }}; white-space:nowrap;">Alexandre <span data-amp="{{ lt.idx }}" style="font-style:italic; color:{{ ampColor }};">&amp;</span> Mayara</div>
+            <div style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:20px; color:#6f6557; margin-top:3px; transform:translateX({{ lt.subOffset }}px);">para o nosso sim</div>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- BOARD 3 — CONVITE APLICADO (mockup) -->
+  <section style="max-width:1180px; margin:78px auto 0;">
+    <div style="display:flex; align-items:baseline; gap:18px; border-bottom:1px solid #ddd2c4; padding-bottom:16px; margin-bottom:30px;">
+      <span style="font-family:'Marcellus',serif; font-size:15px; color:#b07a5e;">03</span>
+      <h2 style="font-family:'Cormorant Garamond',serif; font-weight:500; font-size:30px; margin:0;">Convite no contexto</h2>
+      <span style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:12.5px; color:#8a8073; margin-left:auto; letter-spacing:.02em;">monograma e lettering escolhidos, aplicados — Tarde Italiana</span>
+    </div>
+    <div style="border:1px solid #e6dccd; border-radius:3px; overflow:hidden; box-shadow:0 14px 34px -22px rgba(60,44,30,.5);">
+      <dc-import name="Convite A&M" hint-size="100%,760px" style="display:block; width:100%; height:760px;"></dc-import>
+    </div>
+
+    <div style="font-family:'Montserrat',sans-serif; font-weight:500; font-size:9px; letter-spacing:.16em; color:#a4998a; margin:30px 0 14px;">OUTRAS APLICAÇÕES · monograma + lettering escolhidos</div>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px;">
+      <div style="aspect-ratio:4/5; background:#E7DDCB; border-radius:3px; display:flex; flex-direction:column; align-items:center; justify-content:center; box-shadow:0 14px 34px -22px rgba(60,44,30,.5);">
+        <div style="width:88px; height:88px; color:#5b4636;">{{ appMono1 }}</div>
+        <div style="font-family:'Marcellus',serif; font-size:12px; letter-spacing:.3em; color:#7a6b56; padding-left:.3em; margin-top:16px;">01 · 08 · 2027</div>
+        <div style="font-family:'Montserrat',sans-serif; font-size:8px; letter-spacing:.2em; text-transform:uppercase; color:#9a8b73; margin-top:26px;">tag · lacre</div>
+      </div>
+      <div style="aspect-ratio:4/5; background:#FBF7F2; border:1px solid #e9ddd4; border-radius:3px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:24px; box-shadow:0 14px 34px -22px rgba(60,44,30,.5);">
+        <div style="width:62px; height:62px; color:#34302a;">{{ appMono2 }}</div>
+        <div style="font-family:{{ nameCssTop }}; font-weight:{{ nameWeightTop }}; text-transform:{{ nameCaseTop }}; font-size:17px; letter-spacing:.1em; color:#34302a; margin-top:16px; text-align:center;">Alexandre &amp; Mayara</div>
+        <div style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:18px; color:#b07a5e; margin-top:4px;">Tarde Italiana</div>
+        <div style="font-family:'Montserrat',sans-serif; font-size:8px; letter-spacing:.2em; text-transform:uppercase; color:#a4998a; margin-top:24px;">cabeçalho</div>
+      </div>
+      <div style="aspect-ratio:4/5; background:#34302a; border-radius:3px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:24px; box-shadow:0 14px 34px -22px rgba(60,44,30,.5);">
+        <div style="width:62px; height:62px; color:#F4EEE4;">{{ appMono3 }}</div>
+        <div style="font-family:{{ nameCssTop }}; font-weight:{{ nameWeightTop }}; text-transform:{{ nameCaseTop }}; font-size:16px; letter-spacing:.1em; color:#F4EEE4; margin-top:16px; text-align:center;">Alexandre &amp; Mayara</div>
+        <div style="font-family:'Marcellus',serif; font-size:13px; letter-spacing:.26em; color:#cdb27a; padding-left:.26em; margin-top:12px;">01 · 08 · 2027</div>
+        <div style="font-family:'Montserrat',sans-serif; font-size:8px; letter-spacing:.2em; text-transform:uppercase; color:#9a8f80; margin-top:24px;">save the date</div>
+      </div>
+    </div>
+  </section>
+
+  <footer style="max-width:1180px; margin:72px auto 0; padding-top:24px; border-top:1px solid #ddd2c4; text-align:center; font-family:'Montserrat',sans-serif; font-weight:300; font-size:11.5px; letter-spacing:.05em; color:#8a8073;">Casamento Alexandre &amp; Mayara · preview de aprovação — nenhuma escolha foi fixada · cores e peso ajustáveis aqui mesmo</footer>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1320,&quot;height&quot;:1980},&quot;monogramColor&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;tinta&quot;,&quot;palette&quot;],&quot;default&quot;:&quot;tinta&quot;,&quot;tsType&quot;:&quot;'tinta'|'palette'&quot;,&quot;section&quot;:&quot;Identidade&quot;,&quot;unit&quot;:&quot;&quot;},&quot;ampersandColor&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;options&quot;:[&quot;#b07a5e&quot;,&quot;#CB6A4A&quot;,&quot;#C99089&quot;,&quot;#5C6B50&quot;,&quot;#222220&quot;],&quot;default&quot;:&quot;#222220&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Identidade&quot;}}">
+class Component extends DCLogic {
+  state = { mono: '', letras: '', ramos: '', choiceSvg: '', chosenLettering: null, elem: { A: {}, B: {}, C: {} }, weights: { 0: 500, 1: 400, 2: 400 }, cases: { 0: 'none', 1: 'none', 2: 'none' }, sizes: { 0: 56, 1: 56, 2: 56 }, monoVariant: 'A', monoSize: 72 };
+
+  WEIGHTS = { 0: [300,400,500,600,700], 1: [400], 2: [300,400,500,600,700] };
+  WNAME = { 300:'Light', 400:'Regular', 500:'Medium', 600:'SemiBold', 700:'Bold' };
+
+  async componentDidMount() {
+    const grab = async (path, style, scope) => {
+      try {
+        const r = await fetch(path);
+        let t = await r.text();
+        t = t.replace('viewBox="0 0 1000 1000">',
+          'viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid meet" class="' + scope + '" style="width:100%;height:100%;display:block;overflow:visible"><style>' + style + '</style>');
+        return t;
+      } catch (e) { return ''; }
+    };
+    // estilos escopados por classe na raiz do SVG — <style> dentro de SVG vaza p/ o documento
+    const monoStyle = '.am-mono .cls-1{fill:none;stroke:currentColor;stroke-width:13;stroke-linecap:round;stroke-linejoin:round}.am-mono .cls-2{fill:currentColor;stroke:none}';
+    const ramosStyle = '.am-ramos .cls-1,.am-ramos .cls-2,.am-ramos .cls-4{fill:currentColor;stroke:none}.am-ramos .cls-3{fill:none;stroke:currentColor;stroke-width:6}';
+    const [mono, letras, ramos] = await Promise.all([
+      grab('am/monograma.svg', monoStyle, 'am-mono'),
+      grab('am/mono-letras.svg', monoStyle, 'am-mono'),
+      grab('am/ramos.svg', ramosStyle, 'am-ramos')
+    ]);
+    this.setState({ mono, letras, ramos });
+    try { const cs = localStorage.getItem('am_mono_choice_svg'); if (cs) this.setState({ choiceSvg: cs }); } catch(e) {}
+    this._onChoice = (e) => { try { this.setState({ choiceSvg: (e && e.detail && e.detail.svg) || localStorage.getItem('am_mono_choice_svg') || '' }); } catch(_) {} };
+    window.addEventListener('am-mono-choice', this._onChoice);
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => this.measureOffsets());
+    }
+    setTimeout(() => this.measureOffsets(), 400);
+  }
+
+  componentWillUnmount() { if (this._onChoice) window.removeEventListener('am-mono-choice', this._onChoice); }
+
+  chosenNode(fallbackColor) {
+    if (this.state.choiceSvg) {
+      return React.createElement('div', { style:{ width:'100%', height:'100%' }, dangerouslySetInnerHTML:{ __html: this.state.choiceSvg } });
+    }
+    return this.svgNode(this.state.letras, fallbackColor);
+  }
+
+  svgNode(html, color) {
+    if (!html) return null;
+    return React.createElement('div', {
+      style: { width: '100%', height: '100%', color },
+      dangerouslySetInnerHTML: { __html: html }
+    });
+  }
+
+  setElem(letter, key, hex) {
+    this.setState(s => ({ elem: { ...s.elem, [letter]: { ...s.elem[letter], [key]: hex } } }));
+  }
+  resetElem(letter) {
+    this.setState(s => ({ elem: { ...s.elem, [letter]: {} } }));
+  }
+  stepW(idx, dir) {
+    const allowed = this.WEIGHTS[idx];
+    this.setState(s => {
+      let i = allowed.indexOf(s.weights[idx]);
+      i = Math.max(0, Math.min(allowed.length - 1, i + dir));
+      return { weights: { ...s.weights, [idx]: allowed[i] } };
+    });
+  }
+  setCase(idx, val) {
+    this.setState(s => ({ cases: { ...s.cases, [idx]: val } }));
+  }
+  stepSize(idx, dir) {
+    this.setState(s => ({ sizes: { ...s.sizes, [idx]: Math.max(32, Math.min(88, s.sizes[idx] + dir * 6)) } }));
+  }
+  setMonoVariant(v) { this.setState({ monoVariant: v }); }
+
+  measureOffsets = () => {
+    const root = this.dcRoot || document;
+    const next = {};
+    let changed = false;
+    const cur = this.state.offsets || {};
+    [0, 1, 2].forEach(i => {
+      const col = (root.querySelector ? root : document).querySelector('[data-namecol="' + i + '"]');
+      const amp = (root.querySelector ? root : document).querySelector('[data-amp="' + i + '"]');
+      if (!col || !amp) return;
+      const colRect = col.getBoundingClientRect();
+      const ampRect = amp.getBoundingClientRect();
+      const ampCenter = (ampRect.left + ampRect.width / 2) - colRect.left;
+      const off = Math.round(ampCenter - colRect.width / 2);
+      next[i] = off;
+      if (Math.abs((cur[i] || 0) - off) > 0.5) changed = true;
+    });
+    if (changed) this.setState({ offsets: next });
+  };
+
+  componentDidUpdate() { this.measureOffsets(); }
+  stepMono(dir) {
+    this.setState(s => ({ monoSize: Math.max(40, Math.min(120, s.monoSize + dir * 8)) }));
+  }
+
+  renderVals() {
+    const ink = '#222220';
+    const monoMode = this.props.monogramColor || 'tinta';
+    const ampColor = this.props.ampersandColor || '#b07a5e';
+
+    const DATA = {
+      A: { letter: 'A', title: 'Romântico Sereno', tag: 'sereno · pastel',
+        ink: '#34302a', ink60: '#7d756a', accent: '#C99089', botanical: '#A6B89A',
+        cardBg: '#FBF7F2', hairline: '#e9ddd4',
+        note: 'Pastel, delicado, acolhedor. O mais leve dos três.',
+        sw: [['rosé','#C99089'],['sálvia','#A6B89A'],['mar','#9DB5B2'],['blush','#EAD9D4'],['marfim','#F7F1EA']] },
+      B: { letter: 'B', title: 'Jardim Terroso', tag: 'mood que a May curtiu',
+        ink: '#36302a', ink60: '#7e7468', accent: '#CB6A4A', botanical: '#8FA383',
+        cardBg: '#FBF5EE', hairline: '#ecdfd2',
+        note: 'Terroso e quente, com calor de jardim. O mood que a May curtiu.',
+        sw: [['terracota','#CB6A4A'],['blush','#E9C6C3'],['sage','#A6B89A'],['taupe','#DCCBC1'],['ivory','#F7F1EA']] },
+      C: { letter: 'C', title: 'Clássico Atemporal', tag: 'sóbrio · atemporal',
+        ink: '#222220', ink60: '#6f6a5e', accent: '#5C6B50', botanical: '#5C6B50',
+        cardBg: '#FBF8F1', hairline: '#e4dac8',
+        note: 'Sóbrio e atemporal — eucalipto sobre marfim, mais peso editorial.',
+        sw: [['tinta','#222220'],['eucalipto','#5C6B50'],['taupe','#DCCBC1'],['areia','#E7DDCB'],['marfim','#F4EEE4']] }
+    };
+
+    const dot = (hex, active) => ({
+      width: '17px', height: '17px', borderRadius: '50%', background: hex, cursor: 'pointer',
+      padding: 0, flexShrink: 0,
+      border: active ? '1.5px solid #fff' : '1px solid rgba(0,0,0,.12)',
+      boxShadow: active ? '0 0 0 1.6px #5a5043' : 'none', outline: 'none'
+    });
+
+    const NAMEFONTS = [
+      { css:"'Cormorant Garamond',serif", weight:500 },
+      { css:"'Marcellus',serif", weight:400 },
+      { css:"'Fraunces',serif", weight:400 }
+    ];
+    const _cl = this.state.chosenLettering;
+    const _nf = (_cl != null) ? NAMEFONTS[_cl] : NAMEFONTS[0];
+    const _ncase = (_cl != null) ? (this.state.cases[_cl] || 'none') : 'none';
+
+    const palettes = ['A','B','C'].map(k => {
+      const p = DATA[k];
+      const ov = this.state.elem[k] || {};
+      const monoDefault = monoMode === 'palette' ? p.accent : ink;
+      const def = { mono: monoDefault, nomes: p.ink, acento: p.accent, ramos: p.botanical, data: p.ink, fundo: p.cardBg };
+      const eff = key => ov[key] || def[key];
+
+      // opções de cor: as 5 da paleta + tinta neutra (sem duplicar)
+      const base = p.sw.map(([name, hex]) => ({ name, hex }));
+      if (!base.some(o => o.hex.toLowerCase() === '#222220')) base.push({ name: 'tinta', hex: '#222220' });
+
+      const roles = [
+        { key: 'mono', label: 'Monograma' },
+        { key: 'nomes', label: 'Nomes' },
+        { key: 'acento', label: 'Acento &' },
+        { key: 'ramos', label: 'Ramos / filete' },
+        { key: 'data', label: 'Data' },
+        { key: 'fundo', label: 'Fundo' }
+      ];
+      const controls = roles.map(r => ({
+        label: r.label,
+        options: base.map(o => ({
+          name: o.name, hex: o.hex,
+          dotStyle: dot(o.hex, eff(r.key).toLowerCase() === o.hex.toLowerCase()),
+          onPick: () => this.setElem(k, r.key, o.hex)
+        }))
+      }));
+
+      return {
+        letter: p.letter, title: p.title, note: p.note,
+        tagUpper: p.tag.toUpperCase(),
+        ink: p.ink, ink60: p.ink60, accent: p.accent, cardBg: p.cardBg, hairline: p.hairline,
+        cMono: eff('mono'), cNomes: eff('nomes'), cAcento: eff('acento'), cRamos: eff('ramos'), cData: eff('data'), cFundo: eff('fundo'),
+        nameCss: _nf.css, nameWeight: _nf.weight, nameCase: _ncase,
+        seal: this.chosenNode(eff('mono')),
+        ramos: this.svgNode(this.state.ramos, eff('ramos')),
+        controls,
+        onReset: () => this.resetElem(k)
+      };
+    });
+
+    const btn = (enabled) => ({
+      fontFamily: "'Montserrat',sans-serif", fontWeight: 400, fontSize: '10px', letterSpacing: '.04em',
+      color: enabled ? '#5a5043' : '#c2b7a8', background: enabled ? '#fff' : '#f3ece2',
+      border: '1px solid ' + (enabled ? '#d8cbba' : '#e6dccd'), borderRadius: '100px',
+      padding: '7px 12px', cursor: enabled ? 'pointer' : 'default', whiteSpace: 'nowrap'
+    });
+
+    const META = [
+      { fontLabel: 'Cormorant Garamond', css: "'Cormorant Garamond',serif", note: 'Contraste alto, ar romântico. Delicada e moderna.' },
+      { fontLabel: 'Marcellus', css: "'Marcellus',serif", note: 'Inspiração lapidária romana. Serena, clássica. Peso único.' },
+      { fontLabel: 'Fraunces', css: "'Fraunces',serif", note: 'Editorial com personalidade — “old style” contemporânea.' }
+    ];
+    const letterings = META.map((m, i) => {
+      const allowed = this.WEIGHTS[i];
+      const w = this.state.weights[i];
+      const idx = allowed.indexOf(w);
+      const canThin = idx > 0, canThick = idx < allowed.length - 1;
+      const single = allowed.length === 1;
+      const cs = this.state.cases[i];
+      const sz = this.state.sizes[i];
+      const toggle = (active) => ({
+        fontFamily: "'Montserrat',sans-serif", fontWeight: active ? 500 : 400, fontSize: '10px', letterSpacing: '.04em',
+        color: active ? '#fff' : '#5a5043', background: active ? '#5a5043' : '#fff',
+        border: '1px solid ' + (active ? '#5a5043' : '#d8cbba'), borderRadius: '100px',
+        padding: '7px 12px', cursor: 'pointer', whiteSpace: 'nowrap'
+      });
+      return {
+        fontLabel: m.fontLabel, css: m.css, note: m.note, weight: w, idx: i,
+        subOffset: (this.state.offsets && this.state.offsets[i]) || 0,
+        weightLabel: single ? ('Peso ' + w + ' · ' + this.WNAME[w] + ' (único)') : ('Peso ' + w + ' · ' + this.WNAME[w]),
+        thinStyle: btn(canThin), thickStyle: btn(canThick),
+        onThinner: canThin ? (() => this.stepW(i, -1)) : (() => {}),
+        onThicker: canThick ? (() => this.stepW(i, 1)) : (() => {}),
+        caseT: cs,
+        upperStyle: toggle(cs === 'uppercase'), lowerStyle: toggle(cs === 'lowercase'),
+        onUpper: () => this.setCase(i, cs === 'uppercase' ? 'none' : 'uppercase'),
+        onLower: () => this.setCase(i, cs === 'lowercase' ? 'none' : 'lowercase'),
+        size: sz,
+        smallerStyle: btn(sz > 32), biggerStyle: btn(sz < 88),
+        onSmaller: sz > 32 ? (() => this.stepSize(i, -1)) : (() => {}),
+        onBigger: sz < 88 ? (() => this.stepSize(i, 1)) : (() => {}),
+        chosen: this.state.chosenLettering === i,
+        chooseLabel: this.state.chosenLettering === i ? '✓ Escolhida para os nomes' : 'Escolher esta',
+        chooseStyle: {
+          fontFamily: "'Montserrat',sans-serif", fontWeight: 600, fontSize: '10px', letterSpacing: '.08em', textTransform: 'uppercase',
+          color: this.state.chosenLettering === i ? '#fff' : '#b07a5e',
+          background: this.state.chosenLettering === i ? '#b07a5e' : '#fff',
+          border: '1px solid #b07a5e', borderRadius: '100px', padding: '8px 14px', cursor: 'pointer', whiteSpace: 'nowrap', marginTop: '16px'
+        },
+        onChoose: () => {
+          try { localStorage.setItem('am_lettering_choice', JSON.stringify({ css: NAMEFONTS[i].css, weight: this.state.weights[i], caseT: this.state.cases[i] || 'none' })); } catch(e) {}
+          try { window.dispatchEvent(new CustomEvent('am-lettering-choice')); } catch(e) {}
+          this.setState({ chosenLettering: i });
+        }
+      };
+    });
+
+    // estúdio do monograma
+    const variantBtn = (active) => ({
+      fontFamily: "'Marcellus',serif", fontSize: '15px', letterSpacing: '.04em',
+      color: active ? '#fff' : '#5a5043', background: active ? '#5a5043' : '#fff',
+      border: '1px solid ' + (active ? '#5a5043' : '#d8cbba'), borderRadius: '4px',
+      width: '40px', height: '40px', cursor: 'pointer', padding: 0
+    });
+    const sizeBtn = (enabled) => ({
+      fontFamily: "'Montserrat',sans-serif", fontWeight: 400, fontSize: '10px', letterSpacing: '.04em',
+      color: enabled ? '#5a5043' : '#c2b7a8', background: enabled ? '#fff' : '#f3ece2',
+      border: '1px solid ' + (enabled ? '#d8cbba' : '#e6dccd'), borderRadius: '100px',
+      padding: '7px 13px', cursor: enabled ? 'pointer' : 'default', whiteSpace: 'nowrap'
+    });
+    const monoOptions = ['A','B','C'].map(v => ({
+      label: v, style: variantBtn(this.state.monoVariant === v), onPick: () => this.setMonoVariant(v)
+    }));
+
+    return {
+      ampColor,
+      sealInk: this.chosenNode(ink),
+      sealAccent: this.chosenNode('#b07a5e'),
+      appMono1: this.chosenNode('#5b4636'),
+      appMono2: this.chosenNode('#34302a'),
+      appMono3: this.chosenNode('#F4EEE4'),
+      nameCssTop: _nf.css, nameWeightTop: _nf.weight, nameCaseTop: _ncase,
+      palettes,
+      letterings,
+      monoOptions,
+      monoVariant: this.state.monoVariant,
+      monoSize: this.state.monoSize,
+      onMonoSmaller: () => this.stepMono(-1),
+      onMonoBigger: () => this.stepMono(1),
+      monoSmallerStyle: sizeBtn(this.state.monoSize > 40),
+      monoBiggerStyle: sizeBtn(this.state.monoSize < 120)
+    };
+  }
+}
+</script>
+</body>
+</html>

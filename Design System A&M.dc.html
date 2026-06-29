@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500;600&family=Lato:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; }
+</style>
+</helmet>
+<div style="min-height:100vh; background:{{ pageBg }}; color:#222220; font-family:'Montserrat',sans-serif; padding:64px 7vw 96px;">
+
+  <!-- Cabeçalho -->
+  <header style="max-width:1080px; margin:0 auto 8px; display:flex; flex-direction:column; align-items:center; text-align:center; gap:18px;">
+    <div style="color:{{ monoColor }}; width:108px; height:108px;">{{ monoSvg }}</div>
+    <div style="font-family:'Cinzel',serif; letter-spacing:.42em; font-size:13px; color:{{ ink60 }}; padding-left:.42em;">DESIGN SYSTEM</div>
+    <h1 style="font-family:'Playfair Display',serif; font-weight:500; font-size:46px; margin:0; line-height:1.1;">Alexandre <span style="font-style:italic; color:{{ accent }};">&amp;</span> Mayara</h1>
+    <p style="font-family:'Lato',sans-serif; font-weight:300; font-size:15px; color:{{ ink60 }}; margin:0; max-width:520px; line-height:1.6;">Passo a passo, sempre juntos. Tokens extraídos da base de verdade — e agora <em>interativos</em>: ajuste monograma, lettering e cores aqui mesmo para decidir.</p>
+    <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-top:4px;">
+      <span style="font-family:'Lato',sans-serif; font-size:11.5px; letter-spacing:.12em; text-transform:uppercase; color:{{ ink60 }}; border:1px solid {{ hairline }}; border-radius:100px; padding:6px 14px;">Paleta {{ paletteLetter }} · {{ paletteName }}</span>
+      <span style="font-family:'Lato',sans-serif; font-size:11.5px; letter-spacing:.12em; text-transform:uppercase; color:{{ ink60 }}; border:1px solid {{ hairline }}; border-radius:100px; padding:6px 14px;">Monograma: {{ monoColorLabel }}</span>
+    </div>
+  </header>
+
+  <div style="max-width:1080px; margin:0 auto;">
+
+    <!-- 1. Monograma -->
+    <section style="margin-top:72px;">
+      <div style="display:flex; align-items:baseline; gap:16px; border-bottom:1px solid {{ hairline }}; padding-bottom:14px; margin-bottom:34px;">
+        <span style="font-family:'Cinzel',serif; font-size:14px; color:{{ accent }};">01</span>
+        <h2 style="font-family:'Playfair Display',serif; font-weight:500; font-size:26px; margin:0;">Monograma</h2>
+        <span style="font-family:'Lato',sans-serif; font-weight:300; font-size:13px; color:{{ ink60 }}; margin-left:auto;">AM caligráfico monolinha · ativos/monograma.svg</span>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:22px;">
+        <div style="background:{{ cardBg }}; border:1px solid {{ hairline }}; border-radius:3px; aspect-ratio:1/1; display:flex; align-items:center; justify-content:center; color:{{ monoColor }};"><div style="width:62%;">{{ monoSvg }}</div></div>
+        <div style="background:{{ ink }}; border-radius:3px; aspect-ratio:1/1; display:flex; align-items:center; justify-content:center; color:{{ marfim }};"><div style="width:62%;">{{ monoSvg }}</div></div>
+        <div style="background:{{ cardBg }}; border:1px solid {{ hairline }}; border-radius:3px; aspect-ratio:1/1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; color:{{ monoColor }};">
+          <div style="width:34px;">{{ monoSvg }}</div>
+          <div style="width:22px;">{{ monoSvg }}</div>
+          <div style="width:14px;">{{ monoSvg }}</div>
+        </div>
+      </div>
+
+      <!-- estúdio interativo do monograma -->
+      <div style="margin-top:22px; display:flex; align-items:stretch; gap:28px; flex-wrap:wrap; background:{{ cardBg }}; border:1px solid {{ hairline }}; border-radius:3px; padding:24px 28px;">
+        <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; background:#fff; border:1px solid {{ hairline }}; border-radius:3px; padding:22px 30px; min-width:194px;">
+          <div style="height:132px; display:flex; align-items:center; justify-content:center;">
+            <div style="width:{{ monoSize }}px; height:{{ monoSize }}px; color:{{ monoColor }};">{{ monoSvg }}</div>
+          </div>
+          <div style="font-family:'Lato',sans-serif; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:{{ ink60 }}; margin-top:6px;">Variação {{ monoVariant }} · {{ monoSize }}px</div>
+        </div>
+        <div style="flex:1; min-width:240px; display:flex; flex-direction:column; justify-content:center;">
+          <div style="font-family:'Lato',sans-serif; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:{{ accent }}; margin-bottom:10px;">Variação do monograma</div>
+          <div style="display:flex; gap:9px; margin-bottom:20px;">
+            <sc-for list="{{ monoOptions }}" as="mo" hint-placeholder-count="3">
+              <button onClick="{{ mo.onPick }}" style="{{ mo.style }}">{{ mo.label }}</button>
+            </sc-for>
+          </div>
+          <div style="font-family:'Lato',s
+</x-dc>
+</body>
+</html>

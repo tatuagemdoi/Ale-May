@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <meta name="design_doc_mode" content="canvas">
+  <style>
+    body { background:#e7e2d8; }
+    .lbl { font-family:'Inter',sans-serif; font-size:11px; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:#8a8273; }
+    .card { background:#fff; border-radius:2px; box-shadow:0 1px 3px rgba(0,0,0,.10); }
+    .nm { font-family:'Cormorant Garamond',serif; font-size:23px; font-weight:600; color:#2a2620; letter-spacing:.01em; }
+    .spec { font-family:'Inter',sans-serif; font-size:10.5px; font-weight:500; letter-spacing:.05em; color:#9a917f; text-transform:uppercase; }
+    .body { font-family:'Cormorant Garamond',serif; font-size:18px; line-height:1.5; color:#43403a; }
+  </style>
+</helmet>
+
+<div style="position:absolute; left:60px; top:44px; width:1180px;">
+  <div style="font-family:'Cormorant Garamond',serif; font-size:14px; letter-spacing:.42em; text-transform:uppercase; color:#a79c87; margin-bottom:10px;">Casamento A &amp; M · Sistema de Monograma</div>
+  <div style="font-family:'Cormorant Garamond',serif; font-size:54px; font-weight:500; color:#2a2620; line-height:1.04;">Monograma A·M — Estudo de Variações</div>
+  <div class="body" style="max-width:760px; margin-top:14px;">Geometria original preservada na Fase 1: variam apenas peso, terminação, textura e cor do traço. A Fase 2 propõe direções a partir da análise crítica do desenho.</div>
+</div>
+
+<!-- ============ FASE 1 ============ -->
+<div class="lbl" data-drags-parent="1" style="position:absolute; left:60px; top:250px;">Fase 1 — Estilo de traço · geometria travada</div>
+
+<div class="card" style="position:absolute; left:60px; top:288px; width:300px;">
+  <div style="height:300px; padding:14px; box-sizing:border-box; background:#faf7f1; border-radius:2px 2px 0 0;">{{ f1 }}</div>
+  <div style="padding:14px 16px; display:flex; justify-content:space-between; align-items:baseline; border-top:1px solid #efe9dc;">
+    <div><div class="nm">Padrão</div><div class="spec" style="margin-top:3px;">travado · 7px · round</div></div>
+    <div style="font-family:'Inter'; font-size:9px; font-weight:600; letter-spacing:.12em; color:#fff; background:#2a2620; padding:4px 8px; border-radius:2px;">PADRÃO</div>
+  </div>
+</div>
+
+<div class="card" style="position:absolute; left:420px; top:288px; width:300px;">
+  <div style="height:300px; padding:14px; box-sizing:border-box; background:#faf7f1; border-radius:2px 2px 0 0;">{{ f2 }}</div>
+  <div style="padding:14px 16px; border-top:1px solid #efe9dc;"><div class="nm">Fio fino</div><div class="spec" style="margin-top:3px;">3px · delicado</div></div>
+</div>
+
+<div class="card" style="position:absolute; left:780px; top:288px; width:300px;">
+  <div style="height:300px; padding:14px; box-sizing:border-box; background:#faf7f1; border-radius:2px 2px 0 0;">{{ f3 }}</div>
+  <div style="padding:14px 16px; border-top:1px solid #efe9dc;"><div class="nm">Encorpado</div><div class="spec" style="margin-top:3px;">13px · presença</div></div>
+</div>
+
+<div class="card" style="position:absolute; left:1140px; top:288px; width:300px;">
+  <div style="height:300px; padding:14px; box-sizing:border-box; background:#faf7f1; border-radius:2px 2px 0 0;">{{ f4 }}</div>
+  <div style="padding:14px 16px; border-top:1px solid #efe9dc;"><div class="nm">Corte reto</div><div class="spec" style="margin-top:3px;">butt · miter</div></div>
+</div>
+
+<div class="card" style="position:absolute; left:1500px; top:288px; width:300px;">
+  <div style="height:300px; padding:14px; box-sizing:border-box; background:#faf7f1; border-radius:2px 2px 0 0;">{{ f5 }}</div>
+  <div style="padding:14px 16px; border-top:1px solid #efe9dc;"><div class="nm">Pontilhado</div><div class="spec" style="margin-top:3px;">tracejado · gravura</div></div>
+</div>
+
+<div class="card" style="position:absolute; left:1860px; top:288px; width:300px;">
+  <div style="height:300px; padding:14px; box-sizing:border-box; background:#faf7f1; border-radius:2px 2px 0 0;">{{ f6 }}</div>
+  <div style="padding:14px 16px; border-top:1px solid #efe9dc;"><div class="nm">Ouro velho</div><div class="spec" style="margin-top:3px;">7px · cor quente</div></div>
+</div>
+
+<div class="card" style="position:absolute; left:2220px; top:288px; width:300px;">
+  <div style="height:300px; padding:14px; box-sizing:border-box; background:#faf7f1; border-radius:2px 2px 0 0;">{{ f7 }}</div>
+  <div style="padding:14px 16px; border-top:1px solid #efe9dc;"><div class="nm">Sálvia</div><div class="spec" style="margin-top:3px;">7px · botânico</div></div>
+</div>
+
+<div class="card" style="position:absolute; left:2580px; top:288px; width:300px;">
+  <div style="height:300px; padding:14px; box-sizing:border-box; background:#faf7f1; border-radius:2px 2px 0 0;">{{ f8 }}</div>
+  <div style="padding:14px 16px; border-top:1px solid #efe9dc;"><div class="nm">Dois tons</div><div class="spec" style="margin-top:3px;">letra tinta · ornato ouro</div></div>
+</div>
+
+<!-- ============ ANÁLISE CRÍTICA ============ -->
+<div class="lbl" data-drags-parent="1" style="position:absolute; left:60px; top:700px;">Análise crítica</div>
+
+<div class="card" style="position:absolute; left:60px; top:738px; width:1380px; padding:30px 34px; box-sizing:border-box; background:#2a2620;">
+  <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:28px 40px;">
+    <div><div style="font-family:'Cormorant Garamond',serif; font-size:26px; color:#cdb27a; line-height:1;">01</div><div style="font-family:'Inter'; font-size:11px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:#e8e0cf; margin:8px 0 5px;">Legibilidade</div><div style="font-family:'Cormorant Garamond',serif; font-size:17px; line-height:1.45; color:#b8b0a0;">O entrelace de A e M gera ambiguidade — o A quase desaparece atrás do M. As letras pedem mais respiro.</div></div>
+    <div><div style="font-family:'Cormorant Garamond',serif; font-size:26px; color:#cdb27a; line-height:1;">02</div><div style="font-family:'Inter'; font-size:11px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:#e8e0cf; margin:8px 0 5px;">Hierarquia</div><div style="font-family:'Cormorant Garamond',serif; font-size:17px; line-height:1.45; color:#b8b0a0;">As volutas laterais têm peso igual ao das letras e competem com elas. O ornamento deveria apoiar, não disputar.</div></div>
+    <div><div style="font-family:'Cormorant Garamond',serif; font-size:26px; color:#cdb27a; line-height:1;">03</div><div style="font-family:'Inter'; font-size:11px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:#e8e0cf; margin:8px 0 5px;">Equilíbrio</div><div style="font-family:'Cormorant Garamond',serif; font-size:17px; line-height:1.45; color:#b8b0a0;">O ramo inferior é assimétrico e pende à direita; o arco superior é fino demais e flutua solto da composição.</div></div>
+    <div><div style="font-family:'Cormorant Garamond',serif; font-size:26px; color:#cdb27a; line-height:1;">04</div><div style="font-family:'Inter'; font-size:11px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:#e8e0cf; margin:8px 0 5px;">Escala mínima</div><div style="font-family:'Cormorant Garamond',serif; font-size:17px; line-height:1.45; color:#b8b0a0;">Traços e folhas muito finos colapsam em usos pequenos — lacre, convite, bordado, favicon.</div></div>
+    <div><div style="font-family:'Cormorant Garamond',serif; font-size:26px; color:#cdb27a; line-height:1;">05</div><div style="font-family:'Inter'; font-size:11px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:#e8e0cf; margin:8px 0 5px;">Contenção</div><div style="font-family:'Cormorant Garamond',serif; font-size:17px; line-height:1.45; color:#b8b0a0;">A composição aberta dificulta aplicações contidas — falta uma versão em selo/círculo para o sistema.</div></div>
+    <div style="display:flex; align-items:flex-end;"><div style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:18px; line-height:1.4; color:#cdb27a;">A Fase 2 responde a cada ponto →</div></div>
+  </div>
+</div>
+
+<!-- ============ FASE 2 ============ -->
+<div class="lbl" data-drags-parent="1" style="position:absolute; left:60px; top:1148px;">Fase 2 — Direções a partir da crítica</div>
+
+<div class="card" style="position:absolute; left:60px; top:1186px; width:320px;">
+  <div style="height:320px; padding:16px; box-sizing:border-box; background:#faf7f1; border-radius:2px 2px 0 0;">{{ g1 }}</div>
+  <div style="padding:15px 18px; border-top:1px solid #efe9dc;"><div class="nm">Letras em foco</div><div class="spec" style="margin-top:3px;">resp. 01 · 02</div><div class="body" style="font-size:15px; margin-top:7px;">Letras ampliadas, ramo removido. O olhar vai primeiro ao A·M.</div></div>
+</div>
+
+<div class="card" style="position:absolute; left:420px; top:1186px; width:320px;">
+  <div style="height:320px; padding:16px; box-sizing:border-box; background:#faf7f1; border-radius:2px 2px 0 0;">{{ g2 }}</div>
+  <div style="padding:15px 18px; border-top:1px solid #efe9dc;"><div class="nm">Monograma puro</div><div class="spec" style="margin-top:3px;">resp. 02 · 04</div><div class="body" style="font-size:15px; margin-top:7px;">Só letras e volutas. Sobrevive em qualquer escala.</div></div>
+</div>
+
+<div class="card" style="position:absolute; left:780px; top:1186px; width:320px;">
+  <div style="height:320px; padding:16px; box-sizing:border-box; background:#faf7f1; border-radius:2px 2px 0 0;">{{ g3 }}</div>
+  <div style="padding:15px 18px; border-top:1px solid #efe9dc;"><div class="nm">Coroa simétrica</div><div class="spec" style="margin-top:3px;">resp. 03</div><div class="body" style="font-size:15px; margin-top:7px;">Ramo espelhado em coroa fechada e equilibrada.</div></div>
+</div>
+
+<div class="card" style="position:absolute; left:1140px; top:1186px; width:320px;">
+  <div style="height:320px; padding:16px; box-sizing:border-box; background:#faf7f1; border-radius:2px 2px 0 0;">{{ g4 }}</div>
+  <div style="padding:15px 18px; border-top:1px solid #efe9dc;"><div class="nm">Hierarquia tonal</div><div class="spec" style="margin-top:3px;">resp. 02</div><div class="body" style="font-size:15px; margin-top:7px;">Letra em tinta cheia, ornato em ouro fino — separa os planos.</div></div>
+</div>
+
+<div class="card" style="position:absolute; left:1500px; top:1186px; width:320px;">
+  <div style="height:320px; padding:16px; box-sizing:border-box; background:#22201c; border-radius:2px 2px 0 0; display:flex; align-items:center; justify-content:center;">
+    <div style="width:236px; height:236px; border-radius:50%; border:1.5px solid rgba(206,178,122,.5); display:flex; align-items:center; justify-content:center; padding:14px; box-sizing:border-box;">{{ g5 }}</div>
+  </div>
+  <div style="padding:15px 18px; border-top:1px solid #efe9dc;"><div class="nm">Selo de lacre</div><div class="spec" style="margin-top:3px;">resp. 05</div><div class="body" style="font-size:15px; margin-top:7px;">Versão contida em círculo para carimbo e lacre.</div></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1480,&quot;height&quot;:1620},&quot;strokeWidthPadrao&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:2.5,&quot;min&quot;:2,&quot;max&quot;:16,&quot;step&quot;:0.5,&quot;unit&quot;:&quot;px&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Padrão travado&quot;},&quot;corPrincipal&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#1c2a24&quot;,&quot;options&quot;:[&quot;#23211e&quot;,&quot;#3a3630&quot;,&quot;#1c2a24&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Padrão travado&quot;},&quot;corOuro&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#b8954a&quot;,&quot;options&quot;:[&quot;#a6823c&quot;,&quot;#b8954a&quot;,&quot;#9c7b3a&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Cores&quot;},&quot;corSalvia&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#6e7c57&quot;,&quot;options&quot;:[&quot;#6e7c57&quot;,&quot;#7a8b6f&quot;,&quot;#5c6b4c&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Cores&quot;}}">
+const LETTERS = '<path d="M379.31,371.25c14.5,8.42,16.19,23.25,20.38,36.68,1.53,3.96,3.81.22,5.03-1.79,3.1-5.13,8.26-15.69,14.54-20.85,6.13-5.5,14.1-7.17,21.81-7.94"/><path d="M823.49,534.96c-27.38-2.82-47.44-28.91-44.81-58.26,3.29-36.7,33.7-63.59,67.92-60.06,42.78,4.41,74.13,45.16,70.02,91.04-5.14,57.34-52.65,99.36-106.13,93.85-66.84-6.88-106.5-71.32-122.56-142.14-16.22-66.07-11.2-174.03-11.19-190.87,0-.88.19-6.67-2.27-7.82-2.21-1.03-5.68,2-8.9,5.7-7.5,7.87-21.02,31.81-28.12,50.72-10.6,26.29-20.18,59.43-26.74,84.46-4.99,18.83-8.25,33.05-9.91,37.64-.36.84-.58,1.76-1.26,1.85-1.34-.24-2.55-10.65-6.65-25.13-14.39-48.15-38.5-105.47-73.46-142.19-6.5-6.33-13.56-12.82-18.95-16.2-3.49-2.19-7.57,1.65-6.03,5.66,0,.02.02.05.03.07,11.71,25.26,47.24,124.17,31.97,195.13-12.4,71-49.21,109.71-116.72,115.06"/><path d="M176.51,531.61c27.38-2.82,47.44-28.91,44.81-58.26-3.29-36.7-33.7-63.59-67.92-60.06-42.78,4.41-74.13,45.16-70.02,91.04,5.14,57.34,52.65,99.36,106.13,93.85,65.51-6.75,104.73-72.3,143.86-133.47,1.59-2.49,3.1-5.01,4.51-7.62,22.32-41.43,43.91-95.8,65.84-135.84,14.99-25.06,35.63-51.4,61.09-63.47,11.68-4.19,3.92,7.23-2.48,27.19-26.29,77.6-46.99,221.22,30.63,272.74,17.53,10.87,37.94,13.76,57.88,15.66"/>';
+
+const ARC = '<path d="M185.1,351.34c47.78-138.98,179.65-238.84,334.84-238.84s293.25,104.62,338.07,248.72"/>';
+
+const LAUREL = '<path d="M780.67,715.01c13.93,88.75-76.35,116.48-.18-3.05-56.44,88.57,10.42,74.85,0,0"/><path d="M504.49,842.14c-53.38,54.74-118.3,7.36,1.99-1.68-89.13,6.7-45.69,45.26,0,0"/><path d="M722.77,771.22c-14.83,105.64-126.51,100.22.85-3.51-94.37,76.86-14.02,88.55,0,0"/><path d="M629.27,821.93c-50.32,115.79-176.63,75.98,2.08-3.74-132.42,59.07-44,96.59,0,0"/><path d="M579.9,827.99c-97.62-80.07-191.84,12.99,3.56,2.38-144.79,7.86-83.22-65.87,0,0"/><path d="M750.89,740.35c-77,46.28-136.64-26.95,2.76-1.31-103.29-19-65.44,37.79,0,0"/><path d="M813.67,663.77c-53.36,32.06-94.68-18.68,1.91-.91-71.57-13.16-45.35,26.19,0,0"/><path d="M816.04,665.77c19.88,33.08-11.58,58.69-.56-1.19-8.16,44.37,16.23,28.11,0,0"/><path d="M461.26,834.66c-86.23-25.2-72.86-118.69,2.84,1.14-56.09-88.79-72.16-22.46,0,0"/><path d="M372.39,811.96c-72.65-52.85-28.48-136.33,2.29,2.03-22.8-102.52-60.33-45.52,0,0"/><path d="M340.87,800.58c-72.75,52.71-138.45-15.14,2.64-1.55-104.54-10.07-61.96,43.27,0,0"/><path d="M281.07,759.05c-88.43,15.87-118.12-73.78,3.05-.25-89.78-54.49-74.61,12.05,0,0"/><path d="M234.09,709.13c-83.03-55.15-18.42-135.86,2.57,2.1-15.55-102.23-68.76-47.41,0,0"/><path d="M432.34,833.74c-62.97,59.48-117.85-11.59,2.28-1.76-89.01-7.28-53.6,48.9,0,0"/><path d="M674.24,798.06c-84.16,31.44-129.42-51.45,2.95-.79-98.09-37.54-71.24,25.21,0,0"/><path d="M301.32,772.52c-58.18-62.87,7.95-122.81,1.73,2.29,4.61-92.7-47.88-53.59,0,0"/><path d="M831.85,630.54c-51.61,114.48-162.65,197.84-296.69,207.8-118.66,8.81-228-41.94-298.67-126.97"/>';
+
+class Component extends DCLogic {
+  mark(o) {
+    o = o || {};
+    const ink = this.props.corPrincipal || '#23211e';
+    let inner = '';
+    // draw order: letters, arc, laurel (original)
+    if (o.letters !== false) {
+      const t = o.lettersTransform ? ` transform="${o.lettersTransform}"` : '';
+      const c = o.lettersColor ? ` stroke="${o.lettersColor}"` : '';
+      inner += `<g${t}${c}>${LETTERS}</g>`;
+    }
+    if (o.arc !== false) {
+      const c = o.ornColor ? ` stroke="${o.ornColor}"` : '';
+      const w = o.ornWidth ? ` stroke-width="${o.ornWidth}"` : '';
+      inner += `<g${c}${w}>${ARC}</g>`;
+    }
+    if (o.laurel !== false) {
+      const c = o.ornColor ? ` stroke="${o.ornColor}"` : '';
+      const w = o.ornWidth ? ` stroke-width="${o.ornWidth}"` : '';
+      let lr = LAUREL;
+      if (o.laurelMirror) lr += `<g transform="matrix(1 0 0 -1 0 1000)">${LAUREL}</g>`;
+      inner += `<g${c}${w}>${lr}</g>`;
+    }
+    return React.createElement('svg', {
+      viewBox: '0 0 1000 1000', width: '100%', height: '100%',
+      preserveAspectRatio: 'xMidYMid meet',
+      style: { display: 'block' },
+      fill: 'none',
+      stroke: o.stroke || ink,
+      strokeWidth: o.strokeWidth == null ? (this.props.strokeWidthPadrao || 7) : o.strokeWidth,
+      strokeLinecap: o.linecap || 'round',
+      strokeLinejoin: o.linejoin || 'round',
+      strokeDasharray: o.dash || undefined,
+      dangerouslySetInnerHTML: { __html: inner }
+    });
+  }
+
+  renderVals() {
+    const gold = this.props.corOuro || '#a6823c';
+    const sage = this.props.corSalvia || '#6e7c57';
+    const ink = this.props.corPrincipal || '#23211e';
+    const up = 'translate(500 470) scale(1.12) translate(-500 -470)';
+    const upBig = 'translate(500 470) scale(1.4) translate(-500 -470)';
+    return {
+      // Fase 1 — geometria travada, só traço
+      f1: this.mark({}),
+      f2: this.mark({ strokeWidth: 3 }),
+      f3: this.mark({ strokeWidth: 13 }),
+      f4: this.mark({ linecap: 'butt', linejoin: 'miter' }),
+      f5: this.mark({ strokeWidth: 6, dash: '1 16' }),
+      f6: this.mark({ stroke: gold }),
+      f7: this.mark({ stroke: sage }),
+      f8: this.mark({ ornColor: gold, lettersColor: ink, strokeWidth: 7 }),
+      // Fase 2 — direções
+      g1: this.mark({ laurel: false, lettersTransform: up }),
+      g2: this.mark({ laurel: false, arc: false, lettersTransform: upBig }),
+      g3: this.mark({ arc: false, laurelMirror: true }),
+      g4: this.mark({ lettersColor: ink, strokeWidth: 9, ornColor: gold, ornWidth: 5 }),
+      g5: this.mark({ arc: false, laurelMirror: true, stroke: '#d9c290', strokeWidth: 8 })
+    };
+  }
+}
+</script>
+</body>
+</html>

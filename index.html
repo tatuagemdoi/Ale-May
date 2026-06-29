@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A&amp;M · Design System do Casamento</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:'Inter',sans-serif;
+    background:#F7F1EA;
+    color:#2b2724;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:64px 24px 80px;
+  }
+  .wrap{width:100%;max-width:880px}
+  header{text-align:center;margin-bottom:56px}
+  .mono{width:96px;height:96px;margin:0 auto 22px;display:block}
+  .kick{font-size:12px;letter-spacing:.34em;text-transform:uppercase;color:#9a8e82;margin-bottom:14px}
+  h1{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(38px,7vw,60px);line-height:1.04;letter-spacing:.01em}
+  h1 .amp{font-style:italic;color:#CB6A4A;font-weight:400}
+  .sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:20px;color:#7a6f64;margin-top:12px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(248px,1fr));gap:18px}
+  a.card{
+    display:block;text-decoration:none;color:inherit;
+    background:#fff;border:1px solid #ece2d6;border-radius:4px;
+    padding:26px 24px;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;
+  }
+  a.card:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(80,60,40,.10);border-color:#d9cbbb}
+  .card .t{font-family:'Cormorant Garamond',serif;font-size:25px;font-weight:600;margin-bottom:8px}
+  .card .d{font-size:13.5px;line-height:1.5;color:#7a6f64}
+  .card .go{margin-top:16px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#CB6A4A}
+  footer{margin-top:54px;font-size:12px;color:#a99d90;text-align:center;line-height:1.7}
+  .sec{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:#b3a596;margin:38px 0 14px;text-align:center}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <img class="mono" src="am/mono-letras.svg" alt="Monograma A&amp;M" onerror="this.style.display='none'">
+      <div class="kick">Identidade Visual</div>
+      <h1>Alexandre <span class="amp">&amp;</span> Mayara</h1>
+      <p class="sub">design system &middot; passo a passo, sempre juntos</p>
+    </header>
+
+    <div class="sec">Fase 1 · Decisões</div>
+    <div class="grid">
+      <a class="card" href="A&M - Fase 1 Decis%C3%B5es.dc.html">
+        <div class="t">Fase 1 · Decisões</div>
+        <div class="d">Paleta (A/B/C), lettering dos nomes e o monograma escolhido — tudo em um lugar, ao vivo.</div>
+        <div class="go">Abrir →</div>
+      </a>
+      <a class="card" href="Monograma AM - Estudio.dc.html">
+        <div class="t">Estúdio do Monograma</div>
+        <div class="d">Pincel, tamanho, cor das paletas e moldura/selo. Salve A·B·C e escolha o canônico.</div>
+        <div class="go">Abrir →</div>
+      </a>
+      <a class="card" href="Convite A&M.dc.html">
+        <div class="t">Convite</div>
+        <div class="d">Convite aplicado no lugar à mesa, refletindo o monograma e a tipografia escolhidos.</div>
+        <div class="go">Abrir →</div>
+      </a>
+    </div>
+
+    <div class="sec">Referência</div>
+    <div class="grid">
+      <a class="card" href="Design System A&M.dc.html">
+        <div class="t">Design System</div>
+        <div class="d">Tokens de cor, tipografia, elementos gráficos e invariantes da identidade.</div>
+        <div class="go">Abrir →</div>
+      </a>
+      <a class="card" href="Monograma AM - Variacoes.dc.html">
+        <div class="t">Variações do Monograma</div>
+        <div class="d">Estudos e versões do monograma (puro, vestido, linha de base).</div>
+        <div class="go">Abrir →</div>
+      </a>
+    </div>
+
+    <footer>
+      Evento &ldquo;falta 1 ano&rdquo; · 01/08/2026 &nbsp;·&nbsp; Casamento · 01/08/2027<br>
+      Fonte de verdade: repositório <strong>tatuagemdoi/Ale-May</strong>
+    </footer>
+  </div>
+</body>
+</html>
