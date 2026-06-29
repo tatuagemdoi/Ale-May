@@ -25,7 +25,7 @@ Adicionar conector personalizado → `Magnific` · `https://mcp.magnific.com`. G
 | `01-mood/` | Eucalipto, flores sutis, atmosferas das paletas A/B/C | **agora** (Fase 0) |
 | `02-texturas-fundos/` | Papel, linho, superfícies neutras p/ mockup de convite | **agora** |
 | `03-upscale/` | Upscale de monograma aplicado, PNGs de cor, fotos do WhatsApp | **agora** |
-| `04-elementos-gerados/` | Ramos/folhas/flores p/ usar nas peças | **🔒 após o system (P1)** |
+| `04-elementos-gerados/` | Ramos/folhas/flores p/ peças — **saem do HTML gerativo** (Claude Design), não do Magnific | **🔒 após o system (P1)** |
 
 ## Guardrails dos prompts (sempre)
 Sem pessoas/noivos · sem cenário de casamento · eucalipto como assinatura · sutil, não carregado ·
