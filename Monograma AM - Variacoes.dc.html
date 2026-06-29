@@ -232,6 +232,23 @@
     <button onClick="{{ onChoose }}" style="margin-top:18px; width:100%; font-family:'Inter',sans-serif; font-size:11px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:#fff; background:{{ chooseBg }}; border:none; border-radius:100px; padding:13px 0; cursor:pointer; transition:background .2s;">{{ chooseLabel }}</button>
 
     <div style="margin-top:18px; padding-top:16px; border-top:1px solid #efe9dc; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:15px; color:#9a917f; line-height:1.45;">Salve variações em A·B·C e clique em <span style="color:#2a2620;">Definir como escolhido</span> — essa versão passa a aparecer no monograma de toda a página de decisões.</div>
+
+    <!-- comentários -->
+    <div style="margin-top:24px; padding-top:20px; border-top:1px solid #ece6d9;">
+      <div style="font-family:'Inter',sans-serif; font-size:10px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:#9a917f; margin-bottom:14px;">Comentários &amp; notas</div>
+      <textarea value="{{ commentDraft }}" onInput="{{ onCommentInput }}" placeholder="Observações, aprovações ou pendências…" rows="4" style="width:100%;font-family:'Inter',sans-serif;font-size:13px;line-height:1.7;color:#2a2620;background:#f8f4ed;border:1px solid #ece6d9;border-radius:3px;padding:14px 16px;resize:vertical;outline:none;box-sizing:border-box;"></textarea>
+      <div style="display:flex;align-items:center;gap:10px;margin-top:10px;">
+        <button onClick="{{ onCommentSave }}" style="font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:#2a2620;border:none;border-radius:100px;padding:8px 18px;cursor:pointer;">Salvar</button>
+        <button onClick="{{ onCommentClear }}" style="font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#2a2620;background:transparent;border:1px solid #ece6d9;border-radius:100px;padding:8px 18px;cursor:pointer;">Limpar</button>
+        <span style="font-family:'Inter',sans-serif;font-size:11px;color:#9a917f;">{{ savedAt }}</span>
+      </div>
+      <sc-for list="{{ commentBlocks }}" as="cb" hint-placeholder-count="0">
+        <div style="margin-top:16px;background:#fff;border:1px solid #ece6d9;border-radius:3px;padding:16px 18px;">
+          <div style="font-family:'Inter',sans-serif;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#9a917f;margin-bottom:8px;">{{ cb.date }}</div>
+          <div style="font-family:'Inter',sans-serif;font-size:13px;line-height:1.7;color:#2a2620;white-space:pre-wrap;">{{ cb.text }}</div>
+        </div>
+      </sc-for>
+    </div>
   </div>
 </div>
 
@@ -326,11 +343,15 @@ function markSimple(o, props) {
 }
 
 class Component extends DCLogic {
-  state = { brush:0, ramo:2, colorHex:'#34302a', bgHex:'#F7F1EA', sizeF:0.55, mold:null, molds:{}, moldRot:0, moldScale:1, moldX:0, moldY:0, slots:{A:null,B:null,C:null} };
+  state = { brush:0, ramo:2, colorHex:'#34302a', bgHex:'#F7F1EA', sizeF:0.55, mold:null, molds:{}, moldRot:0, moldScale:1, moldX:0, moldY:0, slots:{A:null,B:null,C:null}, commentDraft: '', comments: [], savedAt: '' };
 
   SLOT_KEY = 'am_estudio_slots';
 
   componentDidMount() {
+    try {
+      const saved = JSON.parse(localStorage.getItem('am_variacoes_comments') || '[]');
+      if (saved.length) this.setState({ comments: saved });
+    } catch(e) {}
     try {
       const raw = localStorage.getItem(this.SLOT_KEY);
       if (raw) this.setState({ slots: Object.assign({A:null,B:null,C:null}, JSON.parse(raw)) });
@@ -512,6 +533,10 @@ class Component extends DCLogic {
     });
   }
 
+  saveComments(comments) {
+    try { localStorage.setItem('am_variacoes_comments', JSON.stringify(comments)); } catch(e) {}
+  }
+
   renderVals() {
     const s = this.state;
     const p = this.props;
@@ -521,6 +546,20 @@ class Component extends DCLogic {
     const up = 'translate(500 470) scale(1.12) translate(-500 -470)';
     const upBig = 'translate(500 470) scale(1.4) translate(-500 -470)';
     const sel = (on) => `cursor:pointer; box-sizing:border-box; border-radius:3px; padding:9px 10px; transition:all .15s; border:1.5px solid ${on?'#2a2620':'#ece6d9'}; background:${on?'#fbf9f4':'#fff'}; box-shadow:${on?'0 1px 6px rgba(0,0,0,.07)':'none'};`;
+    const onCommentSave = () => {
+      const text = (s.commentDraft || '').trim();
+      if (!text) return;
+      const now = new Date();
+      const label = now.toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'}) + ' · ' + now.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
+      const next = [{ text, date: label }, ...s.comments];
+      this.saveComments(next);
+      this.setState({ comments: next, commentDraft: '', savedAt: 'salvo às ' + now.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}) });
+    };
+    const onCommentClear = () => {
+      const next = [];
+      this.saveComments(next);
+      this.setState({ comments: next, commentDraft: '', savedAt: '' });
+    };
 
     return {
       // ── Fase 1 (simples) ──
@@ -598,7 +637,13 @@ class Component extends DCLogic {
           box: `cursor:pointer; padding:3px; border-radius:50%; transition:all .15s; border:2px solid ${hex.toLowerCase()===s.bgHex.toLowerCase()?'#2a2620':'transparent'};`,
           onClick: () => this.setState({ bgHex: hex })
         }))
-      }))
+      })),
+      commentDraft: s.commentDraft,
+      onCommentInput: (e) => this.setState({ commentDraft: e.target.value }),
+      onCommentSave,
+      onCommentClear,
+      savedAt: s.savedAt,
+      commentBlocks: s.comments,
     };
   }
 }
