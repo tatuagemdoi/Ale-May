@@ -84,14 +84,10 @@
       <div style="display:flex; align-items:baseline; gap:16px; border-bottom:1px solid {{ hairline }}; padding-bottom:14px; margin-bottom:32px;">
         <span style="font-family:'Cinzel',serif; font-size:13px; color:{{ accent }};">02</span>
         <h2 style="font-family:'Playfair Display',serif; font-weight:500; font-size:26px; margin:0; color:{{ ink }};">Paleta de cores</h2>
-        <div style="margin-left:auto; display:flex; gap:8px;">
-          <sc-for list="{{ palBtns }}" as="pb" hint-placeholder-count="3">
-            <button onClick="{{ pb.onClick }}" style="{{ pb.style }}">{{ pb.label }}</button>
-          </sc-for>
-        </div>
+        <span style="font-family:'Lato',sans-serif; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:{{ accent }}; margin-left:auto;">✓ Jardim Terroso aprovada</span>
       </div>
 
-      <sc-for list="{{ palettes }}" as="pal" hint-placeholder-count="3">
+      <sc-for list="{{ palettes }}" as="pal" hint-placeholder-count="1">
         <div style="display:{{ pal.display }}; flex-direction:column; gap:0; margin-bottom:36px;">
           <div style="display:flex; align-items:baseline; gap:10px; margin-bottom:16px;">
             <span style="font-family:'Cinzel',serif; font-size:15px; color:{{ accent }};">{{ pal.letter }}</span>
@@ -380,21 +376,8 @@
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1320,&quot;height&quot;:5200}}">
 
 const PALDATA = {
-  A: {
-    letter:'A', title:'Romântico Sereno', note:'Pastel, delicado, acolhedor.',
-    tokens:[
-      { role:'Tinta',    name:'quase-preto',  hex:'#34302a' },
-      { role:'Acento',   name:'rosé',          hex:'#C99089' },
-      { role:'Botânico', name:'sálvia',         hex:'#A6B89A' },
-      { role:'Suave',    name:'blush',          hex:'#EAD9D4' },
-      { role:'Fundo',    name:'marfim',         hex:'#F7F1EA' },
-      { role:'Hairline', name:'bege',           hex:'#e9ddd4' }
-    ],
-    cMono:'#34302a', cNomes:'#34302a', cAcento:'#C99089', cData:'#34302a',
-    fundo:'#F7F1EA'
-  },
   B: {
-    letter:'B', title:'Jardim Terroso', note:'Terroso e quente, calor de jardim.',
+    letter:'B', title:'Jardim Terroso', note:'Terroso e quente, calor de jardim. · Paleta aprovada.',
     tokens:[
       { role:'Tinta',    name:'sépia escuro',  hex:'#36302a' },
       { role:'Acento',   name:'terracota',      hex:'#CB6A4A' },
@@ -405,19 +388,6 @@ const PALDATA = {
     ],
     cMono:'#36302a', cNomes:'#36302a', cAcento:'#CB6A4A', cData:'#36302a',
     fundo:'#F7F1EA'
-  },
-  C: {
-    letter:'C', title:'Clássico Atemporal', note:'Sóbrio — eucalipto sobre marfim.',
-    tokens:[
-      { role:'Tinta',    name:'quase-preto',  hex:'#222220' },
-      { role:'Acento',   name:'eucalipto',     hex:'#5C6B50' },
-      { role:'Botânico', name:'eucalipto',     hex:'#5C6B50' },
-      { role:'Suave',    name:'taupe',          hex:'#DCCBC1' },
-      { role:'Fundo',    name:'marfim',         hex:'#F4EEE4' },
-      { role:'Hairline', name:'areia',          hex:'#e4dac8' }
-    ],
-    cMono:'#222220', cNomes:'#222220', cAcento:'#5C6B50', cData:'#222220',
-    fundo:'#F4EEE4'
   }
 };
 
@@ -444,7 +414,7 @@ class Component extends DCLogic {
     weights:{ 0:500, 1:400, 2:400 },
     cases:{ 0:'none', 1:'none', 2:'none' },
     sizes:{ 0:52, 1:52, 2:52 },
-    palette:'B',
+    palette:'B', /* aprovada */
     notes:{}, noteDrafts:{},
     commentDraft:'',
     comments:[],
@@ -646,24 +616,16 @@ class Component extends DCLogic {
 
     const btn = (on) => `font-family:'Lato',sans-serif;font-size:10px;font-weight:${on?700:400};letter-spacing:.04em;color:${on?'#fff':ink};background:${on?ink:'transparent'};border:1px solid ${on?ink:hairline};border-radius:100px;padding:6px 12px;cursor:pointer;white-space:nowrap;transition:all .15s;`;
 
-    const palBtns = ['A','B','C'].map(k => ({
-      label: k,
-      style: btn(s.palette === k),
-      onClick: () => this.setState({ palette: k })
-    }));
-
-    const palettes = ['A','B','C'].map(k => {
-      const pd = PALDATA[k];
-      return {
-        display: s.palette === k ? 'flex' : 'none',
-        letter: pd.letter, title: pd.title, note: pd.note,
-        tokens: pd.tokens,
-        swatches: pd.tokens.slice(0,5).map((t,i) => ({ hex: t.hex, flex: i < 2 ? 2 : 1 })),
-        fundo: pd.fundo,
-        cMono: pd.cMono, cNomes: pd.cNomes, cAcento: pd.cAcento, cData: pd.cData,
-        note: this.noteFor('pal_' + k)
-      };
-    });
+    const pd = PALDATA.B;
+    const palettes = [{
+      display: 'flex',
+      letter: pd.letter, title: pd.title, note: pd.note,
+      tokens: pd.tokens,
+      swatches: pd.tokens.slice(0,5).map((t,i) => ({ hex: t.hex, flex: i < 2 ? 2 : 1 })),
+      fundo: pd.fundo,
+      cMono: pd.cMono, cNomes: pd.cNomes, cAcento: pd.cAcento, cData: pd.cData,
+      note: this.noteFor('pal_B')
+    }];
 
     const monoVariants = [
       { name:'Vestido', sub:'arco + ramos · versão completa', svg: this.svgNode(s.mono, ink), box:`background:${cardBg};border:1px solid ${hairline};border-radius:3px;padding:22px;`, note: this.noteFor('mono_vestido') },
@@ -721,8 +683,7 @@ class Component extends DCLogic {
       note: this.noteFor('inv_' + i)
     }));
 
-    const palette = PALDATA[s.palette];
-    const palName = { A:'Romântico Sereno', B:'Jardim Terroso', C:'Clássico Atemporal' }[s.palette];
+    const palName = 'Jardim Terroso';
 
     const moodImages = [
       { src:'90-referencias/banco-imagens/01-mood/mood_aliancas-peonias-brancas.jpg', alt:'Alianças com peônias brancas', caption:'alianças · peônias brancas · delicadeza' },
@@ -767,10 +728,10 @@ class Component extends DCLogic {
       ink, ink60, accent,
       monoColor: ink,
       monoSvg: this.chosenNode(ink),
-      paletteBadge: `Paleta ${s.palette} · ${palName}`,
+      paletteBadge: `Paleta B · ${palName} · ✓ aprovada`,
       letteringBadge: _cl != null ? `Lettering: ${NAMEFONTS[_cl].label}` : 'Lettering: a definir',
       nameCss: _nf.css, nameWeight: _nw, nameCase: _ncase,
-      palBtns, palettes,
+      palettes,
       monoVariants,
       elements,
       letterings,

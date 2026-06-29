@@ -32,11 +32,11 @@
     <div style="display:flex; align-items:baseline; gap:18px; border-bottom:1px solid #ddd2c4; padding-bottom:16px; margin-bottom:40px;">
       <span style="font-family:'Marcellus',serif; font-size:15px; color:#b07a5e;">01</span>
       <h2 style="font-family:'Cormorant Garamond',serif; font-weight:500; font-size:30px; margin:0;">Paleta</h2>
-      <span style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:12.5px; color:#8a8073; margin-left:auto; letter-spacing:.02em;">A · B · C no monograma + papelaria — toque nas bolinhas para recolorir cada elemento</span>
+      <span style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:12.5px; color:#8a8073; margin-left:auto; letter-spacing:.02em;">Jardim Terroso · paleta aprovada — toque nas bolinhas para recolorir</span>
     </div>
 
-    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:26px;">
-      <sc-for list="{{ palettes }}" as="pal" hint-placeholder-count="3">
+    <div style="display:grid; grid-template-columns:1fr; max-width:480px; gap:26px;">
+      <sc-for list="{{ palettes }}" as="pal" hint-placeholder-count="1">
         <div>
           <!-- mockup de papelaria -->
           <div style="aspect-ratio:5/7; background:{{ pal.cFundo }}; border:1px solid {{ pal.hairline }}; border-radius:3px; box-shadow:0 14px 34px -22px rgba(60,44,30,.5); padding:30px 26px; display:flex; flex-direction:column; align-items:center; text-align:center;">
@@ -368,7 +368,7 @@ class Component extends DCLogic {
     const _nf = (_cl != null) ? NAMEFONTS[_cl] : NAMEFONTS[0];
     const _ncase = (_cl != null) ? (this.state.cases[_cl] || 'none') : 'none';
 
-    const palettes = ['A','B','C'].map(k => {
+    const palettes = ['B'].map(k => {
       const p = DATA[k];
       const ov = this.state.elem[k] || {};
       const monoDefault = monoMode === 'palette' ? p.accent : ink;
