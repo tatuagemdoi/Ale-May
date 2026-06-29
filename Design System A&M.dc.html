@@ -259,6 +259,53 @@
       </div>
     </section>
 
+    <!-- ── 07 · BANCO DE IMAGENS ─────────────────────────── -->
+    <section style="margin-top:72px;">
+      <div style="display:flex; align-items:baseline; gap:16px; border-bottom:1px solid {{ hairline }}; padding-bottom:14px; margin-bottom:32px;">
+        <span style="font-family:'Cinzel',serif; font-size:13px; color:{{ accent }};">07</span>
+        <h2 style="font-family:'Playfair Display',serif; font-weight:500; font-size:26px; margin:0; color:{{ ink }};">Banco de imagens</h2>
+        <span style="font-family:'Lato',sans-serif; font-weight:300; font-size:12px; color:{{ ink60 }}; margin-left:auto;">mood board · referências visuais</span>
+      </div>
+      <div class="lbl" style="color:{{ ink60 }}; margin-bottom:14px;">Mood · atmosfera</div>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:28px;">
+        <sc-for list="{{ moodImages }}" as="mi" hint-placeholder-count="3">
+          <div style="border-radius:3px; overflow:hidden; background:{{ cardBg }}; border:1px solid {{ hairline }};">
+            <img src="{{ mi.src }}" alt="{{ mi.alt }}" style="width:100%; aspect-ratio:4/3; object-fit:cover; display:block;">
+            <div style="padding:10px 12px; font-family:'Lato',sans-serif; font-weight:300; font-size:11px; color:{{ ink60 }}; line-height:1.4;">{{ mi.caption }}</div>
+          </div>
+        </sc-for>
+      </div>
+      <div class="lbl" style="color:{{ ink60 }}; margin-bottom:14px;">Texturas &amp; mockups · materiais e contexto</div>
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:14px;">
+        <sc-for list="{{ mockupImages }}" as="mk" hint-placeholder-count="4">
+          <div style="border-radius:3px; overflow:hidden; background:{{ cardBg }}; border:1px solid {{ hairline }};">
+            <img src="{{ mk.src }}" alt="{{ mk.alt }}" style="width:100%; aspect-ratio:3/4; object-fit:cover; display:block;">
+            <div style="padding:10px 12px; font-family:'Lato',sans-serif; font-weight:300; font-size:11px; color:{{ ink60 }}; line-height:1.4;">{{ mk.caption }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- ── 08 · PATTERNS ───────────────────────────────────── -->
+    <section style="margin-top:72px;">
+      <div style="display:flex; align-items:baseline; gap:16px; border-bottom:1px solid {{ hairline }}; padding-bottom:14px; margin-bottom:32px;">
+        <span style="font-family:'Cinzel',serif; font-size:13px; color:{{ accent }};">08</span>
+        <h2 style="font-family:'Playfair Display',serif; font-weight:500; font-size:26px; margin:0; color:{{ ink }};">Patterns</h2>
+        <span style="font-family:'Lato',sans-serif; font-weight:300; font-size:12px; color:{{ ink60 }}; margin-left:auto;">padrões SVG gerados dos elementos botânicos</span>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:20px;">
+        <sc-for list="{{ patterns }}" as="pt" hint-placeholder-count="3">
+          <div style="background:{{ cardBg }}; border:1px solid {{ hairline }}; border-radius:3px; overflow:hidden;">
+            <div style="height:200px; overflow:hidden; background:{{ pt.bg }};">{{ pt.preview }}</div>
+            <div style="padding:16px 18px; border-top:1px solid {{ hairline }};">
+              <div style="font-family:'Cinzel',serif; font-size:11px; letter-spacing:.14em; color:{{ ink }}; margin-bottom:6px;">{{ pt.name }}</div>
+              <div style="font-family:'Lato',sans-serif; font-weight:300; font-size:11px; color:{{ ink60 }}; line-height:1.5;">{{ pt.use }}</div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
     <!-- ── DATAS ─────────────────────────────────────────── -->
     <section style="margin-top:48px; background:{{ cardBg }}; border:1px solid {{ hairline }}; border-radius:3px; padding:22px 28px; display:flex; gap:0;">
       <div style="flex:1; padding-right:28px; border-right:1px solid {{ hairline }};">
@@ -279,7 +326,7 @@
 
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1320,&quot;height&quot;:2800}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1320,&quot;height&quot;:4400}}">
 
 const PALDATA = {
   A: {
@@ -433,6 +480,41 @@ class Component extends DCLogic {
     });
   }
 
+  patternFolha(c, bg) {
+    const leaf = 'M0,0 C6,-5 10,-20 0,-32 C-10,-20 -6,-5 0,0';
+    const places = [
+      {x:30,y:28,r:15},{x:80,y:12,r:-40},{x:55,y:55,r:200},
+      {x:12,y:72,r:100},{x:90,y:65,r:160},{x:48,y:88,r:-70}
+    ];
+    const paths = places.map(p=>`<path d="${leaf}" transform="translate(${p.x},${p.y}) rotate(${p.r})" fill="${c}" opacity="0.7"/>`).join('');
+    const inn = `<defs><pattern id="pf" x="0" y="0" width="110" height="110" patternUnits="userSpaceOnUse">${paths}</pattern></defs><rect width="100%" height="100%" fill="${bg}"/><rect width="100%" height="100%" fill="url(#pf)"/>`;
+    return React.createElement('svg',{viewBox:'0 0 400 200',width:'100%',height:'200',style:{display:'block'},dangerouslySetInnerHTML:{__html:inn}});
+  }
+
+  patternRamo(c, bg) {
+    const stem = 'M0,40 Q50,18 100,40 Q150,62 200,40';
+    const leaf = 'M0,0 C5,-8 8,-16 0,-22 C-8,-16 -5,-8 0,0';
+    const lps = [{x:22,y:33,r:-55},{x:45,y:26,r:-30},{x:68,y:30,r:-50},
+                 {x:100,y:40,r:50},{x:130,y:51,r:30},{x:158,y:44,r:55},{x:180,y:37,r:-45}];
+    const lpath = lps.map(p=>`<path d="${leaf}" transform="translate(${p.x},${p.y}) rotate(${p.r})" fill="${c}" opacity="0.8"/>`).join('');
+    const inn = `<defs><pattern id="pr" x="0" y="0" width="200" height="80" patternUnits="userSpaceOnUse">
+      <path d="${stem}" fill="none" stroke="${c}" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+      ${lpath}
+    </pattern></defs><rect width="100%" height="100%" fill="${bg}"/><rect width="100%" height="100%" fill="url(#pr)"/>`;
+    return React.createElement('svg',{viewBox:'0 0 400 200',width:'100%',height:'200',style:{display:'block'},dangerouslySetInnerHTML:{__html:inn}});
+  }
+
+  patternAM(c, bg) {
+    const P1='M376.5,399.47c14.84,8.62,16.57,23.79,20.86,37.54,1.56,4.05,3.9.23,5.15-1.83,3.17-5.25,8.45-16.06,14.87-21.33,6.27-5.63,14.43-7.34,22.32-8.12';
+    const P2='M831.03,566.99c-28.02-2.89-48.55-29.58-45.86-59.62,3.36-37.55,34.48-65.07,69.51-61.47,43.78,4.51,75.86,46.22,71.65,93.16-5.26,58.68-53.88,101.68-108.6,96.04-68.4-7.05-108.98-72.98-125.42-145.46-16.59-67.61-11.46-178.09-11.46-195.33,0-.91.2-6.83-2.32-8.01-2.26-1.06-5.81,2.05-9.11,5.84-7.68,8.05-21.51,32.55-28.78,51.91-10.85,26.9-20.65,60.82-27.36,86.43-5.11,19.27-8.44,33.82-10.14,38.51-.36.86-.6,1.8-1.29,1.9-1.37-.25-2.61-10.89-6.8-25.72-14.73-49.27-39.4-107.93-75.17-145.51-6.65-6.48-13.88-13.12-19.39-16.57-3.57-2.24-7.74,1.69-6.17,5.79.01.02.02.05.03.07,11.99,25.85,48.35,127.07,32.72,199.68-12.69,72.66-50.36,112.27-119.44,117.74';
+    const P3='M168.97,563.57c28.02-2.89,48.55-29.58,45.86-59.62-3.36-37.55-34.48-65.07-69.51-61.47-43.78,4.51-75.86,46.22-71.65,93.16,5.26,58.68,53.88,101.68,108.6,96.04,67.04-6.9,107.17-73.99,147.22-136.58,1.63-2.55,3.18-5.13,4.62-7.8,22.85-42.39,44.94-98.04,67.38-139.01,15.34-25.65,36.46-52.6,62.52-64.95,11.95-4.28,4.01,7.4-2.54,27.83-26.91,79.41-48.09,226.38,31.35,279.1,17.94,11.12,38.83,14.08,59.23,16.03';
+    const sc=0.22;
+    const sz=Math.round(1000*sc);
+    const g=`<g fill="none" stroke="${c}" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" transform="scale(${sc})" opacity="0.18"><path d="${P1}"/><path d="${P2}"/><path d="${P3}"/></g>`;
+    const inn=`<defs><pattern id="pa" x="0" y="0" width="${sz}" height="${sz}" patternUnits="userSpaceOnUse">${g}</pattern></defs><rect width="100%" height="100%" fill="${bg}"/><rect width="100%" height="100%" fill="url(#pa)"/>`;
+    return React.createElement('svg',{viewBox:'0 0 400 200',width:'100%',height:'200',style:{display:'block'},dangerouslySetInnerHTML:{__html:inn}});
+  }
+
   stepW(i, dir) {
     const allowed = NAMEFONTS[i].weights;
     this.setState(s => {
@@ -541,6 +623,40 @@ class Component extends DCLogic {
     const palette = PALDATA[s.palette];
     const palName = { A:'Romântico Sereno', B:'Jardim Terroso', C:'Clássico Atemporal' }[s.palette];
 
+    const moodImages = [
+      { src:'90-referencias/banco-imagens/01-mood/mood_aliancas-peonias-brancas.jpg', alt:'Alianças com peônias brancas', caption:'alianças · peônias brancas · delicadeza' },
+      { src:'90-referencias/banco-imagens/01-mood/mood_boutonniere-rosa-oliveira_linho.jpg', alt:'Boutonnière de rosa e oliveira em linho', caption:'boutonnière · rosa · oliveira · linho' },
+      { src:'90-referencias/banco-imagens/01-mood/mood_guardanapos-eucalipto_terracota-B.jpg', alt:'Guardanapos com eucalipto e terracota', caption:'guardanapos · eucalipto · paleta B terracota' }
+    ];
+
+    const mockupImages = [
+      { src:'90-referencias/banco-imagens/02-texturas-fundos/mockup_cartao-envelope-kraft_pena-tinta.jpg', alt:'Cartão e envelope kraft com pena e tinta', caption:'cartão · envelope kraft · pena e tinta' },
+      { src:'90-referencias/banco-imagens/02-texturas-fundos/mockup_lugar-sousplat-palha_cartao-tag.jpg', alt:'Lugar com sousplat de palha e cartão tag', caption:'sousplat palha · cartão tag' },
+      { src:'90-referencias/banco-imagens/02-texturas-fundos/mockup_menu-vertical_vela-mosquitinho.jpg', alt:'Menu vertical com vela mosquitinho', caption:'menu vertical · vela mosquitinho' },
+      { src:'90-referencias/banco-imagens/02-texturas-fundos/mockup_prato-guardanapo-eucalipto_cartao-dobrado.jpg', alt:'Prato com guardanapo de eucalipto e cartão dobrado', caption:'prato · guardanapo eucalipto · cartão dobrado' }
+    ];
+
+    const patterns = [
+      {
+        name:'FOLHINHA DISPERSA',
+        use:'forro de envelope · papel de seda · embrulho',
+        bg: pageBg,
+        preview: this.patternFolha(accent, pageBg)
+      },
+      {
+        name:'RAMO ONDULADO',
+        use:'faixa decorativa · borda de tag · guardanapo',
+        bg: cardBg,
+        preview: this.patternRamo(accent, cardBg)
+      },
+      {
+        name:'AM GRID',
+        use:'fundo de caixa presente · papel de seda · tecido',
+        bg: pageBg,
+        preview: this.patternAM(ink, pageBg)
+      }
+    ];
+
     return {
       pageBg, cardBg, hairline,
       ink, ink60, accent,
@@ -553,7 +669,10 @@ class Component extends DCLogic {
       monoVariants,
       elements,
       letterings,
-      invariants
+      invariants,
+      moodImages,
+      mockupImages,
+      patterns
     };
   }
 }
