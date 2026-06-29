@@ -10,61 +10,553 @@
 <helmet>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500;600&family=Lato:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Marcellus&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Lato:ital,wght@0,300;0,400;0,700;1,400&family=Cinzel:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <style>
   * { box-sizing: border-box; }
   body { margin: 0; }
+  .lbl { font-family:'Lato',sans-serif; font-size:10px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:#9a917f; }
+  .swatch-row { display:flex; gap:0; border-radius:3px; overflow:hidden; height:38px; }
 </style>
 </helmet>
-<div style="min-height:100vh; background:{{ pageBg }}; color:#222220; font-family:'Montserrat',sans-serif; padding:64px 7vw 96px;">
 
-  <!-- Cabeçalho -->
+<div style="min-height:100vh; background:{{ pageBg }}; color:#222220; font-family:'Lato',sans-serif; padding:64px 6vw 100px; transition:background .3s;">
+
+  <!-- ── CABEÇALHO ─────────────────────────────────────────── -->
   <header style="max-width:1080px; margin:0 auto 8px; display:flex; flex-direction:column; align-items:center; text-align:center; gap:18px;">
-    <div style="color:{{ monoColor }}; width:108px; height:108px;">{{ monoSvg }}</div>
-    <div style="font-family:'Cinzel',serif; letter-spacing:.42em; font-size:13px; color:{{ ink60 }}; padding-left:.42em;">DESIGN SYSTEM</div>
-    <h1 style="font-family:'Playfair Display',serif; font-weight:500; font-size:46px; margin:0; line-height:1.1;">Alexandre <span style="font-style:italic; color:{{ accent }};">&amp;</span> Mayara</h1>
-    <p style="font-family:'Lato',sans-serif; font-weight:300; font-size:15px; color:{{ ink60 }}; margin:0; max-width:520px; line-height:1.6;">Passo a passo, sempre juntos. Tokens extraídos da base de verdade — e agora <em>interativos</em>: ajuste monograma, lettering e cores aqui mesmo para decidir.</p>
-    <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-top:4px;">
-      <span style="font-family:'Lato',sans-serif; font-size:11.5px; letter-spacing:.12em; text-transform:uppercase; color:{{ ink60 }}; border:1px solid {{ hairline }}; border-radius:100px; padding:6px 14px;">Paleta {{ paletteLetter }} · {{ paletteName }}</span>
-      <span style="font-family:'Lato',sans-serif; font-size:11.5px; letter-spacing:.12em; text-transform:uppercase; color:{{ ink60 }}; border:1px solid {{ hairline }}; border-radius:100px; padding:6px 14px;">Monograma: {{ monoColorLabel }}</span>
+    <div style="color:{{ monoColor }}; width:100px; height:100px;">{{ monoSvg }}</div>
+    <div style="font-family:'Cinzel',serif; letter-spacing:.42em; font-size:12px; color:{{ ink60 }}; padding-left:.42em;">DESIGN SYSTEM</div>
+    <h1 style="font-family:'Playfair Display',serif; font-weight:500; font-size:44px; margin:0; line-height:1.1; color:{{ ink }};">Alexandre <span style="font-style:italic; color:{{ accent }};">&amp;</span> Mayara</h1>
+    <p style="font-family:'Lato',sans-serif; font-weight:300; font-size:15px; color:{{ ink60 }}; margin:0; max-width:520px; line-height:1.6;">Sistema vivo — tokens, tipografia e elementos gráficos do casamento. As escolhas feitas no Estúdio e na Fase 1 se refletem aqui.</p>
+    <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center;">
+      <span style="font-family:'Lato',sans-serif; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:{{ ink60 }}; border:1px solid {{ hairline }}; border-radius:100px; padding:6px 14px;">{{ paletteBadge }}</span>
+      <span style="font-family:'Lato',sans-serif; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:{{ ink60 }}; border:1px solid {{ hairline }}; border-radius:100px; padding:6px 14px;">{{ letteringBadge }}</span>
     </div>
   </header>
 
   <div style="max-width:1080px; margin:0 auto;">
 
-    <!-- 1. Monograma -->
+    <!-- ── 01 · MONOGRAMA ─────────────────────────────────── -->
     <section style="margin-top:72px;">
-      <div style="display:flex; align-items:baseline; gap:16px; border-bottom:1px solid {{ hairline }}; padding-bottom:14px; margin-bottom:34px;">
-        <span style="font-family:'Cinzel',serif; font-size:14px; color:{{ accent }};">01</span>
-        <h2 style="font-family:'Playfair Display',serif; font-weight:500; font-size:26px; margin:0;">Monograma</h2>
-        <span style="font-family:'Lato',sans-serif; font-weight:300; font-size:13px; color:{{ ink60 }}; margin-left:auto;">AM caligráfico monolinha · ativos/monograma.svg</span>
+      <div style="display:flex; align-items:baseline; gap:16px; border-bottom:1px solid {{ hairline }}; padding-bottom:14px; margin-bottom:32px;">
+        <span style="font-family:'Cinzel',serif; font-size:13px; color:{{ accent }};">01</span>
+        <h2 style="font-family:'Playfair Display',serif; font-weight:500; font-size:26px; margin:0; color:{{ ink }};">Monograma</h2>
+        <span style="font-family:'Lato',sans-serif; font-weight:300; font-size:12px; color:{{ ink60 }}; margin-left:auto; letter-spacing:.02em;">AM caligráfico · am/monograma.svg</span>
       </div>
-      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:22px;">
-        <div style="background:{{ cardBg }}; border:1px solid {{ hairline }}; border-radius:3px; aspect-ratio:1/1; display:flex; align-items:center; justify-content:center; color:{{ monoColor }};"><div style="width:62%;">{{ monoSvg }}</div></div>
-        <div style="background:{{ ink }}; border-radius:3px; aspect-ratio:1/1; display:flex; align-items:center; justify-content:center; color:{{ marfim }};"><div style="width:62%;">{{ monoSvg }}</div></div>
-        <div style="background:{{ cardBg }}; border:1px solid {{ hairline }}; border-radius:3px; aspect-ratio:1/1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; color:{{ monoColor }};">
-          <div style="width:34px;">{{ monoSvg }}</div>
-          <div style="width:22px;">{{ monoSvg }}</div>
-          <div style="width:14px;">{{ monoSvg }}</div>
+
+      <!-- 3 aplicações -->
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:20px;">
+        <div style="background:{{ cardBg }}; border:1px solid {{ hairline }}; border-radius:3px; aspect-ratio:1/1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; padding:20px;">
+          <div style="color:{{ monoColor }}; width:58%; flex:0 0 auto;">{{ monoSvg }}</div>
+          <div class="lbl" style="color:{{ ink60 }};">Sobre claro</div>
+        </div>
+        <div style="background:{{ ink }}; border-radius:3px; aspect-ratio:1/1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; padding:20px;">
+          <div style="color:{{ pageBg }}; width:58%; flex:0 0 auto;">{{ monoSvg }}</div>
+          <div class="lbl" style="color:{{ ink60 }};">Sobre escuro</div>
+        </div>
+        <div style="background:{{ cardBg }}; border:1px solid {{ hairline }}; border-radius:3px; aspect-ratio:1/1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:18px;">
+          <div style="display:flex; align-items:flex-end; gap:14px; color:{{ monoColor }};">
+            <div style="width:56px; height:56px;">{{ monoSvg }}</div>
+            <div style="width:34px; height:34px;">{{ monoSvg }}</div>
+            <div style="width:18px; height:18px;">{{ monoSvg }}</div>
+          </div>
+          <div class="lbl" style="color:{{ ink60 }};">Escala · 56 · 34 · 18 px</div>
         </div>
       </div>
 
-      <!-- estúdio interativo do monograma -->
-      <div style="margin-top:22px; display:flex; align-items:stretch; gap:28px; flex-wrap:wrap; background:{{ cardBg }}; border:1px solid {{ hairline }}; border-radius:3px; padding:24px 28px;">
-        <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; background:#fff; border:1px solid {{ hairline }}; border-radius:3px; padding:22px 30px; min-width:194px;">
-          <div style="height:132px; display:flex; align-items:center; justify-content:center;">
-            <div style="width:{{ monoSize }}px; height:{{ monoSize }}px; color:{{ monoColor }};">{{ monoSvg }}</div>
+      <!-- variantes -->
+      <div style="margin-top:20px; display:grid; grid-template-columns:repeat(3,1fr); gap:20px;">
+        <sc-for list="{{ monoVariants }}" as="mv" hint-placeholder-count="3">
+          <div style="{{ mv.box }}">
+            <div style="color:{{ monoColor }}; width:72%; aspect-ratio:1/1; margin:0 auto 14px;">{{ mv.svg }}</div>
+            <div style="font-family:'Playfair Display',serif; font-size:15px; font-weight:500; color:{{ ink }};">{{ mv.name }}</div>
+            <div class="lbl" style="margin-top:4px; color:{{ ink60 }};">{{ mv.sub }}</div>
           </div>
-          <div style="font-family:'Lato',sans-serif; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:{{ ink60 }}; margin-top:6px;">Variação {{ monoVariant }} · {{ monoSize }}px</div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- ── 02 · PALETA DE CORES ───────────────────────────── -->
+    <section style="margin-top:72px;">
+      <div style="display:flex; align-items:baseline; gap:16px; border-bottom:1px solid {{ hairline }}; padding-bottom:14px; margin-bottom:32px;">
+        <span style="font-family:'Cinzel',serif; font-size:13px; color:{{ accent }};">02</span>
+        <h2 style="font-family:'Playfair Display',serif; font-weight:500; font-size:26px; margin:0; color:{{ ink }};">Paleta de cores</h2>
+        <div style="margin-left:auto; display:flex; gap:8px;">
+          <sc-for list="{{ palBtns }}" as="pb" hint-placeholder-count="3">
+            <button onClick="{{ pb.onClick }}" style="{{ pb.style }}">{{ pb.label }}</button>
+          </sc-for>
         </div>
-        <div style="flex:1; min-width:240px; display:flex; flex-direction:column; justify-content:center;">
-          <div style="font-family:'Lato',sans-serif; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:{{ accent }}; margin-bottom:10px;">Variação do monograma</div>
-          <div style="display:flex; gap:9px; margin-bottom:20px;">
-            <sc-for list="{{ monoOptions }}" as="mo" hint-placeholder-count="3">
-              <button onClick="{{ mo.onPick }}" style="{{ mo.style }}">{{ mo.label }}</button>
+      </div>
+
+      <sc-for list="{{ palettes }}" as="pal" hint-placeholder-count="3">
+        <div style="display:{{ pal.display }}; flex-direction:column; gap:0; margin-bottom:36px;">
+          <div style="display:flex; align-items:baseline; gap:10px; margin-bottom:16px;">
+            <span style="font-family:'Cinzel',serif; font-size:15px; color:{{ accent }};">{{ pal.letter }}</span>
+            <span style="font-family:'Playfair Display',serif; font-style:italic; font-size:20px; color:{{ ink }};">{{ pal.title }}</span>
+            <span style="font-family:'Lato',sans-serif; font-weight:300; font-size:12px; color:{{ ink60 }}; margin-left:8px;">{{ pal.note }}</span>
+          </div>
+          <!-- faixa de cores -->
+          <div class="swatch-row">
+            <sc-for list="{{ pal.swatches }}" as="sw" hint-placeholder-count="6">
+              <div style="flex:{{ sw.flex }}; background:{{ sw.hex }};"></div>
             </sc-for>
           </div>
-          <div style="font-family:'Lato',s
+          <!-- tokens -->
+          <div style="display:grid; grid-template-columns:repeat(6,1fr); gap:1px; background:{{ hairline }}; border:1px solid {{ hairline }}; border-top:none; border-radius:0 0 3px 3px; overflow:hidden;">
+            <sc-for list="{{ pal.tokens }}" as="tk" hint-placeholder-count="6">
+              <div style="background:{{ cardBg }}; padding:10px 12px;">
+                <div style="width:24px; height:24px; border-radius:50%; background:{{ tk.hex }}; border:1px solid {{ hairline }}; margin-bottom:7px;"></div>
+                <div style="font-family:'Lato',sans-serif; font-weight:700; font-size:9px; letter-spacing:.08em; text-transform:uppercase; color:{{ ink }};">{{ tk.role }}</div>
+                <div style="font-family:'Lato',sans-serif; font-weight:300; font-size:10px; color:{{ ink60 }}; margin-top:2px;">{{ tk.name }}</div>
+                <div style="font-family:'Lato',sans-serif; font-size:10px; color:{{ ink60 }}; margin-top:1px; letter-spacing:.03em;">{{ tk.hex }}</div>
+              </div>
+            </sc-for>
+          </div>
+          <!-- mockup de papelaria -->
+          <div style="margin-top:16px; background:{{ pal.fundo }}; border:1px solid {{ hairline }}; border-radius:3px; padding:28px 30px; display:flex; align-items:center; gap:28px;">
+            <div style="width:64px; height:64px; flex-shrink:0; color:{{ pal.cMono }};">{{ monoSvg }}</div>
+            <div>
+              <div style="font-family:'Lato',sans-serif; font-weight:700; font-size:9px; letter-spacing:.28em; text-transform:uppercase; color:{{ pal.cAcento }};">PARA O NOSSO SIM</div>
+              <div style="font-family:{{ nameCss }}; font-weight:{{ nameWeight }}; font-size:26px; line-height:1.1; color:{{ pal.cNomes }}; margin-top:6px; text-transform:{{ nameCase }};">Alexandre <span style="font-style:italic; color:{{ pal.cAcento }};">&amp;</span> Mayara</div>
+              <div style="font-family:'Marcellus',serif; font-size:13px; letter-spacing:.22em; color:{{ pal.cData }}; margin-top:8px; padding-left:.22em;">01 · 08 · 2027</div>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </section>
+
+    <!-- ── 03 · TIPOGRAFIA ───────────────────────────────── -->
+    <section style="margin-top:72px;">
+      <div style="display:flex; align-items:baseline; gap:16px; border-bottom:1px solid {{ hairline }}; padding-bottom:14px; margin-bottom:14px;">
+        <span style="font-family:'Cinzel',serif; font-size:13px; color:{{ accent }};">03</span>
+        <h2 style="font-family:'Playfair Display',serif; font-weight:500; font-size:26px; margin:0; color:{{ ink }};">Tipografia</h2>
+        <span style="font-family:'Lato',sans-serif; font-weight:300; font-size:12px; color:{{ ink60 }}; margin-left:auto;">caligrafia vive no monograma · nomes em romano editorial</span>
+      </div>
+      <p style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:18px; color:{{ ink60 }}; margin:0 0 28px; max-width:680px; line-height:1.55;">Três serifas de contraste candidatas para os nomes. Ajuste peso, caixa e corpo para encontrar a voz certa. A fonte escolhida na Fase 1 aparece marcada.</p>
+
+      <div style="display:flex; flex-direction:column; gap:0;">
+        <sc-for list="{{ letterings }}" as="lt" hint-placeholder-count="3">
+          <div style="display:flex; align-items:flex-start; gap:36px; padding:32px 4px; border-top:1px solid {{ hairline }};">
+            <!-- controles -->
+            <div style="width:178px; flex-shrink:0;">
+              <div style="font-family:'Cinzel',serif; font-size:13px; letter-spacing:.04em; color:{{ ink }};">{{ lt.fontLabel }}</div>
+              <div style="font-family:'Lato',sans-serif; font-weight:300; font-size:11px; color:{{ ink60 }}; line-height:1.5; margin-top:6px;">{{ lt.note }}</div>
+              <div style="display:flex; align-items:center; gap:7px; margin-top:16px; flex-wrap:wrap;">
+                <button onClick="{{ lt.onThinner }}" style="{{ lt.thinStyle }}">‹ fino</button>
+                <button onClick="{{ lt.onThicker }}" style="{{ lt.thickStyle }}">grosso ›</button>
+              </div>
+              <div class="lbl" style="color:{{ ink60 }}; margin-top:8px;">{{ lt.weightLabel }}</div>
+              <div style="display:flex; align-items:center; gap:7px; margin-top:12px;">
+                <button onClick="{{ lt.onUpper }}" style="{{ lt.upperStyle }}">AA</button>
+                <button onClick="{{ lt.onLower }}" style="{{ lt.lowerStyle }}">aa</button>
+              </div>
+              <div style="display:flex; align-items:center; gap:7px; margin-top:10px;">
+                <button onClick="{{ lt.onSmaller }}" style="{{ lt.smallStyle }}">– menor</button>
+                <button onClick="{{ lt.onBigger }}" style="{{ lt.bigStyle }}">maior +</button>
+              </div>
+              <div class="lbl" style="color:{{ ink60 }}; margin-top:8px;">{{ lt.sizeLabel }}</div>
+              <button onClick="{{ lt.onChoose }}" style="{{ lt.chooseStyle }}">{{ lt.chooseLabel }}</button>
+            </div>
+            <!-- preview -->
+            <div style="flex:1; display:flex; flex-direction:column; gap:6px; padding-top:4px;">
+              <div style="font-family:{{ lt.css }}; font-weight:{{ lt.weight }}; font-size:{{ lt.size }}px; line-height:1.02; color:{{ ink }}; text-transform:{{ lt.caseT }};">Alexandre <span style="font-style:italic; color:{{ accent }};">&amp;</span> Mayara</div>
+              <div style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:18px; color:{{ ink60 }};">para o nosso sim</div>
+              <div style="margin-top:8px; display:flex; gap:20px; flex-wrap:wrap;">
+                <div style="font-family:{{ lt.css }}; font-weight:{{ lt.weight }}; text-transform:{{ lt.caseT }}; font-size:13px; letter-spacing:.18em; color:{{ ink60 }};">TARDE ITALIANA</div>
+                <div style="font-family:{{ lt.css }}; font-weight:300; text-transform:{{ lt.caseT }}; font-size:12px; letter-spacing:.1em; color:{{ ink60 }};">01 · 08 · 2027</div>
+              </div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+
+      <!-- escala tipográfica dos suportes -->
+      <div style="margin-top:28px; background:{{ cardBg }}; border:1px solid {{ hairline }}; border-radius:3px; padding:24px 28px;">
+        <div class="lbl" style="color:{{ ink60 }}; margin-bottom:18px;">Escala de suporte · Cinzel + Lato + Cormorant</div>
+        <div style="display:flex; flex-direction:column; gap:14px;">
+          <div style="display:flex; align-items:baseline; gap:24px; border-bottom:1px solid {{ hairline }}; padding-bottom:14px;">
+            <div style="font-family:'Cinzel',serif; font-size:11px; color:{{ ink60 }}; width:110px; flex-shrink:0;">Label / seção</div>
+            <div style="font-family:'Cinzel',serif; font-size:13px; letter-spacing:.3em; color:{{ ink }};">FASE 1 · DECISÕES</div>
+          </div>
+          <div style="display:flex; align-items:baseline; gap:24px; border-bottom:1px solid {{ hairline }}; padding-bottom:14px;">
+            <div style="font-family:'Cinzel',serif; font-size:11px; color:{{ ink60 }}; width:110px; flex-shrink:0;">Subtítulo</div>
+            <div style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:22px; color:{{ ink }};">passo a passo, sempre juntos</div>
+          </div>
+          <div style="display:flex; align-items:baseline; gap:24px; border-bottom:1px solid {{ hairline }}; padding-bottom:14px;">
+            <div style="font-family:'Cinzel',serif; font-size:11px; color:{{ ink60 }}; width:110px; flex-shrink:0;">Corpo de texto</div>
+            <div style="font-family:'Lato',sans-serif; font-weight:300; font-size:15px; line-height:1.6; color:{{ ink }}; max-width:480px;">Tudo aqui é preview — nada foi fixado. Ajuste monograma, lettering e cores aqui mesmo para decidir.</div>
+          </div>
+          <div style="display:flex; align-items:baseline; gap:24px;">
+            <div style="font-family:'Cinzel',serif; font-size:11px; color:{{ ink60 }}; width:110px; flex-shrink:0;">Data / filete</div>
+            <div style="font-family:'Marcellus',serif; font-size:15px; letter-spacing:.28em; color:{{ ink }}; padding-left:.28em;">01 · 08 · 2027</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 04 · ELEMENTOS GRÁFICOS ────────────────────────── -->
+    <section style="margin-top:72px;">
+      <div style="display:flex; align-items:baseline; gap:16px; border-bottom:1px solid {{ hairline }}; padding-bottom:14px; margin-bottom:32px;">
+        <span style="font-family:'Cinzel',serif; font-size:13px; color:{{ accent }};">04</span>
+        <h2 style="font-family:'Playfair Display',serif; font-weight:500; font-size:26px; margin:0; color:{{ ink }};">Elementos gráficos</h2>
+        <span style="font-family:'Lato',sans-serif; font-weight:300; font-size:12px; color:{{ ink60 }}; margin-left:auto;">ramos · molduras · selos</span>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:16px;">
+        <sc-for list="{{ elements }}" as="el" hint-placeholder-count="4">
+          <div style="background:{{ cardBg }}; border:1px solid {{ hairline }}; border-radius:3px; padding:18px 16px; display:flex; flex-direction:column; align-items:center; gap:12px;">
+            <div style="width:100%; aspect-ratio:1/1; display:flex; align-items:center; justify-content:center; color:{{ monoColor }};">{{ el.svg }}</div>
+            <div style="font-family:'Cinzel',serif; font-size:10px; letter-spacing:.12em; color:{{ ink60 }}; text-align:center;">{{ el.name }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- ── 05 · INVARIANTES DA IDENTIDADE ─────────────────── -->
+    <section style="margin-top:72px;">
+      <div style="display:flex; align-items:baseline; gap:16px; border-bottom:1px solid {{ hairline }}; padding-bottom:14px; margin-bottom:32px;">
+        <span style="font-family:'Cinzel',serif; font-size:13px; color:{{ accent }};">05</span>
+        <h2 style="font-family:'Playfair Display',serif; font-weight:500; font-size:26px; margin:0; color:{{ ink }};">Invariantes da identidade</h2>
+        <span style="font-family:'Lato',sans-serif; font-weight:300; font-size:12px; color:{{ ink60 }}; margin-left:auto;">o que não muda — fonte de verdade: casamento-am</span>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:20px;">
+        <sc-for list="{{ invariants }}" as="inv" hint-placeholder-count="6">
+          <div style="background:{{ cardBg }}; border:1px solid {{ hairline }}; border-radius:3px; padding:22px 24px;">
+            <div style="font-family:'Cinzel',serif; font-size:11px; letter-spacing:.18em; color:{{ accent }}; margin-bottom:10px;">{{ inv.tag }}</div>
+            <div style="font-family:'Playfair Display',serif; font-weight:500; font-size:17px; color:{{ ink }}; margin-bottom:7px;">{{ inv.title }}</div>
+            <div style="font-family:'Lato',sans-serif; font-weight:300; font-size:13px; line-height:1.6; color:{{ ink60 }};">{{ inv.body }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- ── 06 · APLICAÇÕES ───────────────────────────────── -->
+    <section style="margin-top:72px;">
+      <div style="display:flex; align-items:baseline; gap:16px; border-bottom:1px solid {{ hairline }}; padding-bottom:14px; margin-bottom:32px;">
+        <span style="font-family:'Cinzel',serif; font-size:13px; color:{{ accent }};">06</span>
+        <h2 style="font-family:'Playfair Display',serif; font-weight:500; font-size:26px; margin:0; color:{{ ink }};">Aplicações</h2>
+        <span style="font-family:'Lato',sans-serif; font-weight:300; font-size:12px; color:{{ ink60 }}; margin-left:auto;">identidade escolhida em contexto</span>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:20px;">
+        <!-- tag / lacre -->
+        <div style="aspect-ratio:4/5; background:#E7DDCB; border-radius:3px; display:flex; flex-direction:column; align-items:center; justify-content:center; box-shadow:0 12px 30px -18px rgba(60,44,30,.4);">
+          <div style="width:84px; height:84px; color:#5b4636;">{{ monoSvg }}</div>
+          <div style="font-family:'Marcellus',serif; font-size:12px; letter-spacing:.28em; color:#7a6b56; padding-left:.28em; margin-top:16px;">01 · 08 · 2027</div>
+          <div class="lbl" style="color:#9a8b73; margin-top:26px;">tag · lacre</div>
+        </div>
+        <!-- cabeçalho -->
+        <div style="aspect-ratio:4/5; background:{{ cardBg }}; border:1px solid {{ hairline }}; border-radius:3px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:24px; box-shadow:0 12px 30px -18px rgba(60,44,30,.4);">
+          <div style="width:58px; height:58px; color:{{ monoColor }};">{{ monoSvg }}</div>
+          <div style="font-family:{{ nameCss }}; font-weight:{{ nameWeight }}; text-transform:{{ nameCase }}; font-size:17px; letter-spacing:.08em; color:{{ ink }}; margin-top:16px; text-align:center;">Alexandre &amp; Mayara</div>
+          <div style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:17px; color:{{ accent }}; margin-top:4px;">Tarde Italiana</div>
+          <div class="lbl" style="color:{{ ink60 }}; margin-top:24px;">cabeçalho de página</div>
+        </div>
+        <!-- save the date -->
+        <div style="aspect-ratio:4/5; background:{{ ink }}; border-radius:3px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:24px; box-shadow:0 12px 30px -18px rgba(60,44,30,.4);">
+          <div style="width:58px; height:58px; color:{{ pageBg }};">{{ monoSvg }}</div>
+          <div style="font-family:{{ nameCss }}; font-weight:{{ nameWeight }}; text-transform:{{ nameCase }}; font-size:16px; letter-spacing:.08em; color:{{ pageBg }}; margin-top:16px; text-align:center;">Alexandre &amp; Mayara</div>
+          <div style="font-family:'Marcellus',serif; font-size:13px; letter-spacing:.22em; color:#cdb27a; padding-left:.22em; margin-top:12px;">01 · 08 · 2027</div>
+          <div class="lbl" style="color:#9a8f80; margin-top:24px;">save the date</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── DATAS ─────────────────────────────────────────── -->
+    <section style="margin-top:48px; background:{{ cardBg }}; border:1px solid {{ hairline }}; border-radius:3px; padding:22px 28px; display:flex; gap:0;">
+      <div style="flex:1; padding-right:28px; border-right:1px solid {{ hairline }};">
+        <div class="lbl" style="color:{{ accent }}; margin-bottom:8px;">Evento · 01/08/2026</div>
+        <div style="font-family:'Cormorant Garamond',serif; font-size:16px; color:{{ ink60 }}; line-height:1.5;">"Falta 1 ano" — celebração antecipada com os convidados. Convites e peças deste evento usam a data <strong style="color:{{ ink }};">2026</strong>.</div>
+      </div>
+      <div style="flex:1; padding-left:28px;">
+        <div class="lbl" style="color:{{ accent }}; margin-bottom:8px;">Casamento · 01/08/2027</div>
+        <div style="font-family:'Cormorant Garamond',serif; font-size:16px; color:{{ ink60 }}; line-height:1.5;">Cerimônia oficial. Save the dates, papelaria de casamento e aplicações permanentes usam a data <strong style="color:{{ ink }};">2027</strong>.</div>
+      </div>
+    </section>
+
+  </div><!-- /max-width -->
+
+  <footer style="max-width:1080px; margin:64px auto 0; padding-top:20px; border-top:1px solid {{ hairline }}; text-align:center; font-family:'Lato',sans-serif; font-weight:300; font-size:11px; letter-spacing:.06em; color:{{ ink60 }};">
+    Casamento Alexandre &amp; Mayara · design system · preview de aprovação — nenhuma escolha foi fixada · fonte de verdade: tatuagemdoi/Ale-May
+  </footer>
+
+</div>
 </x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1320,&quot;height&quot;:2800}}">
+
+const PALDATA = {
+  A: {
+    letter:'A', title:'Romântico Sereno', note:'Pastel, delicado, acolhedor.',
+    tokens:[
+      { role:'Tinta',    name:'quase-preto',  hex:'#34302a' },
+      { role:'Acento',   name:'rosé',          hex:'#C99089' },
+      { role:'Botânico', name:'sálvia',         hex:'#A6B89A' },
+      { role:'Suave',    name:'blush',          hex:'#EAD9D4' },
+      { role:'Fundo',    name:'marfim',         hex:'#F7F1EA' },
+      { role:'Hairline', name:'bege',           hex:'#e9ddd4' }
+    ],
+    cMono:'#34302a', cNomes:'#34302a', cAcento:'#C99089', cData:'#34302a',
+    fundo:'#F7F1EA'
+  },
+  B: {
+    letter:'B', title:'Jardim Terroso', note:'Terroso e quente, calor de jardim.',
+    tokens:[
+      { role:'Tinta',    name:'sépia escuro',  hex:'#36302a' },
+      { role:'Acento',   name:'terracota',      hex:'#CB6A4A' },
+      { role:'Botânico', name:'sage',            hex:'#8FA383' },
+      { role:'Suave',    name:'blush',           hex:'#E9C6C3' },
+      { role:'Fundo',    name:'ivory',           hex:'#F7F1EA' },
+      { role:'Hairline', name:'areia',           hex:'#ecdfd2' }
+    ],
+    cMono:'#36302a', cNomes:'#36302a', cAcento:'#CB6A4A', cData:'#36302a',
+    fundo:'#F7F1EA'
+  },
+  C: {
+    letter:'C', title:'Clássico Atemporal', note:'Sóbrio — eucalipto sobre marfim.',
+    tokens:[
+      { role:'Tinta',    name:'quase-preto',  hex:'#222220' },
+      { role:'Acento',   name:'eucalipto',     hex:'#5C6B50' },
+      { role:'Botânico', name:'eucalipto',     hex:'#5C6B50' },
+      { role:'Suave',    name:'taupe',          hex:'#DCCBC1' },
+      { role:'Fundo',    name:'marfim',         hex:'#F4EEE4' },
+      { role:'Hairline', name:'areia',          hex:'#e4dac8' }
+    ],
+    cMono:'#222220', cNomes:'#222220', cAcento:'#5C6B50', cData:'#222220',
+    fundo:'#F4EEE4'
+  }
+};
+
+const NAMEFONTS = [
+  { css:"'Cormorant Garamond',serif", weights:[300,400,500,600,700], label:'Cormorant Garamond', note:'Contraste alto, ar romântico.' },
+  { css:"'Marcellus',serif",          weights:[400],                  label:'Marcellus',          note:'Lapidária romana. Serena, clássica.' },
+  { css:"'Fraunces',serif",           weights:[300,400,500,600,700], label:'Fraunces',            note:'Editorial com personalidade.' }
+];
+const WNAME = { 300:'Light', 400:'Regular', 500:'Medium', 600:'SemiBold', 700:'Bold' };
+
+const INVARIANTS = [
+  { tag:'Monograma', title:'Caligrafia vive no monograma', body:'Os nomes Alexandre e Mayara usam tipografia romana editorial, não caligrafia. A curva caligráfica pertence exclusivamente ao AM.' },
+  { tag:'Tipografia', title:'Romano editorial sem distorção', body:'Fontes dos nomes não devem ser distorcidas, inclinadas artificialmente ou decoradas. O contraste vem do peso e do corpo.' },
+  { tag:'Datas', title:'Duas datas — duas funções', body:'01/08/2026 = evento "falta 1 ano". 01/08/2027 = casamento. Cada peça usa a data correspondente à sua função.' },
+  { tag:'Aprovação', title:'Decisão visual fecha com preview', body:'Nenhuma escolha está fixada até aprovação explícita do Lucas. Este site é ferramenta de preview, não documento final.' },
+  { tag:'Fonte de verdade', title:'Repo casamento-am no GitHub', body:'10-dominio/ contém objetos de valor e o agregado identidade-visual. Em caso de divergência, o repo prevalece sobre o site.' },
+  { tag:'Escala mínima', title:'Monograma: mínimo 18 px / 5 mm', body:'Abaixo desse limiar os filamentos do AM colapsam. Em lacre e bordado usar versão "puro" (sem ramos).' }
+];
+
+class Component extends DCLogic {
+  state = {
+    mono:'', letras:'', ramos:'', molduras:{},
+    choiceSvg:'', chosenLettering:null,
+    weights:{ 0:500, 1:400, 2:400 },
+    cases:{ 0:'none', 1:'none', 2:'none' },
+    sizes:{ 0:52, 1:52, 2:52 },
+    palette:'B'
+  };
+
+  async componentDidMount() {
+    const grab = async (path, style, cls) => {
+      try {
+        const r = await fetch(path);
+        let t = await r.text();
+        t = t.replace('viewBox="0 0 1000 1000">',
+          `viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid meet" class="${cls}" style="width:100%;height:100%;display:block;overflow:visible"><style>${style}</style>`);
+        return t;
+      } catch(e) { return ''; }
+    };
+    const monoStyle = '.am-mono .cls-1{fill:none;stroke:currentColor;stroke-width:13;stroke-linecap:round;stroke-linejoin:round}.am-mono .cls-2{fill:currentColor;stroke:none}';
+    const letrasStyle = '.am-letras .cls-1{fill:none;stroke:currentColor;stroke-width:8;stroke-linecap:round;stroke-linejoin:round}';
+    const ramosStyle = '.am-ramos .cls-1,.am-ramos .cls-2,.am-ramos .cls-4{fill:currentColor;stroke:none}.am-ramos .cls-3{fill:none;stroke:currentColor;stroke-width:6}';
+    const [mono, letras, ramos] = await Promise.all([
+      grab('am/monograma.svg', monoStyle, 'am-mono'),
+      grab('am/mono-letras.svg', letrasStyle, 'am-letras'),
+      grab('am/ramos.svg', ramosStyle, 'am-ramos')
+    ]);
+    // molduras
+    const moldKeys = ['a1','a2','A3','a4','B1','B2'];
+    const molds = {};
+    await Promise.all(moldKeys.map(async k => {
+      try {
+        const r = await fetch('am/molduras/' + k + '.svg');
+        let t = await r.text();
+        let inner = t.replace(/^[\s\S]*?<svg[^>]*>/, '').replace('</svg>','').replace(/<defs>[\s\S]*?<\/defs>/,'');
+        inner = inner.replace(/<path class="cls-\d"/g, '<path fill="none"');
+        inner = inner.replace(/<path d=/g, '<path stroke="none" d=');
+        molds[k] = inner;
+      } catch(e) { molds[k] = ''; }
+    }));
+    this.setState({ mono, letras, ramos, molduras: molds });
+    try {
+      const cs = localStorage.getItem('am_mono_choice_svg');
+      if (cs) this.setState({ choiceSvg: cs });
+      const cl = localStorage.getItem('am_lettering_choice');
+      if (cl) {
+        const obj = JSON.parse(cl);
+        const idx = NAMEFONTS.findIndex(f => f.css === obj.css);
+        if (idx >= 0) this.setState({ chosenLettering: idx });
+      }
+    } catch(e) {}
+    this._onChoice = (e) => {
+      try { this.setState({ choiceSvg: (e&&e.detail&&e.detail.svg) || localStorage.getItem('am_mono_choice_svg')||'' }); } catch(_) {}
+    };
+    this._onLettering = () => {
+      try {
+        const cl = JSON.parse(localStorage.getItem('am_lettering_choice')||'null');
+        if (!cl) return;
+        const idx = NAMEFONTS.findIndex(f => f.css === cl.css);
+        if (idx >= 0) this.setState({ chosenLettering: idx });
+      } catch(_) {}
+    };
+    window.addEventListener('am-mono-choice', this._onChoice);
+    window.addEventListener('am-lettering-choice', this._onLettering);
+  }
+
+  componentWillUnmount() {
+    if (this._onChoice) window.removeEventListener('am-mono-choice', this._onChoice);
+    if (this._onLettering) window.removeEventListener('am-lettering-choice', this._onLettering);
+  }
+
+  svgNode(html, color) {
+    if (!html) return null;
+    return React.createElement('div', { style:{ width:'100%', height:'100%', color }, dangerouslySetInnerHTML:{ __html: html } });
+  }
+
+  chosenNode(color) {
+    const html = this.state.choiceSvg || this.state.letras;
+    return this.svgNode(html, color);
+  }
+
+  moldNode(k, color) {
+    const inner = this.state.molduras[k];
+    if (!inner) return null;
+    return React.createElement('svg', {
+      viewBox:'0 0 1000 1000', width:'100%', height:'100%',
+      preserveAspectRatio:'xMidYMid meet',
+      fill:color, stroke:color,
+      strokeWidth:7, strokeLinecap:'round', strokeLinejoin:'round',
+      dangerouslySetInnerHTML:{ __html: inner }
+    });
+  }
+
+  stepW(i, dir) {
+    const allowed = NAMEFONTS[i].weights;
+    this.setState(s => {
+      let idx = allowed.indexOf(s.weights[i]);
+      idx = Math.max(0, Math.min(allowed.length-1, idx+dir));
+      return { weights: { ...s.weights, [i]: allowed[idx] } };
+    });
+  }
+
+  setCase(i, val) {
+    this.setState(s => ({ cases: { ...s.cases, [i]: val } }));
+  }
+
+  stepSize(i, dir) {
+    this.setState(s => ({ sizes: { ...s.sizes, [i]: Math.max(28, Math.min(88, s.sizes[i]+dir*6)) } }));
+  }
+
+  renderVals() {
+    const s = this.state;
+    const P = PALDATA[s.palette];
+    const ink = P.cMono;
+    const accent = P.cAcento;
+    const pageBg = P.fundo;
+    const cardBg = pageBg === '#F7F1EA' ? '#fff' : pageBg;
+    const hairline = P.tokens[5].hex;
+    const ink60 = ink + 'aa';
+
+    const _cl = s.chosenLettering;
+    const _nf = _cl != null ? NAMEFONTS[_cl] : NAMEFONTS[0];
+    const _ncase = _cl != null ? (s.cases[_cl] || 'none') : 'none';
+    const _nw = _cl != null ? s.weights[_cl] : 500;
+
+    const btn = (on) => `font-family:'Lato',sans-serif;font-size:10px;font-weight:${on?700:400};letter-spacing:.04em;color:${on?'#fff':ink};background:${on?ink:'transparent'};border:1px solid ${on?ink:hairline};border-radius:100px;padding:6px 12px;cursor:pointer;white-space:nowrap;transition:all .15s;`;
+
+    const palBtns = ['A','B','C'].map(k => ({
+      label: k,
+      style: btn(s.palette === k),
+      onClick: () => this.setState({ palette: k })
+    }));
+
+    const palettes = ['A','B','C'].map(k => {
+      const pd = PALDATA[k];
+      return {
+        display: s.palette === k ? 'flex' : 'none',
+        letter: pd.letter, title: pd.title, note: pd.note,
+        tokens: pd.tokens,
+        swatches: pd.tokens.slice(0,5).map((t,i) => ({ hex: t.hex, flex: i < 2 ? 2 : 1 })),
+        fundo: pd.fundo,
+        cMono: pd.cMono, cNomes: pd.cNomes, cAcento: pd.cAcento, cData: pd.cData
+      };
+    });
+
+    const monoVariants = [
+      { name:'Vestido', sub:'arco + ramos · versão completa', svg: this.svgNode(s.mono, ink), box:`background:${cardBg};border:1px solid ${hairline};border-radius:3px;padding:22px;` },
+      { name:'Puro',    sub:'só letras · escala pequena',      svg: this.chosenNode(ink),      box:`background:${cardBg};border:1px solid ${hairline};border-radius:3px;padding:22px;` },
+      { name:'Ramos',   sub:'elemento isolado · botânico',     svg: this.svgNode(s.ramos, accent), box:`background:${cardBg};border:1px solid ${hairline};border-radius:3px;padding:22px;` }
+    ];
+
+    const moldNames = ['a1','a2','A3','a4','B1','B2'];
+    const moldLabels = ['A1','A2','A3','A4','B1','B2'];
+    const elements = moldNames.map((k,i) => ({
+      name: 'Moldura ' + moldLabels[i],
+      svg: this.moldNode(k, ink)
+    }));
+
+    const letterings = NAMEFONTS.map((m,i) => {
+      const allowed = m.weights;
+      const w = s.weights[i];
+      const widx = allowed.indexOf(w);
+      const single = allowed.length === 1;
+      const cs = s.cases[i];
+      const sz = s.sizes[i];
+      const isChosen = s.chosenLettering === i;
+      const toggle = (active) => `font-family:'Lato',sans-serif;font-size:10px;font-weight:${active?700:400};color:${active?'#fff':ink};background:${active?ink:'transparent'};border:1px solid ${active?ink:hairline};border-radius:100px;padding:6px 12px;cursor:pointer;`;
+      return {
+        fontLabel: m.label, css: m.css, note: m.note,
+        weight: w, caseT: cs, size: sz,
+        weightLabel: WNAME[w] + (single ? ' · único' : ''),
+        sizeLabel: sz + 'px',
+        thinStyle: btn(!single && widx > 0),
+        thickStyle: btn(!single && widx < allowed.length-1),
+        onThinner: () => this.stepW(i, -1),
+        onThicker: () => this.stepW(i, 1),
+        upperStyle: toggle(cs === 'uppercase'),
+        lowerStyle: toggle(cs === 'lowercase'),
+        onUpper: () => this.setCase(i, cs === 'uppercase' ? 'none' : 'uppercase'),
+        onLower: () => this.setCase(i, cs === 'lowercase' ? 'none' : 'lowercase'),
+        smallStyle: btn(sz > 28),
+        bigStyle: btn(sz < 88),
+        onSmaller: () => this.stepSize(i, -1),
+        onBigger: () => this.stepSize(i, 1),
+        chooseLabel: isChosen ? '✓ Escolhida' : 'Escolher esta',
+        chooseStyle: `font-family:'Lato',sans-serif;font-weight:700;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:${isChosen?'#fff':accent};background:${isChosen?accent:'transparent'};border:1px solid ${accent};border-radius:100px;padding:8px 14px;cursor:pointer;white-space:nowrap;margin-top:14px;display:block;text-align:center;transition:all .15s;`,
+        onChoose: () => {
+          try { localStorage.setItem('am_lettering_choice', JSON.stringify({ css: m.css, weight: w, caseT: cs })); } catch(e) {}
+          try { window.dispatchEvent(new CustomEvent('am-lettering-choice')); } catch(e) {}
+          this.setState({ chosenLettering: i });
+        }
+      };
+    });
+
+    const invariants = INVARIANTS.map(inv => ({
+      tag: inv.tag, title: inv.title, body: inv.body
+    }));
+
+    const palette = PALDATA[s.palette];
+    const palName = { A:'Romântico Sereno', B:'Jardim Terroso', C:'Clássico Atemporal' }[s.palette];
+
+    return {
+      pageBg, cardBg, hairline,
+      ink, ink60, accent,
+      monoColor: ink,
+      monoSvg: this.chosenNode(ink),
+      paletteBadge: `Paleta ${s.palette} · ${palName}`,
+      letteringBadge: _cl != null ? `Lettering: ${NAMEFONTS[_cl].label}` : 'Lettering: a definir',
+      nameCss: _nf.css, nameWeight: _nw, nameCase: _ncase,
+      palBtns, palettes,
+      monoVariants,
+      elements,
+      letterings,
+      invariants
+    };
+  }
+}
+</script>
 </body>
 </html>
