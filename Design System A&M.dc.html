@@ -70,6 +70,10 @@
             <div style="color:{{ monoColor }}; width:72%; aspect-ratio:1/1; margin:0 auto 14px;">{{ mv.svg }}</div>
             <div style="font-family:'Playfair Display',serif; font-size:15px; font-weight:500; color:{{ ink }};">{{ mv.name }}</div>
             <div class="lbl" style="margin-top:4px; color:{{ ink60 }};">{{ mv.sub }}</div>
+            <div style="margin-top:10px; border-top:1px solid {{ hairline }}; padding-top:10px; display:flex; gap:8px; align-items:flex-start;">
+              <textarea value="{{ mv.note.val }}" onInput="{{ mv.note.onInput }}" rows="2" placeholder="nota…" style="flex:1;font-family:'Lato',sans-serif;font-size:11px;line-height:1.6;color:{{ ink }};background:transparent;border:1px solid {{ hairline }};border-radius:2px;padding:6px 10px;resize:none;outline:none;box-sizing:border-box;"></textarea>
+              <button onClick="{{ mv.note.onSave }}" style="font-family:'Lato',sans-serif;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:{{ ink }};background:transparent;border:1px solid {{ hairline }};border-radius:100px;padding:6px 12px;cursor:pointer;white-space:nowrap;flex-shrink:0;">salvar</button>
+            </div>
           </div>
         </sc-for>
       </div>
@@ -120,6 +124,10 @@
               <div style="font-family:'Marcellus',serif; font-size:13px; letter-spacing:.22em; color:{{ pal.cData }}; margin-top:8px; padding-left:.22em;">01 · 08 · 2027</div>
             </div>
           </div>
+          <div style="margin-top:12px; display:flex; gap:8px; align-items:flex-start;">
+            <textarea value="{{ pal.note.val }}" onInput="{{ pal.note.onInput }}" rows="2" placeholder="nota sobre esta paleta…" style="flex:1;font-family:'Lato',sans-serif;font-size:11px;line-height:1.6;color:{{ ink }};background:{{ cardBg }};border:1px solid {{ hairline }};border-radius:2px;padding:6px 10px;resize:none;outline:none;box-sizing:border-box;"></textarea>
+            <button onClick="{{ pal.note.onSave }}" style="font-family:'Lato',sans-serif;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:{{ ink }};background:transparent;border:1px solid {{ hairline }};border-radius:100px;padding:6px 12px;cursor:pointer;white-space:nowrap;flex-shrink:0;">salvar</button>
+          </div>
         </div>
       </sc-for>
     </section>
@@ -164,6 +172,10 @@
                 <div style="font-family:{{ lt.css }}; font-weight:{{ lt.weight }}; text-transform:{{ lt.caseT }}; font-size:13px; letter-spacing:.18em; color:{{ ink60 }};">TARDE ITALIANA</div>
                 <div style="font-family:{{ lt.css }}; font-weight:300; text-transform:{{ lt.caseT }}; font-size:12px; letter-spacing:.1em; color:{{ ink60 }};">01 · 08 · 2027</div>
               </div>
+              <div style="margin-top:12px; display:flex; gap:8px; align-items:flex-start;">
+                <textarea value="{{ lt.note.val }}" onInput="{{ lt.note.onInput }}" rows="2" placeholder="nota sobre esta fonte…" style="flex:1;font-family:'Lato',sans-serif;font-size:11px;line-height:1.6;color:{{ ink }};background:{{ cardBg }};border:1px solid {{ hairline }};border-radius:2px;padding:6px 10px;resize:none;outline:none;box-sizing:border-box;"></textarea>
+                <button onClick="{{ lt.note.onSave }}" style="font-family:'Lato',sans-serif;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:{{ ink }};background:transparent;border:1px solid {{ hairline }};border-radius:100px;padding:6px 12px;cursor:pointer;white-space:nowrap;flex-shrink:0;">salvar</button>
+              </div>
             </div>
           </div>
         </sc-for>
@@ -205,6 +217,10 @@
           <div style="background:{{ cardBg }}; border:1px solid {{ hairline }}; border-radius:3px; padding:18px 16px; display:flex; flex-direction:column; align-items:center; gap:12px;">
             <div style="width:100%; aspect-ratio:1/1; display:flex; align-items:center; justify-content:center; color:{{ monoColor }};">{{ el.svg }}</div>
             <div style="font-family:'Cinzel',serif; font-size:10px; letter-spacing:.12em; color:{{ ink60 }}; text-align:center;">{{ el.name }}</div>
+            <div style="margin-top:8px; display:flex; gap:6px; align-items:flex-start;">
+              <textarea value="{{ el.note.val }}" onInput="{{ el.note.onInput }}" rows="2" placeholder="nota…" style="flex:1;font-family:'Lato',sans-serif;font-size:10px;line-height:1.5;color:{{ ink }};background:transparent;border:1px solid {{ hairline }};border-radius:2px;padding:5px 8px;resize:none;outline:none;box-sizing:border-box;"></textarea>
+              <button onClick="{{ el.note.onSave }}" style="font-family:'Lato',sans-serif;font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:{{ ink }};background:transparent;border:1px solid {{ hairline }};border-radius:100px;padding:5px 10px;cursor:pointer;white-space:nowrap;flex-shrink:0;">salvar</button>
+            </div>
           </div>
         </sc-for>
       </div>
@@ -223,6 +239,10 @@
             <div style="font-family:'Cinzel',serif; font-size:11px; letter-spacing:.18em; color:{{ accent }}; margin-bottom:10px;">{{ inv.tag }}</div>
             <div style="font-family:'Playfair Display',serif; font-weight:500; font-size:17px; color:{{ ink }}; margin-bottom:7px;">{{ inv.title }}</div>
             <div style="font-family:'Lato',sans-serif; font-weight:300; font-size:13px; line-height:1.6; color:{{ ink60 }};">{{ inv.body }}</div>
+            <div style="margin-top:10px; border-top:1px solid {{ hairline }}; padding-top:10px; display:flex; gap:8px; align-items:flex-start;">
+              <textarea value="{{ inv.note.val }}" onInput="{{ inv.note.onInput }}" rows="2" placeholder="nota…" style="flex:1;font-family:'Lato',sans-serif;font-size:11px;line-height:1.6;color:{{ ink }};background:transparent;border:1px solid {{ hairline }};border-radius:2px;padding:6px 10px;resize:none;outline:none;box-sizing:border-box;"></textarea>
+              <button onClick="{{ inv.note.onSave }}" style="font-family:'Lato',sans-serif;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:{{ ink }};background:transparent;border:1px solid {{ hairline }};border-radius:100px;padding:6px 12px;cursor:pointer;white-space:nowrap;flex-shrink:0;">salvar</button>
+            </div>
           </div>
         </sc-for>
       </div>
@@ -301,6 +321,10 @@
               <div style="font-family:'Cinzel',serif; font-size:11px; letter-spacing:.14em; color:{{ ink }}; margin-bottom:6px;">{{ pt.name }}</div>
               <div style="font-family:'Lato',sans-serif; font-weight:300; font-size:11px; color:{{ ink60 }}; line-height:1.5; margin-bottom:12px;">{{ pt.use }}</div>
               <button onClick="{{ pt.onDownload }}" style="font-family:'Lato',sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:{{ ink }};background:transparent;border:1px solid {{ hairline }};border-radius:100px;padding:6px 14px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;">↓ baixar SVG</button>
+              <div style="margin-top:10px; display:flex; gap:8px; align-items:flex-start;">
+                <textarea value="{{ pt.note.val }}" onInput="{{ pt.note.onInput }}" rows="2" placeholder="nota…" style="flex:1;font-family:'Lato',sans-serif;font-size:11px;line-height:1.6;color:{{ ink }};background:transparent;border:1px solid {{ hairline }};border-radius:2px;padding:6px 10px;resize:none;outline:none;box-sizing:border-box;"></textarea>
+                <button onClick="{{ pt.note.onSave }}" style="font-family:'Lato',sans-serif;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:{{ ink }};background:transparent;border:1px solid {{ hairline }};border-radius:100px;padding:6px 12px;cursor:pointer;white-space:nowrap;flex-shrink:0;">salvar</button>
+              </div>
             </div>
           </div>
         </sc-for>
@@ -353,7 +377,7 @@
 
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1320,&quot;height&quot;:4400}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1320,&quot;height&quot;:5200}}">
 
 const PALDATA = {
   A: {
@@ -421,6 +445,7 @@ class Component extends DCLogic {
     cases:{ 0:'none', 1:'none', 2:'none' },
     sizes:{ 0:52, 1:52, 2:52 },
     palette:'B',
+    notes:{}, noteDrafts:{},
     commentDraft:'',
     comments:[],
     savedAt:''
@@ -461,6 +486,10 @@ class Component extends DCLogic {
     try {
       const saved = JSON.parse(localStorage.getItem('am_ds_comments') || '[]');
       if (saved.length) this.setState({ comments: saved });
+    } catch(e) {}
+    try {
+      const notes = JSON.parse(localStorage.getItem('am_ds_notes') || '{}');
+      if (Object.keys(notes).length) this.setState({ notes });
     } catch(e) {}
     try {
       const cs = localStorage.getItem('am_mono_choice_svg');
@@ -565,6 +594,24 @@ class Component extends DCLogic {
     try { localStorage.setItem('am_ds_comments', JSON.stringify(comments)); } catch(e) {}
   }
 
+  noteFor(key) {
+    const s = this.state;
+    const saved = s.notes[key] || '';
+    const draft = Object.prototype.hasOwnProperty.call(s.noteDrafts, key) ? s.noteDrafts[key] : saved;
+    return {
+      val: draft,
+      onInput: (e) => this.setState(prev => ({ noteDrafts: {...prev.noteDrafts, [key]: e.target.value} })),
+      onSave: () => {
+        const text = (Object.prototype.hasOwnProperty.call(s.noteDrafts, key) ? s.noteDrafts[key] : saved).trim();
+        this.setState(prev => {
+          const notes = {...prev.notes, [key]: text};
+          try { localStorage.setItem('am_ds_notes', JSON.stringify(notes)); } catch(e) {}
+          return { notes };
+        });
+      }
+    };
+  }
+
   stepW(i, dir) {
     const allowed = NAMEFONTS[i].weights;
     this.setState(s => {
@@ -613,21 +660,23 @@ class Component extends DCLogic {
         tokens: pd.tokens,
         swatches: pd.tokens.slice(0,5).map((t,i) => ({ hex: t.hex, flex: i < 2 ? 2 : 1 })),
         fundo: pd.fundo,
-        cMono: pd.cMono, cNomes: pd.cNomes, cAcento: pd.cAcento, cData: pd.cData
+        cMono: pd.cMono, cNomes: pd.cNomes, cAcento: pd.cAcento, cData: pd.cData,
+        note: this.noteFor('pal_' + k)
       };
     });
 
     const monoVariants = [
-      { name:'Vestido', sub:'arco + ramos · versão completa', svg: this.svgNode(s.mono, ink), box:`background:${cardBg};border:1px solid ${hairline};border-radius:3px;padding:22px;` },
-      { name:'Puro',    sub:'só letras · escala pequena',      svg: this.chosenNode(ink),      box:`background:${cardBg};border:1px solid ${hairline};border-radius:3px;padding:22px;` },
-      { name:'Ramos',   sub:'elemento isolado · botânico',     svg: this.svgNode(s.ramos, accent), box:`background:${cardBg};border:1px solid ${hairline};border-radius:3px;padding:22px;` }
+      { name:'Vestido', sub:'arco + ramos · versão completa', svg: this.svgNode(s.mono, ink), box:`background:${cardBg};border:1px solid ${hairline};border-radius:3px;padding:22px;`, note: this.noteFor('mono_vestido') },
+      { name:'Puro',    sub:'só letras · escala pequena',      svg: this.chosenNode(ink),      box:`background:${cardBg};border:1px solid ${hairline};border-radius:3px;padding:22px;`, note: this.noteFor('mono_puro') },
+      { name:'Ramos',   sub:'elemento isolado · botânico',     svg: this.svgNode(s.ramos, accent), box:`background:${cardBg};border:1px solid ${hairline};border-radius:3px;padding:22px;`, note: this.noteFor('mono_ramos') }
     ];
 
     const moldNames = ['a1','a2','A3','a4','B1','B2'];
     const moldLabels = ['A1','A2','A3','A4','B1','B2'];
     const elements = moldNames.map((k,i) => ({
       name: 'Moldura ' + moldLabels[i],
-      svg: this.moldNode(k, ink)
+      svg: this.moldNode(k, ink),
+      note: this.noteFor('el_' + k)
     }));
 
     const letterings = NAMEFONTS.map((m,i) => {
@@ -662,12 +711,14 @@ class Component extends DCLogic {
           try { localStorage.setItem('am_lettering_choice', JSON.stringify({ css: m.css, weight: w, caseT: cs })); } catch(e) {}
           try { window.dispatchEvent(new CustomEvent('am-lettering-choice')); } catch(e) {}
           this.setState({ chosenLettering: i });
-        }
+        },
+        note: this.noteFor('let_' + i)
       };
     });
 
-    const invariants = INVARIANTS.map(inv => ({
-      tag: inv.tag, title: inv.title, body: inv.body
+    const invariants = INVARIANTS.map((inv,i) => ({
+      tag: inv.tag, title: inv.title, body: inv.body,
+      note: this.noteFor('inv_' + i)
     }));
 
     const palette = PALDATA[s.palette];
@@ -706,9 +757,9 @@ class Component extends DCLogic {
     const p2 = this.patternRamo(accent, cardBg);
     const p3 = this.patternAM(ink, pageBg);
     const patterns = [
-      { name:'FOLHINHA DISPERSA', use:'forro de envelope · papel de seda · embrulho',       bg:pageBg, preview:p1.preview, onDownload:p1.onDownload },
-      { name:'RAMO ONDULADO',     use:'faixa decorativa · borda de tag · guardanapo',        bg:cardBg, preview:p2.preview, onDownload:p2.onDownload },
-      { name:'AM GRID',           use:'fundo de caixa presente · papel de seda · tecido',    bg:pageBg, preview:p3.preview, onDownload:p3.onDownload }
+      { name:'FOLHINHA DISPERSA', use:'forro de envelope · papel de seda · embrulho',       bg:pageBg, preview:p1.preview, onDownload:p1.onDownload, note:this.noteFor('pt_folha') },
+      { name:'RAMO ONDULADO',     use:'faixa decorativa · borda de tag · guardanapo',        bg:cardBg, preview:p2.preview, onDownload:p2.onDownload, note:this.noteFor('pt_ramo') },
+      { name:'AM GRID',           use:'fundo de caixa presente · papel de seda · tecido',    bg:pageBg, preview:p3.preview, onDownload:p3.onDownload, note:this.noteFor('pt_am') }
     ];
 
     return {

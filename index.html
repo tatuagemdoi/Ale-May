@@ -38,6 +38,12 @@
   .card .go{margin-top:16px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#CB6A4A}
   footer{margin-top:54px;font-size:12px;color:#a99d90;text-align:center;line-height:1.7}
   .sec{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:#b3a596;margin:38px 0 14px;text-align:center}
+  .card-wrap{display:flex;flex-direction:column;gap:0}
+  .card-note{margin-top:0;padding:10px 12px 12px;background:#fff;border:1px solid #ece2d6;border-top:none;border-radius:0 0 4px 4px;display:flex;gap:8px;align-items:flex-start;}
+  .card-note textarea{flex:1;font-family:'Inter',sans-serif;font-size:11px;line-height:1.5;color:#2b2724;background:#F7F1EA;border:1px solid #e2d8cc;border-radius:2px;padding:5px 8px;resize:none;outline:none;box-sizing:border-box;}
+  .card-note button{font-family:'Inter',sans-serif;font-size:9px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:#2b2724;background:transparent;border:1px solid #d9cbbb;border-radius:100px;padding:5px 10px;cursor:pointer;white-space:nowrap;flex-shrink:0;}
+  .card-wrap a.card{border-radius:4px 4px 0 0;border-bottom:none;}
+  .card-wrap a.card:hover{transform:none;box-shadow:none;border-color:#d9cbbb;}
 </style>
 </head>
 <body>
@@ -51,35 +57,65 @@
 
     <div class="sec">Fase 1 · Decisões</div>
     <div class="grid">
-      <a class="card" href="A&M - Fase 1 Decis%C3%B5es.dc.html">
-        <div class="t">Fase 1 · Decisões</div>
-        <div class="d">Paleta (A/B/C), lettering dos nomes e o monograma escolhido — tudo em um lugar, ao vivo.</div>
-        <div class="go">Abrir →</div>
-      </a>
-      <a class="card" href="Monograma AM - Estudio.dc.html">
-        <div class="t">Estúdio do Monograma</div>
-        <div class="d">Pincel, tamanho, cor das paletas e moldura/selo. Salve A·B·C e escolha o canônico.</div>
-        <div class="go">Abrir →</div>
-      </a>
-      <a class="card" href="Convite A&M.dc.html">
-        <div class="t">Convite</div>
-        <div class="d">Convite aplicado no lugar à mesa, refletindo o monograma e a tipografia escolhidos.</div>
-        <div class="go">Abrir →</div>
-      </a>
+      <div class="card-wrap">
+        <a class="card" href="A&M - Fase 1 Decis%C3%B5es.dc.html">
+          <div class="t">Fase 1 · Decisões</div>
+          <div class="d">Paleta (A/B/C), lettering dos nomes e o monograma escolhido — tudo em um lugar, ao vivo.</div>
+          <div class="go">Abrir →</div>
+        </a>
+        <div class="card-note" data-key="card_fase1">
+          <textarea rows="2" placeholder="nota…"></textarea>
+          <button>salvar</button>
+        </div>
+      </div>
+      <div class="card-wrap">
+        <a class="card" href="Monograma AM - Estudio.dc.html">
+          <div class="t">Estúdio do Monograma</div>
+          <div class="d">Pincel, tamanho, cor das paletas e moldura/selo. Salve A·B·C e escolha o canônico.</div>
+          <div class="go">Abrir →</div>
+        </a>
+        <div class="card-note" data-key="card_estudio">
+          <textarea rows="2" placeholder="nota…"></textarea>
+          <button>salvar</button>
+        </div>
+      </div>
+      <div class="card-wrap">
+        <a class="card" href="Convite A&M.dc.html">
+          <div class="t">Convite</div>
+          <div class="d">Convite aplicado no lugar à mesa, refletindo o monograma e a tipografia escolhidos.</div>
+          <div class="go">Abrir →</div>
+        </a>
+        <div class="card-note" data-key="card_convite">
+          <textarea rows="2" placeholder="nota…"></textarea>
+          <button>salvar</button>
+        </div>
+      </div>
     </div>
 
     <div class="sec">Referência</div>
     <div class="grid">
-      <a class="card" href="Design System A&M.dc.html">
-        <div class="t">Design System</div>
-        <div class="d">Tokens de cor, tipografia, elementos gráficos e invariantes da identidade.</div>
-        <div class="go">Abrir →</div>
-      </a>
-      <a class="card" href="Monograma AM - Variacoes.dc.html">
-        <div class="t">Variações do Monograma</div>
-        <div class="d">Estudos e versões do monograma (puro, vestido, linha de base).</div>
-        <div class="go">Abrir →</div>
-      </a>
+      <div class="card-wrap">
+        <a class="card" href="Design System A&M.dc.html">
+          <div class="t">Design System</div>
+          <div class="d">Tokens de cor, tipografia, elementos gráficos e invariantes da identidade.</div>
+          <div class="go">Abrir →</div>
+        </a>
+        <div class="card-note" data-key="card_ds">
+          <textarea rows="2" placeholder="nota…"></textarea>
+          <button>salvar</button>
+        </div>
+      </div>
+      <div class="card-wrap">
+        <a class="card" href="Monograma AM - Variacoes.dc.html">
+          <div class="t">Variações do Monograma</div>
+          <div class="d">Estudos e versões do monograma (puro, vestido, linha de base).</div>
+          <div class="go">Abrir →</div>
+        </a>
+        <div class="card-note" data-key="card_variacoes">
+          <textarea rows="2" placeholder="nota…"></textarea>
+          <button>salvar</button>
+        </div>
+      </div>
     </div>
 
     <!-- comentários -->
@@ -101,6 +137,29 @@
   </div>
 <script>
 (function(){
+  // ── Card notes ──────────────────────────────────────────────
+  var NOTES_KEY = 'am_index_notes';
+  function loadNotes() { try { return JSON.parse(localStorage.getItem(NOTES_KEY)||'{}'); } catch(e) { return {}; } }
+  function saveNotes(obj) { try { localStorage.setItem(NOTES_KEY, JSON.stringify(obj)); } catch(e) {} }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    var notes = loadNotes();
+    document.querySelectorAll('.card-note').forEach(function(wrap){
+      var key = wrap.getAttribute('data-key');
+      var ta = wrap.querySelector('textarea');
+      var btn = wrap.querySelector('button');
+      if (notes[key]) ta.value = notes[key];
+      btn.addEventListener('click', function(e){
+        e.stopPropagation();
+        var n = loadNotes();
+        n[key] = ta.value.trim();
+        saveNotes(n);
+      });
+      ta.addEventListener('click', function(e){ e.stopPropagation(); });
+    });
+  });
+
+  // ── Page comments ────────────────────────────────────────────
   var KEY = 'am_index_comments';
   function load() { try { return JSON.parse(localStorage.getItem(KEY)||'[]'); } catch(e) { return []; } }
   function save(arr) { try { localStorage.setItem(KEY, JSON.stringify(arr)); } catch(e) {} }

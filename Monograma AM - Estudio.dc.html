@@ -124,6 +124,10 @@
           <div onClick="{{ sl.onLoad }}" title="carregar" style="height:66px; border-radius:3px; background:{{ sl.bg }}; display:flex; align-items:center; justify-content:center; cursor:pointer; padding:6px; box-sizing:border-box;">{{ sl.thumb }}</div>
           <div class="nm" style="font-size:16px; font-weight:600; color:#2a2620; text-align:center; margin-top:5px;">{{ sl.letter }}</div>
           <button onClick="{{ sl.onSave }}" style="margin-top:5px; width:100%; font-family:'Inter',sans-serif; font-size:8.5px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:#fff; background:#2a2620; border:none; border-radius:100px; padding:6px 0; cursor:pointer;">{{ sl.saveLabel }}</button>
+          <div style="margin-top:8px; display:flex; gap:5px; align-items:flex-start;">
+            <textarea value="{{ sl.note.val }}" onInput="{{ sl.note.onInput }}" rows="2" placeholder="nota…" style="flex:1;font-family:'Inter',sans-serif;font-size:10px;line-height:1.5;color:#2a2620;background:transparent;border:1px solid #ece6d9;border-radius:2px;padding:5px 7px;resize:none;outline:none;box-sizing:border-box;"></textarea>
+            <button onClick="{{ sl.note.onSave }}" style="font-family:'Inter',sans-serif;font-size:8px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#2a2620;background:transparent;border:1px solid #ece6d9;border-radius:100px;padding:5px 8px;cursor:pointer;white-space:nowrap;flex-shrink:0;">ok</button>
+          </div>
         </div>
       </sc-for>
     </div>
@@ -215,7 +219,7 @@ const ARC_TOP_LB = 'M158.48,355.31c47.78-138.98,179.65-238.84,334.84-238.84s293.
 const ARC_BOT_LB = 'M831.39,630.72c-47.78,138.98-179.65,238.84-334.84,238.84s-293.25-104.62-338.07-248.72';
 
 class Component extends DCLogic {
-  state = { brush:0, ramo:2, count:6, colorHex:'#34302a', bgHex:'#F7F1EA', sizeF:0.55, mold:null, molds:{}, moldRot:0, moldScale:1, moldX:0, moldY:0, slots:{A:null,B:null,C:null}, commentDraft: '', comments: [], savedAt: '' };
+  state = { brush:0, ramo:2, count:6, colorHex:'#34302a', bgHex:'#F7F1EA', sizeF:0.55, mold:null, molds:{}, moldRot:0, moldScale:1, moldX:0, moldY:0, slots:{A:null,B:null,C:null}, notes:{}, noteDrafts:{}, commentDraft: '', comments: [], savedAt: '' };
 
   SLOT_KEY = 'am_estudio_slots';
 
@@ -223,6 +227,10 @@ class Component extends DCLogic {
     try {
       const saved = JSON.parse(localStorage.getItem('am_estudio_comments') || '[]');
       if (saved.length) this.setState({ comments: saved });
+    } catch(e) {}
+    try {
+      const notes = JSON.parse(localStorage.getItem('am_estudio_notes') || '{}');
+      if (Object.keys(notes).length) this.setState({ notes });
     } catch(e) {}
     try {
       const raw = localStorage.getItem(this.SLOT_KEY);
@@ -437,6 +445,24 @@ class Component extends DCLogic {
     try { localStorage.setItem('am_estudio_comments', JSON.stringify(comments)); } catch(e) {}
   }
 
+  noteFor(key) {
+    const s = this.state;
+    const saved = s.notes[key] || '';
+    const draft = Object.prototype.hasOwnProperty.call(s.noteDrafts, key) ? s.noteDrafts[key] : saved;
+    return {
+      val: draft,
+      onInput: (e) => this.setState(prev => ({ noteDrafts: {...prev.noteDrafts, [key]: e.target.value} })),
+      onSave: () => {
+        const text = (Object.prototype.hasOwnProperty.call(s.noteDrafts, key) ? s.noteDrafts[key] : saved).trim();
+        this.setState(prev => {
+          const notes = {...prev.notes, [key]: text};
+          try { localStorage.setItem('am_estudio_notes', JSON.stringify(notes)); } catch(e) {}
+          return { notes };
+        });
+      }
+    };
+  }
+
   renderVals() {
     const s = this.state;
     const sel = (on) => `cursor:pointer; box-sizing:border-box; border-radius:3px; padding:9px 10px; transition:all .15s; border:1.5px solid ${on?'#2a2620':'#ece6d9'}; background:${on?'#fbf9f4':'#fff'}; box-shadow:${on?'0 1px 6px rgba(0,0,0,.07)':'none'};`;
@@ -488,7 +514,8 @@ class Component extends DCLogic {
           thumb: cfg ? this.mark({}, cfg) : null,
           saveLabel: cfg ? 'Atualizar' : 'Salvar aqui',
           onSave: () => this.saveSlot(letter),
-          onLoad: () => this.loadSlot(letter)
+          onLoad: () => this.loadSlot(letter),
+          note: this.noteFor('slot_' + letter)
         };
       }),
       sizeF: s.sizeF,

@@ -77,6 +77,10 @@
             <span style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:18px;">{{ pal.title }}</span>
           </div>
           <div style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:11px; color:#8a8073; line-height:1.5; margin-top:5px;">{{ pal.note }}</div>
+          <div style="margin-top:10px; display:flex; gap:8px; align-items:flex-start;">
+            <textarea value="{{ pal.noteObj.val }}" onInput="{{ pal.noteObj.onInput }}" rows="2" placeholder="nota sobre esta paleta…" style="flex:1;font-family:'Montserrat',sans-serif;font-size:11px;line-height:1.6;color:#34302a;background:transparent;border:1px solid #ddd2c4;border-radius:2px;padding:6px 10px;resize:none;outline:none;box-sizing:border-box;"></textarea>
+            <button onClick="{{ pal.noteObj.onSave }}" style="font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#34302a;background:transparent;border:1px solid #ddd2c4;border-radius:100px;padding:6px 12px;cursor:pointer;white-space:nowrap;flex-shrink:0;">salvar</button>
+          </div>
         </div>
       </sc-for>
     </div>
@@ -125,10 +129,14 @@
             <div style="font-family:'Montserrat',sans-serif; font-weight:400; font-size:9.5px; letter-spacing:.1em; color:#a4998a; margin-top:9px;">Corpo {{ lt.size }}px</div>
             <button onClick="{{ lt.onChoose }}" style="{{ lt.chooseStyle }}">{{ lt.chooseLabel }}</button>
           </div>
-          <div style="flex:1; display:flex;">
+          <div style="flex:1; display:flex; flex-direction:column; gap:0;">
             <div data-namecol="{{ lt.idx }}" style="display:inline-flex; flex-direction:column; align-items:center;">
             <div style="font-family:{{ lt.css }}; font-weight:{{ lt.weight }}; font-size:{{ lt.size }}px; line-height:1.02; color:#222220; text-transform:{{ lt.caseT }}; white-space:nowrap;">Alexandre <span data-amp="{{ lt.idx }}" style="font-style:italic; color:{{ ampColor }};">&amp;</span> Mayara</div>
             <div style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:20px; color:#6f6557; margin-top:3px; transform:translateX({{ lt.subOffset }}px);">para o nosso sim</div>
+            </div>
+            <div style="margin-top:12px; display:flex; gap:8px; align-items:flex-start;">
+              <textarea value="{{ lt.noteObj.val }}" onInput="{{ lt.noteObj.onInput }}" rows="2" placeholder="nota sobre esta fonte…" style="flex:1;font-family:'Montserrat',sans-serif;font-size:11px;line-height:1.6;color:#34302a;background:transparent;border:1px solid #ddd2c4;border-radius:2px;padding:6px 10px;resize:none;outline:none;box-sizing:border-box;"></textarea>
+              <button onClick="{{ lt.noteObj.onSave }}" style="font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#34302a;background:transparent;border:1px solid #ddd2c4;border-radius:100px;padding:6px 12px;cursor:pointer;white-space:nowrap;flex-shrink:0;">salvar</button>
             </div>
           </div>
         </div>
@@ -195,7 +203,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1320,&quot;height&quot;:1980},&quot;monogramColor&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;tinta&quot;,&quot;palette&quot;],&quot;default&quot;:&quot;tinta&quot;,&quot;tsType&quot;:&quot;'tinta'|'palette'&quot;,&quot;section&quot;:&quot;Identidade&quot;,&quot;unit&quot;:&quot;&quot;},&quot;ampersandColor&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;options&quot;:[&quot;#b07a5e&quot;,&quot;#CB6A4A&quot;,&quot;#C99089&quot;,&quot;#5C6B50&quot;,&quot;#222220&quot;],&quot;default&quot;:&quot;#222220&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Identidade&quot;}}">
 class Component extends DCLogic {
-  state = { mono: '', letras: '', ramos: '', choiceSvg: '', chosenLettering: null, elem: { A: {}, B: {}, C: {} }, weights: { 0: 500, 1: 400, 2: 400 }, cases: { 0: 'none', 1: 'none', 2: 'none' }, sizes: { 0: 56, 1: 56, 2: 56 }, monoVariant: 'A', monoSize: 72, commentDraft: '', comments: [], savedAt: '' };
+  state = { mono: '', letras: '', ramos: '', choiceSvg: '', chosenLettering: null, elem: { A: {}, B: {}, C: {} }, weights: { 0: 500, 1: 400, 2: 400 }, cases: { 0: 'none', 1: 'none', 2: 'none' }, sizes: { 0: 56, 1: 56, 2: 56 }, monoVariant: 'A', monoSize: 72, notes:{}, noteDrafts:{}, commentDraft: '', comments: [], savedAt: '' };
 
   WEIGHTS = { 0: [300,400,500,600,700], 1: [400], 2: [300,400,500,600,700] };
   WNAME = { 300:'Light', 400:'Regular', 500:'Medium', 600:'SemiBold', 700:'Bold' };
@@ -204,6 +212,10 @@ class Component extends DCLogic {
     try {
       const saved = JSON.parse(localStorage.getItem('am_fase1_comments') || '[]');
       if (saved.length) this.setState({ comments: saved });
+    } catch(e) {}
+    try {
+      const notes = JSON.parse(localStorage.getItem('am_fase1_notes') || '{}');
+      if (Object.keys(notes).length) this.setState({ notes });
     } catch(e) {}
     const grab = async (path, style, scope) => {
       try {
@@ -299,6 +311,24 @@ class Component extends DCLogic {
     try { localStorage.setItem('am_fase1_comments', JSON.stringify(comments)); } catch(e) {}
   }
 
+  noteFor(key) {
+    const s = this.state;
+    const saved = s.notes[key] || '';
+    const draft = Object.prototype.hasOwnProperty.call(s.noteDrafts, key) ? s.noteDrafts[key] : saved;
+    return {
+      val: draft,
+      onInput: (e) => this.setState(prev => ({ noteDrafts: {...prev.noteDrafts, [key]: e.target.value} })),
+      onSave: () => {
+        const text = (Object.prototype.hasOwnProperty.call(s.noteDrafts, key) ? s.noteDrafts[key] : saved).trim();
+        this.setState(prev => {
+          const notes = {...prev.notes, [key]: text};
+          try { localStorage.setItem('am_fase1_notes', JSON.stringify(notes)); } catch(e) {}
+          return { notes };
+        });
+      }
+    };
+  }
+
   renderVals() {
     const ink = '#222220';
     const monoMode = this.props.monogramColor || 'tinta';
@@ -375,7 +405,8 @@ class Component extends DCLogic {
         seal: this.chosenNode(eff('mono')),
         ramos: this.svgNode(this.state.ramos, eff('ramos')),
         controls,
-        onReset: () => this.resetElem(k)
+        onReset: () => this.resetElem(k),
+        noteObj: this.noteFor('pal_' + k)
       };
     });
 
@@ -432,7 +463,8 @@ class Component extends DCLogic {
           try { localStorage.setItem('am_lettering_choice', JSON.stringify({ css: NAMEFONTS[i].css, weight: this.state.weights[i], caseT: this.state.cases[i] || 'none' })); } catch(e) {}
           try { window.dispatchEvent(new CustomEvent('am-lettering-choice')); } catch(e) {}
           this.setState({ chosenLettering: i });
-        }
+        },
+        noteObj: this.noteFor('let_' + i)
       };
     });
 
